@@ -1,0 +1,9 @@
+@mixin neutral-btn{
+  background-color: $MainColor;
+  padding: 15px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  border:none;
+  color: #FFFFFF;
+  cursor: pointer;
+}

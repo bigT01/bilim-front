@@ -1,0 +1,88 @@
+@import "../../styles/root";
+@import "../../styles/mixin";
+
+.login_wrapper{
+  width: 100vw;
+  height: 100vh;
+  min-height: 650px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .login_container{
+    width: 70%;
+    height: 90%;
+    border-radius: $modal-border-radius;
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF;
+    box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.1);
+    &_information{
+      width: 45%;
+      height: 100%;
+      box-sizing: border-box;
+      border-top-left-radius: $modal-border-radius;
+      border-bottom-left-radius: $modal-border-radius;
+      background-color: $MainColor;
+      color: #FFFFFF;
+      padding: 2rem;
+      text-align: center;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      .header{
+        line-height: 30px;
+        font-size: 26px;
+        .mainWord{
+          margin: 10px 0;
+        }
+      }
+    }
+    &_login{
+      padding: 2rem;
+      width: 55%;
+      box-sizing: border-box;
+      .header{
+        margin-bottom: 30px;
+      }
+      .form_signUp{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 30px;
+        font-size: 24px;
+        .input_wrapper{
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+        }
+        .signUp_input{
+          width: 50%;
+          border-top: none;
+          border-left: none;
+          border-right: none;
+          background-color: inherit;
+          padding-bottom: 5px;
+          border-bottom: 2px solid $MainColor;
+          font-size: 16px;
+        }
+        .signUp_label{
+          font-size: 16px;
+        }
+        .signUp_input:focus-visible{
+          outline: none;
+          border-bottom-color: green;
+          transition: border-bottom-color 0.2s linear;
+        }
+        .submit_wrapper{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 14px;
+          .submit{
+            @include neutral-btn;
+          }
+        }
+      }
+    }
+  }
+}
