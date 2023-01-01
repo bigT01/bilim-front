@@ -1,0 +1,50 @@
+@import "../../styles/root";
+
+.menu_wrapper{
+  box-sizing: border-box;
+  //position: fixed;
+  width: 100%;
+  height: 100vh;
+  border-right: 2px solid $MainColor;
+  border-bottom-right-radius: 30px;
+  border-top-right-radius: 30px;
+  //box-shadow: 0 20px 40px $MainColor;
+  padding: 10px 30px 10px 0;
+  background-color: #FFFFFF;
+  grid-area: "navbar";
+  z-index: 100;
+  .header{
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    margin-bottom: 25px;
+    .close_btn{
+      background-color: #FFFFFF;
+      border: none;
+      padding: 9px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0px 2px 5px rgba(38, 51, 77, 0.20);
+      cursor: pointer;
+    }
+  }
+  .navbar{
+    .navbar_wrapper{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .nav_link{
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        padding: 15px 20px 15px 30px;
+        font-size: 14px;
+        background-color: rgba(0, 133, 255, 0.1);
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+      }
+    }
+  }
+}

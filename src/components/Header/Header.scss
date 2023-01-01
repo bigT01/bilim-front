@@ -1,0 +1,12 @@
+@import "../../styles/root";
+
+.header_main{
+  box-sizing: border-box;
+  grid-area:'headerMain';
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  border-bottom: 1px solid $MainColor;
+  gap: 20px;
+}

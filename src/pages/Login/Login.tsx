@@ -25,11 +25,10 @@ const Login = () =>{
             password: 'QWEazxc@04'
         })
             .then((res) =>{
-                console.log(res)
                 setAuth({
                     id:'kmvdfkvmdlfkmvdfvmdkf',
                     token:'skjfbnkjsnfnjkff',
-                    role:'student'
+                    role:'admin'
                 })
                navigate('/')
             })

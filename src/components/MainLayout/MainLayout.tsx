@@ -1,5 +1,5 @@
 import {ReactNode, useRef} from "react";
-import {useMessageContext} from "../context/MessageContext";
+import {useMessageContext} from "../../context/MessageContext";
 import { Transition } from 'react-transition-group';
 import s from "./mainLayout.module.css"
 
