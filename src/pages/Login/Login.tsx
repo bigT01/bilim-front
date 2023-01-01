@@ -3,6 +3,8 @@ import "./Login.scss"
 import { useEffect} from "react";
 import axios from "axios";
 import {UseAuthContext} from "../../context/AuthContext";
+import {useNavigate} from "react-router-dom";
+import {useMessageContext} from "../../context/MessageContext";
 
 type FormValues = {
     email: string;
@@ -11,7 +13,9 @@ type FormValues = {
 
 const Login = () =>{
     const { register, handleSubmit } = useForm<FormValues>();
-    const {setAuth} = UseAuthContext()
+    const {setMessage} = useMessageContext()
+    const navigate = useNavigate()
+    const {setAuth, isAuth} = UseAuthContext()
 
     const onSubmit: SubmitHandler<FormValues> = data => {
         axios.post('http://127.0.0.1:8000/api/token/', {
@@ -21,10 +25,23 @@ const Login = () =>{
             password: 'QWEazxc@04'
         })
             .then((res) =>{
-
+                console.log(res)
+                setAuth({
+                    id:'kmvdfkvmdlfkmvdfvmdkf',
+                    token:'skjfbnkjsnfnjkff',
+                    role:'student'
+                })
+               navigate('/')
             })
-            .catch((err) => {console.log(err)})
+            .catch((err) => {setMessage(err.message, 'error')})
     };
+
+    useEffect(() =>{
+        if(isAuth){
+            navigate('/')
+
+        }
+    }, [])
 
     return(
         <div className={'login_wrapper'}>
