@@ -9,4 +9,31 @@
   justify-content: right;
   border-bottom: 1px solid $MainColor;
   gap: 20px;
+  .profile_wrapper{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    .button_more{
+      border: none;
+      transform: rotate(180deg);
+    }
+  }
+  .notification_wrapper{
+    height: 24px;
+    position: relative;
+    .notification_number{
+      top: -6px;
+      right: -6px;
+      position: absolute;
+      font-size: 10px;
+      display: flex;
+      width: 16px;
+      height: 16px;
+      justify-content: center;
+      align-items: center;
+      background-color: red;
+      color: #FFFFFF;
+      border-radius: 50%;
+    }
+  }
 }

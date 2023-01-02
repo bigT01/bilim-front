@@ -1,4 +1,5 @@
 import './Menu.scss'
+import {CloseButton, Dashboard, Settings, Student, Teacher} from "./assets/MenuAssets";
 
 const Menu = () =>{
 
@@ -7,30 +8,26 @@ const Menu = () =>{
         <div className={'menu_wrapper'}>
             <div className="header">
                 <button className={'close_btn'}>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10 0C4.47 0 0 4.47 0 10C0 15.53 4.47 20 10 20C15.53 20 20 15.53 20 10C20 4.47 15.53 0 10 0ZM14.3 14.3C13.91 14.69 13.28 14.69 12.89 14.3L10 11.41L7.11 14.3C6.72 14.69 6.09 14.69 5.7 14.3C5.51275 14.1132 5.40751 13.8595 5.40751 13.595C5.40751 13.3305 5.51275 13.0768 5.7 12.89L8.59 10L5.7 7.11C5.51275 6.92317 5.40751 6.66952 5.40751 6.405C5.40751 6.14048 5.51275 5.88683 5.7 5.7C6.09 5.31 6.72 5.31 7.11 5.7L10 8.59L12.89 5.7C13.28 5.31 13.91 5.31 14.3 5.7C14.69 6.09 14.69 6.72 14.3 7.11L11.41 10L14.3 12.89C14.68 13.27 14.68 13.91 14.3 14.3Z" fill="#C3CAD9"/>
-                    </svg>
+                    <CloseButton />
                 </button>
             </div>
             <nav className={'navbar'}>
                 <ul className={'navbar_wrapper'}>
                     <li className={'nav_link'}>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2.40002 9.24369C2.40002 8.84967 2.60057 8.48001 2.93823 8.25167L11.2582 2.62515C11.7023 2.32482 12.2977 2.32482 12.7418 2.62515L21.0618 8.25167C21.3995 8.48001 21.6 8.84967 21.6 9.24369V19.774C21.6 20.7824 20.7404 21.5999 19.68 21.5999H4.32002C3.25964 21.5999 2.40002 20.7824 2.40002 19.774V9.24369Z" stroke="#292dd6" stroke-width="2"/>
-                        </svg>
+                        <Dashboard/>
                         <p>Dashboard</p>
                     </li>
                     <li className={'nav_link'}>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M20.3995 21.5999L20.3998 18.0002C20.4 16.0119 18.7882 14.3999 16.7998 14.3999H7.20056C5.2125 14.3999 3.60079 16.0114 3.60056 17.9995L3.60016 21.5999M15.6002 5.9999C15.6002 7.98813 13.9884 9.5999 12.0002 9.5999C10.0119 9.5999 8.40016 7.98813 8.40016 5.9999C8.40016 4.01168 10.0119 2.3999 12.0002 2.3999C13.9884 2.3999 15.6002 4.01168 15.6002 5.9999Z" stroke="#292dd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                        <Teacher/>
                         <p>Teachers</p>
                     </li>
                     <li className={'nav_link'}>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M16.0254 20.5708L16.0257 17.3571C16.0259 15.5819 14.5869 14.1427 12.8117 14.1427H5.61444C3.83951 14.1427 2.40059 15.5815 2.40039 17.3564L2.40002 20.5708M21.5997 20.571L21.6 17.3572C21.6002 15.5821 20.1612 14.1429 18.386 14.1429M15.4064 4.06061C16.1957 4.64624 16.7072 5.5851 16.7072 6.64343C16.7072 7.70176 16.1957 8.64061 15.4064 9.22625M12.4938 6.64325C12.4938 8.41833 11.0548 9.85731 9.27977 9.85731C7.50469 9.85731 6.06571 8.41833 6.06571 6.64325C6.06571 4.86818 7.50469 3.4292 9.27977 3.4292C11.0548 3.4292 12.4938 4.86818 12.4938 6.64325Z" stroke="#292dd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                        <Student/>
                         <p>Students</p>
+                    </li>
+                    <li className={'nav_link'}>
+                        <Settings/>
+                        <p>Settings</p>
                     </li>
                 </ul>
             </nav>
