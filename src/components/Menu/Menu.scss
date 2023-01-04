@@ -36,14 +36,20 @@
       flex-direction: column;
       gap: 10px;
       .nav_link{
-        display: flex;
-        gap: 5px;
-        align-items: center;
-        padding: 15px 20px 15px 30px;
-        font-size: 14px;
+        &_a{
+          display: flex;
+          gap: 5px;
+          align-items: center;
+          font-size: 14px;
+          text-decoration: none;
+          color: #000000;
+          padding: 15px 20px 15px 30px;
+          border-top-right-radius: 20px;
+          border-bottom-right-radius: 20px;
+        }
+      }
+      .nav_link_a.active{
         background-color: rgba(0, 133, 255, 0.1);
-        border-top-right-radius: 20px;
-        border-bottom-right-radius: 20px;
       }
     }
   }

@@ -20,7 +20,7 @@ function App() {
                         <Routes>
                             <Route path={'/'} element={<PrivateRoute />}>
                                 <Route path={'/'} element={<Index/>}/>
-                                <Route path={'/admin'} element={<AdminIndex/>}/>
+                                <Route path={'/admin/dashboard'} element={<AdminIndex/>}/>
                                 <Route path={'/teacher'} element={<TeacherIndex/>}/>
                                 <Route path={'/student'} element={<StudentIndex/>}/>
                             </Route>

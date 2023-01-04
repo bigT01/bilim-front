@@ -5,7 +5,7 @@ const Index = () =>{
     const {role} = UseAuthContext()
 
     if(role === 'admin'){
-        return <Navigate to={'/admin'} />
+        return <Navigate to={'/admin/dashboard'} />
     }
     if(role === 'student'){
         return <Navigate to={'/student'} />

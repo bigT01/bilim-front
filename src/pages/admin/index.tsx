@@ -1,15 +1,17 @@
 import Layout from "../../components/Layout/Layout";
 import Menu from "../../components/Menu/Menu";
 import Header from "../../components/Header/Header";
+import Main from "../../components/Main/Main";
+import Dashboard from "./Dashboard";
 
 const AdminIndex = () =>{
     return(
         <Layout>
             <Menu/>
             <Header />
-            <div className="main" style={{gridArea: 'main', backgroundColor: 'inherit', height:'100vh'}}>
-
-            </div>
+            <Main>
+                <Dashboard/>
+            </Main>
         </Layout>
     )
 }
