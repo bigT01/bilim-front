@@ -1,5 +1,5 @@
 import './Header.scss'
-import {Avatar, Bell, More} from "./assets/HeaderAssets";
+import {Avatar, Bell, More} from "../assets/MainAssets";
 
 
 const Header = () =>{

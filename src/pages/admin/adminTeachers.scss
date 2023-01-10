@@ -1,0 +1,46 @@
+@import "../../styles/root";
+@import "../../styles/mixin";
+
+.admin_teachers{
+  .header{
+    margin-bottom: 2rem;
+
+  }
+  .table_wrapper{
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 20px;
+    .header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .search_wrapper{
+        margin-bottom: 20px;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        border: 1px solid $MainColor;
+        padding: 5px 10px;
+        gap: 5px;
+        width: 40%;
+        .search_input{
+          padding: 5px 10px;
+          font-size: 16px;
+          border: none;
+          width: 100%;
+        }
+        .search_input:active{
+          border-color: $SuccessColor;
+        }
+        .search_input:focus-visible{
+          outline: none;
+        }
+      }
+
+      .btn_add{
+        @include success-btn;
+
+      }
+    }
+  }
+}

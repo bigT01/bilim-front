@@ -8,10 +8,10 @@ const Index = () =>{
         return <Navigate to={'/admin/dashboard'} />
     }
     if(role === 'student'){
-        return <Navigate to={'/student'} />
+        return <Navigate to={'/student/dashboard'} />
     }
     if(role === 'teacher'){
-        return <Navigate to={'/teacher'} />
+        return <Navigate to={'/teacher/dashboard'} />
     }
     else{
         return <Navigate to={'/login'} />

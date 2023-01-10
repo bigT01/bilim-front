@@ -8,7 +8,7 @@
   .card_wrapper{
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10rem;
+    margin-bottom: 5rem;
     .card{
       background-color: #FFFFFF;
       border-radius: 10px;
@@ -23,6 +23,60 @@
         align-items: center;
         height: 100px;
         color: $MainColor;
+      }
+    }
+  }
+
+  .chart_wrapper{
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+    .chart{
+      max-width: 500px;
+      height: 400px;
+      background-color: #FFFFFF;
+      border-radius: 15px;
+    }
+    .grade_btn_wrapper{
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      gap: 10px;
+      .grade_btn{
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        background-color: #FFFFFF;
+        box-shadow: 2px 3px 10px;
+        height: fit-content;
+        border-radius: 30px;
+        border: 1px solid $MainColor;
+        cursor: pointer;
+        .more{
+          transform: rotate(180deg);
+        }
+      }
+      .select_more{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        top: 110%;
+        box-sizing: border-box;
+        padding: 10px;
+        background-color: #FFFFFF;
+        border-radius: 15px;
+        .select_btn{
+          border: 1px dashed #FFFFFF;
+          background-color: inherit;
+          padding: 10px 0;
+          cursor: pointer;
+        }
+        .select_btn:hover{
+          border: 1px dashed $MainColor;
+          border-radius: 15px;
+        }
       }
     }
   }

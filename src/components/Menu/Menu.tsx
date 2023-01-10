@@ -1,5 +1,5 @@
 import './Menu.scss'
-import {CloseButton, Dashboard, Settings, Student, Teacher} from "./assets/MenuAssets";
+import {CloseButton, Dashboard, Settings, Student, Teacher} from "../assets/MainAssets";
 import {NavLink, useParams} from "react-router-dom";
 
 const Menu = () =>{

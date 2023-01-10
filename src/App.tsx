@@ -6,9 +6,9 @@ import PrivateRoute from "./utils/PrivateRoute";
 import {AuthProvider} from "./context/AuthContext";
 import MainLayout from "./components/MainLayout/MainLayout";
 import {MessageProvider} from "./context/MessageContext";
-import AdminIndex from "./pages/admin/index";
-import TeacherIndex from "./pages/teacher/index";
 import StudentIndex from "./pages/student/index";
+import Dashboard from "./pages/admin/Dashboard";
+import Teachers from "./pages/admin/Teachers";
 
 
 function App() {
@@ -20,9 +20,9 @@ function App() {
                         <Routes>
                             <Route path={'/'} element={<PrivateRoute />}>
                                 <Route path={'/'} element={<Index/>}/>
-                                <Route path={'/admin/dashboard'} element={<AdminIndex/>}/>
-                                <Route path={'/teacher'} element={<TeacherIndex/>}/>
-                                <Route path={'/student'} element={<StudentIndex/>}/>
+                                <Route path={'/admin/dashboard'} element={<Dashboard/>}/>
+                                <Route path={'/admin/teachers'} element={<Teachers/>}/>
+                                <Route path={'/admin/students'} element={<StudentIndex/>}/>
                             </Route>
                             <Route path={'/login'} element={<Login/>}/>
                         </Routes>
