@@ -5,7 +5,7 @@
   position: fixed;
   width: 15%;
   height: 100vh;
-  border-right: 2px solid $MainColor;
+  border-right: 2px solid #00000070;
   //border-bottom-right-radius: 30px;
   //border-top-right-radius: 30px;
   //box-shadow: 0 20px 40px $MainColor;
@@ -37,6 +37,8 @@
       gap: 10px;
       .nav_link{
         &_a{
+          opacity: 0.5;
+          font-weight: 700;
           display: flex;
           gap: 5px;
           align-items: center;
@@ -49,6 +51,7 @@
         }
       }
       .nav_link_a.active{
+        opacity: 1;
         background-color: rgba(0, 133, 255, 0.1);
       }
     }

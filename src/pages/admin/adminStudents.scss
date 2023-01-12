@@ -1,0 +1,123 @@
+@import "../../styles/root";
+@import "../../styles/mixin";
+
+.admin_students{
+  .header{
+    margin-bottom: 2rem;
+
+  }
+  .table_wrapper{
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 20px;
+    .header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .search_wrapper{
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        border: 1px solid $MainColor;
+        padding: 5px 10px;
+        gap: 5px;
+        width: 40%;
+        .search_input{
+          padding: 5px 10px;
+          font-size: 16px;
+          border: none;
+          width: 100%;
+        }
+        .search_input:active{
+          border-color: $SuccessColor;
+        }
+        .search_input:focus-visible{
+          outline: none;
+        }
+      }
+
+      .btn_add{
+        @include success-btn;
+        box-sizing: border-box;
+        padding: 10px;
+        svg{
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+    .students_wrapper{
+      display: grid;
+      width: 100%;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      grid-column-gap: 15px;
+      grid-row-gap: 15px;
+      .student_card{
+        border: 2px solid #ababab70;
+        padding: 10px;
+        border-radius: 10px;
+        .card-header{
+          display: flex;
+          justify-content: right;
+          gap: 10px;
+          margin-bottom: 15px;
+          .card-btn{
+            background-color: inherit;
+            border: none;
+            cursor: pointer;
+            svg{
+              height: 16px;
+              width: 16px;
+            }
+          }
+        }
+        .card_user_info{
+          display: flex;
+          gap: 10px;
+          margin-bottom: 10px;
+          .user_avatar{
+            svg{
+              width: 50px;
+              height: 50px;
+            }
+          }
+          .user_info{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 5px 0;
+            .info_name{
+              font-size: 14px;
+            }
+            .info_age{
+              font-size: 12px;
+            }
+          }
+        }
+        .card_additional_info{
+          .info_img{
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 22px;
+            height: 22px;
+            //background-color: rgba(194, 192, 192, 0.53);
+            svg{
+              width: 16px;
+              height: 16px;
+            }
+          }
+          .info_wrapper{
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: #706f6f;
+            gap: 10px;
+          }
+        }
+      }
+    }
+  }
+}

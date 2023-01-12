@@ -9,6 +9,7 @@ import {MessageProvider} from "./context/MessageContext";
 import StudentIndex from "./pages/student/index";
 import Dashboard from "./pages/admin/Dashboard";
 import Teachers from "./pages/admin/Teachers";
+import Students from "./pages/admin/Students";
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
                                 <Route path={'/'} element={<Index/>}/>
                                 <Route path={'/admin/dashboard'} element={<Dashboard/>}/>
                                 <Route path={'/admin/teachers'} element={<Teachers/>}/>
-                                <Route path={'/admin/students'} element={<StudentIndex/>}/>
+                                <Route path={'/admin/students'} element={<Students/>}/>
                             </Route>
                             <Route path={'/login'} element={<Login/>}/>
                         </Routes>

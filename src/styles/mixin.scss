@@ -17,3 +17,47 @@
   color: #FFFFFF;
   cursor: pointer;
 }
+
+@mixin admin_table{
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 10px;
+  border-radius: 5px;
+  border-collapse: collapse;
+  &_header{
+    text-align: left;
+    opacity: 0.5;
+    .table_header__cail{
+      padding: 15px 10px;
+    }
+  }
+  &_row{
+    &__cail{
+      font-size: 14px;
+      padding: 10px 10px;
+      .content_wrapper{
+        display: flex;
+        max-width: 400px;
+        flex-wrap: wrap;
+        gap: 10px;
+        .content_info{
+          padding: 10px 15px;
+          border-radius: 10px;
+          background-color: #d496a7;
+          width: fit-content;
+        }
+        .btn_cail{
+          border: none;
+          cursor: pointer;
+          svg{
+            width: 18px;
+            height: 18px;
+          }
+        }
+      }
+    }
+  }
+  &_row:nth-child(even){
+    background-color: #efefef;
+  }
+}
