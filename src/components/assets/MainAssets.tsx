@@ -99,6 +99,14 @@ const UserRemove = ({color}: MainAssetsProps) => {
     )
 }
 
+const Subjects = ({color}:MainAssetsProps) => {
+    return(
+        <svg width="31" height="28" viewBox="0 0 31 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.63241 7.5H22.1926M4.63241 12.375H22.1926M4.63241 17.25H18M5.46162 1H25.5386C28.0026 1 30 2.45511 30 4.25006L29.9995 23.7501C29.9994 25.545 28.002 27 25.538 27L5.46143 26.9999C2.99744 26.9999 0.999984 25.5448 1 23.7499L1.00017 4.24998C1.00019 2.45507 2.99764 1 5.46162 1Z" stroke={color? color: 'black'} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    )
+}
+
 
 
 export {
@@ -112,5 +120,6 @@ export {
     More,
     UserAdd,
     Edit,
-    UserRemove
+    UserRemove,
+    Subjects
 }

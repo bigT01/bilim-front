@@ -3,13 +3,14 @@ import Menu from "../../components/Menu/Menu";
 import Header from "../../components/Header/Header";
 import Main from "../../components/Main/Main";
 import Dashboard from "./Dashboard";
-import {ReactNode} from "react";
+import {ReactNode, useRef} from "react";
 
 type AdminIndex = {
     children: ReactNode;
 }
 
 const AdminIndex = ({children}: AdminIndex) =>{
+
     return(
         <Layout>
             <Menu/>

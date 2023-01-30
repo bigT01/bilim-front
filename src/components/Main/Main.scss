@@ -2,6 +2,6 @@
   grid-area: main;
   box-sizing: border-box;
   background-color: inherit;
-
+  min-height: calc(100vh - 80px);
   padding: 3rem;
 }

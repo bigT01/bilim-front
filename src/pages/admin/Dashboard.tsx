@@ -1,5 +1,5 @@
 import './adminDashboard.scss'
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import StudentsChart from "../../components/Charts/StudentsChart";
 import {More} from "../../components/assets/MainAssets";
 import AdminIndex from "./index";
@@ -7,6 +7,8 @@ import AdminIndex from "./index";
 const Dashboard = () =>{
     const [grade, setGrade] = useState(11)
     const [IsMoreGrade, setIsMoreGrade] = useState(false)
+
+
     const [data, setData] = useState([
         {
             "class": "11A",
@@ -25,6 +27,10 @@ const Dashboard = () =>{
             "average grade": 60,
         },
     ])
+
+    useEffect(() =>{
+
+    }, [])
 
 
     useEffect(() =>{

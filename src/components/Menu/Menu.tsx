@@ -1,5 +1,5 @@
 import './Menu.scss'
-import {CloseButton, Dashboard, Settings, Student, Teacher} from "../assets/MainAssets";
+import {CloseButton, Dashboard, Settings, Student, Subjects, Teacher} from "../assets/MainAssets";
 import {NavLink, useParams} from "react-router-dom";
 
 const Menu = () =>{
@@ -31,6 +31,12 @@ const Menu = () =>{
                         <NavLink to={'/admin/students'} className={'nav_link_a'}>
                             <Student/>
                             <p>Students</p>
+                        </NavLink>
+                    </li>
+                    <li className={'nav_link'}>
+                        <NavLink to={'/admin/subjects'} className={'nav_link_a'}>
+                            <Subjects/>
+                            <p>Subjects</p>
                         </NavLink>
                     </li>
                     <li className={'nav_link'}>
