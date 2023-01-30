@@ -20,8 +20,8 @@ const Subjects = () =>{
                     </div>
                     <table className={'table'}>
                         <tr className='table_header'>
-                            <th className='table_header__cail'>Name</th>
                             <th className='table_header__cail'>Subject</th>
+                            <th className='table_header__cail'>Teachers</th>
                             <th className='table_header__cail'>Classes</th>
                         </tr>
                         <tr className='table_row'>

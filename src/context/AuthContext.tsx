@@ -22,7 +22,7 @@ export const UseAuthContext = () => {
 
 export const AuthProvider = ({children}: AuthProvider) =>{
     const [isAuth, setIsAuth] = useState<boolean>(false)
-    const [role, setRole] = useState<string>('admin')
+    const [role, setRole] = useState<string>('')
     const [token, setToken] = useState<string>('')
 
     const setAuth = (data: Auth) => {

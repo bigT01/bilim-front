@@ -1,8 +1,19 @@
 import './Menu.scss'
 import {CloseButton, Dashboard, Settings, Student, Subjects, Teacher} from "../assets/MainAssets";
 import {NavLink, useParams} from "react-router-dom";
+import {ReactNode} from "react";
 
-const Menu = () =>{
+interface MenuParams{
+    to : string,
+    icon ?: ReactNode,
+    name: string
+}
+
+type MenuProps = {
+    Links: MenuParams[]
+}
+
+const Menu = ({Links}: MenuProps) =>{
 
     const {params} = useParams()
 
@@ -15,36 +26,14 @@ const Menu = () =>{
             </div>
             <nav className={'navbar'}>
                 <ul className={'navbar_wrapper'}>
-                    <li className={'nav_link'}>
-                        <NavLink to={'/admin/dashboard'} className={'nav_link_a'}>
-                            <Dashboard/>
-                            <p>Dashboard</p>
-                        </NavLink>
-                    </li>
-                    <li className={'nav_link'}>
-                        <NavLink to={'/admin/teachers'} className={'nav_link_a'}>
-                            <Teacher/>
-                            <p>Teachers</p>
-                        </NavLink>
-                    </li>
-                    <li className={'nav_link'}>
-                        <NavLink to={'/admin/students'} className={'nav_link_a'}>
-                            <Student/>
-                            <p>Students</p>
-                        </NavLink>
-                    </li>
-                    <li className={'nav_link'}>
-                        <NavLink to={'/admin/subjects'} className={'nav_link_a'}>
-                            <Subjects/>
-                            <p>Subjects</p>
-                        </NavLink>
-                    </li>
-                    <li className={'nav_link'}>
-                        <NavLink to={'/admin/settings'} className={'nav_link_a'}>
-                            <Settings/>
-                            <p>Settings</p>
-                        </NavLink>
-                    </li>
+                    {Links.map(element => (
+                        <li className={'nav_link'}>
+                            <NavLink to={element.to} className={'nav_link_a'}>
+                                {element?.icon ? element?.icon :<Dashboard/>}
+                                <p>{element.name}</p>
+                            </NavLink>
+                        </li>
+                    ))}
                 </ul>
             </nav>
         </div>

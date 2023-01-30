@@ -28,7 +28,7 @@ const Login = () =>{
                 setAuth({
                     id:'kmvdfkvmdlfkmvdfvmdkf',
                     token:'skjfbnkjsnfnjkff',
-                    role:'admin'
+                    role:'student'
                 })
                navigate('/')
             })

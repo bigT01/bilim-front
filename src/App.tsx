@@ -11,6 +11,7 @@ import Dashboard from "./pages/admin/Dashboard";
 import Teachers from "./pages/admin/Teachers";
 import Students from "./pages/admin/Students";
 import Subjects from "./pages/admin/Subjects";
+import DashboardStudent from "./pages/student/DashboardStudent";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
                             <Route path={'/'} element={<PrivateRoute />}>
                                 <Route path={'/'} element={<Index/>}/>
                                 <Route path={'/admin/dashboard'} element={<Dashboard/>}/>
+                                <Route path={'/student/dashboard'} element={<DashboardStudent/>}/>
                                 <Route path={'/admin/teachers'} element={<Teachers/>}/>
                                 <Route path={'/admin/students'} element={<Students/>}/>
                                 <Route path={'/admin/subjects'} element={<Subjects/>}/>

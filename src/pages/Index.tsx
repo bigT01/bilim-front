@@ -3,9 +3,6 @@ import {Navigate} from "react-router-dom";
 
 const Index = () =>{
     const {role} = UseAuthContext()
-
-
-
     if(role === 'admin'){
         return <Navigate to={'/admin/dashboard'} />
     }
