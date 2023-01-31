@@ -17,21 +17,10 @@ const StudentIndex = ({children}:StudentIndexProps) =>{
             name: 'Dashboard'
         },
         {
-            to: '/student/calendar',
-            icon: <Teacher/>,
-            name: "admindcsd"
+            to: '/student/subject',
+            icon:  <Subjects/>,
+            name: "Subjects"
         },
-        {
-            to: '/admin/students',
-            icon: <Student/>,
-            name: 'Students'
-        },
-        {
-            to: '/admin/subjects',
-            icon: <Subjects/>,
-            name: 'Subjects'
-        },
-
     ]
 
     return(

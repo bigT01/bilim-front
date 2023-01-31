@@ -107,7 +107,45 @@ const Subjects = ({color}:MainAssetsProps) => {
     )
 }
 
+const SlideArrow = ({color}:MainAssetsProps) =>{
+    return(
+        <svg width="24" height="24" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.40001 10.7998L1.60001 5.9998L6.40001 1.19981" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    )
+}
 
+const Check = ({color}:MainAssetsProps) =>{
+    return(
+        <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.8 1.3999L3.64043 8.5999L1.19995 6.14562" stroke={color?color:'black'} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    )
+}
+
+const Laptop = ({color}:MainAssetsProps) =>{
+    return(
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.4 15.6V6.23072C20.4 5.10916 19.4598 4.19995 18.3 4.19995H5.70002C4.54023 4.19995 3.60002 5.10916 3.60002 6.23072V15.6M20.4 15.6C21.0628 15.6 21.6 16.1372 21.6 16.8V18.6C21.6 19.2627 21.0628 19.8 20.4 19.8H3.60002C2.93728 19.8 2.40002 19.2627 2.40002 18.6V16.8C2.40002 16.1372 2.93728 15.6 3.60002 15.6M20.4 15.6H16.2L14.4 16.8H9.90002L7.80002 15.6H3.60002" stroke={color?color:'black'} stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+    )
+}
+
+const Idea = ({color}:MainAssetsProps) =>{
+    return(
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.6 21.5999H14.4M6 8.3999C6 5.08619 8.68629 2.3999 12 2.3999C15.3137 2.3999 18 5.08619 18 8.3999C18 10.8603 16.5191 12.874 14.4 13.7999V17.3999C14.4 18.0626 13.8627 18.5999 13.2 18.5999H10.8C10.1373 18.5999 9.6 18.0626 9.6 17.3999V13.9006C7.48091 12.9748 6 10.8603 6 8.3999Z" stroke={color?color:'black'} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    )
+}
+
+const Power = ({color}:MainAssetsProps) =>{
+    return(
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 11.3999V2.3999M5.65005 4.7999C3.65704 6.55897 2.40002 9.13264 2.40002 11.9999C2.40002 17.3018 6.69809 21.5999 12 21.5999C17.302 21.5999 21.6 17.3018 21.6 11.9999C21.6 9.13264 20.343 6.55897 18.35 4.7999" stroke={color?color:'black'} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    )
+}
 
 export {
     Teacher,
@@ -121,5 +159,10 @@ export {
     UserAdd,
     Edit,
     UserRemove,
-    Subjects
+    Subjects,
+    SlideArrow,
+    Check,
+    Laptop,
+    Idea,
+    Power
 }
