@@ -36,6 +36,7 @@ export const AuthProvider = ({children}: AuthProviderType) =>{
     return(
         <AuthContext.Provider value={{
             setAuth,
+
             isAuth,
             token,
             role
