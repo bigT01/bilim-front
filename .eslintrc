@@ -1,0 +1,21 @@
+{
+//  "parser": "@typescript-eslint/parser",
+//  "plugins": ["@typescript-eslint", "jest"],
+//  "extends": ["@salesforce/eslint-config-lwc/recommended"],
+//  "env": {
+//    "jest/globals": true
+//  },
+  "rules": {
+//    "jest/no-deprecated-functions": "error",
+    "no-redeclare": "off",
+    "no-unused-vars": "off",
+    "no-empty-pattern": "off",
+    "no-else-return": "off",
+    "@lwc/lwc/no-async-operation": "off",
+    "vars-on-top": "off",
+    "no-confusing-arrow": "off",
+    "no-shadow": "off",
+    "no-return-await": "off",
+    "import/named": "off"
+  }
+}

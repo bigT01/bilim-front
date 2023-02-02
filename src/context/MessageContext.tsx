@@ -4,14 +4,14 @@ type MessageProviderProps = {
     children: ReactNode
 }
 
-type MessageContext = {
+type MessageContextType = {
     Message: string,
     type: 'error' | 'success' | 'warning' | null,
     setMessage: (message: string, types: 'error' | 'success' | 'warning' | null)=>void
 }
 
 
-const MessageContext = createContext({} as MessageContext)
+const MessageContext = createContext({} as MessageContextType)
 
 export const useMessageContext = () =>{
     return useContext(MessageContext)

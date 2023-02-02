@@ -1,11 +1,11 @@
 import {createContext, ReactNode, useContext, useState} from "react";
 import {Auth} from "../constants/Interfaces";
 
-type AuthProvider = {
+type AuthProviderType = {
     children: ReactNode
 }
 
-type AuthContext = {
+type AuthContextType = {
     setAuth: (data:Auth) => void,
     isAuth: boolean,
     token: string,
@@ -13,14 +13,14 @@ type AuthContext = {
 }
 
 
-const AuthContext = createContext({} as AuthContext)
+const AuthContext = createContext({} as AuthContextType)
 
 export const UseAuthContext = () => {
     return useContext(AuthContext)
 }
 
 
-export const AuthProvider = ({children}: AuthProvider) =>{
+export const AuthProvider = ({children}: AuthProviderType) =>{
     const [isAuth, setIsAuth] = useState<boolean>(false)
     const [role, setRole] = useState<string>('')
     const [token, setToken] = useState<string>('')

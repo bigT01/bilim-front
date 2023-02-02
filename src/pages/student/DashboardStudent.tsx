@@ -34,7 +34,7 @@ const DashboardStudent =() =>{
             <h1 style={{marginBottom:'2rem'}}>Оценки</h1>
             <div className="grades_wrapper">
                 {fakeData.map(element => (
-                    <div className="grade_container">
+                    <div className={`grade_container ${element.grade >= 80 ? 'good' : ''} ${element.grade < 80 &&  element.grade >= 50? 'satisfy' : ''} ${element.grade < 50? 'hardWork' : ''}`}>
                         <div className="header">
                             <p className="subject_name">{element.subjectName}</p>
                             <p className="teacher_name">{element.teacherName}</p>

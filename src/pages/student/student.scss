@@ -1,6 +1,7 @@
 .grades_wrapper{
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  flex-direction: row;
   gap: 1.5rem;
   .grade_container{
     padding: 10px;
@@ -9,13 +10,13 @@
     gap: 10px;
     box-sizing: border-box;
     color: #000000;
-    background-color: #d2d2d2;
+    background-color: rgba(175, 255, 193, 0.2);
     max-width: 350px;
     border-radius: 8px;
+    box-shadow: 1px 8px 10px #ababab;
     .header{
       display: flex;
       justify-content: space-between;
-
     }
     .body{
       display: flex;
@@ -53,6 +54,7 @@
         }
       }
 
+
       .circular-chart.orange .circle {
         stroke: #e5990f;
       }
@@ -71,6 +73,15 @@
         font-size: 0.5em;
         text-anchor: middle;
       }
+    }
+    &.good{
+      background-color: rgba(175, 255, 193, 0.2);
+    }
+    &.satisfy{
+      background-color: rgba(255, 220, 175, 0.2);
+    }
+    &.hardWork{
+      background-color: rgba(255, 175, 175, 0.2);
     }
   }
 }

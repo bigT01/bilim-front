@@ -1,6 +1,6 @@
 import './Menu.scss'
-import {CloseButton, Dashboard, Settings, Student, Subjects, Teacher} from "../assets/MainAssets";
-import {NavLink, useParams} from "react-router-dom";
+import {CloseButton, Dashboard} from "../assets/MainAssets";
+import {NavLink} from "react-router-dom";
 import {ReactNode} from "react";
 
 interface MenuParams{
@@ -15,7 +15,7 @@ type MenuProps = {
 
 const Menu = ({Links}: MenuProps) =>{
 
-    const {params} = useParams()
+    // const {params} = useParams()
 
     return(
         <div className={'menu_wrapper'}>

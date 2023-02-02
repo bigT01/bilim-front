@@ -1,4 +1,4 @@
-import {useForm, Resolver, SubmitHandler} from 'react-hook-form';
+import {useForm, SubmitHandler} from 'react-hook-form';
 import "./Login.scss"
 import { useEffect} from "react";
 import axios from "axios";
@@ -24,11 +24,11 @@ const Login = () =>{
             username: 'admin',
             password: 'QWEazxc@04'
         })
-            .then((res) =>{
+            .then(() =>{
                 setAuth({
                     id:'kmvdfkvmdlfkmvdfvmdkf',
                     token:'skjfbnkjsnfnjkff',
-                    role:'student'
+                    role:'admin'
                 })
                navigate('/')
             })
