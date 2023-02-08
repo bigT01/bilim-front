@@ -25,6 +25,7 @@ export const AuthProvider = ({children}: AuthProviderType) =>{
     const [role, setRole] = useState<string>('')
     const [token, setToken] = useState<string>('')
 
+
     const setAuth = (data: Auth) => {
         if(data?.token){
             setToken(token)

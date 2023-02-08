@@ -5,6 +5,8 @@
 //  "env": {
 //    "jest/globals": true
 //  },
+
+  "parser": "@babel/eslint-parser",
   "rules": {
 //    "jest/no-deprecated-functions": "error",
     "no-redeclare": "off",
@@ -18,4 +20,5 @@
     "no-return-await": "off",
     "import/named": "off"
   }
+
 }
