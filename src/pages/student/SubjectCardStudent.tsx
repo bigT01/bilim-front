@@ -1,12 +1,122 @@
 import StudentIndex from "./index";
 import {Idea, Laptop, Power} from "../../components/assets/MainAssets";
 import math from './assets/math.webp'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import RadioComponent from "../../components/Buttons/RadioComponent";
+import Drop from "../../components/Buttons/Drop";
+import SubjectQuestionCard from "../../components/SubjectQuestionCard/SubjectQuestionCard";
 
+
+const FakeData = {
+    id: "1",
+    description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n" +
+        "                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,\n" +
+        "                                when an unknown printer took a galley of type and scrambled it to make a type specimen\n" +
+        "                                book.",
+    image: math,
+    questions: 4
+}
+
+const FakeQuiz = [
+    {
+        id: 123,
+        type: 'checkbox',
+        question: 'Question: 2+2=?',
+        variants: [
+            {
+                id: "4234",
+                answer: "11"
+            },
+            {
+                id: "9421",
+                answer: "5"
+            },
+            {
+                id: "2342",
+                answer: "4"
+            },
+        ],
+        // backend should not give this information
+        correct: "2342"
+    },
+    {
+        id: 2345,
+        type: 'checkbox',
+        question: 'Question: 2+2=?',
+        variants: [
+            {
+                id: "4234",
+                answer: "11"
+            },
+            {
+                id: "9421",
+                answer: "5"
+            },
+            {
+                id: "2342",
+                answer: "4"
+            },
+        ],
+        // backend should not give this information
+        correct: "2342"
+    },
+    {
+        id: 94353,
+        type: 'checkbox',
+        question: 'Question: 2+2=?',
+        variants: [
+            {
+                id: "4234",
+                answer: "11"
+            },
+            {
+                id: "9421",
+                answer: "5"
+            },
+            {
+                id: "2342",
+                answer: "4"
+            },
+        ],
+        // backend should not give this information
+        correct: "2342"
+    },
+    {
+        id: 3452,
+        type: 'drop',
+        question: 'Question: palace with correct place',
+        DropQuestion: "some people [] love this place [] jnjkdnkdfsdf [] sdjnjsdnl",
+        variants: [
+            {
+                id: "4234",
+                answer: "most"
+            },
+            {
+                id: "9421",
+                answer: "very"
+            },
+            {
+                id: "2342",
+                answer: "high"
+            },
+        ],
+        // backend should not give this information
+        correct: "2342"
+    },
+]
 
 const SubjectCardStudent = () =>{
     const [pageNumber, setPageNumber] = useState(0)
+    const [isFinish, setIsFinish] = useState(false)
+
+    useEffect(() => {
+        if(pageNumber === FakeData.questions){
+            setIsFinish(true)
+        }
+        else{
+            setIsFinish(false)
+        }
+    }, [pageNumber])
 
     return(
         <StudentIndex>
@@ -22,18 +132,13 @@ const SubjectCardStudent = () =>{
                                 <Laptop/>
                                 <span>preview</span>
                             </li>
-                            <li className="nav_link_wrapper little">
-                                <Idea/>
-                                <span>1 quiz</span>
-                            </li>
-                            <li className="nav_link_wrapper little">
-                                <Idea/>
-                                <span>2 quiz</span>
-                            </li>
-                            <li className="nav_link_wrapper little">
-                                <Idea/>
-                                <span>3 quiz</span>
-                            </li>
+                            {FakeQuiz.map((element, index) => (
+                                <li className="nav_link_wrapper little">
+                                    <Idea/>
+                                    <span>{index+1} quiz</span>
+                                </li>
+                            ))}
+
                             <li className="nav_link_wrapper disabled">
                                 <Power color={'#ffffff'}/>
                                 <span>overall</span>
@@ -42,46 +147,19 @@ const SubjectCardStudent = () =>{
                     </div>
                     {pageNumber === 0 && <div className="content">
                         <div className="image_wrapper">
-                            <img src={math} alt="img:math-1"/>
+                            <img src={FakeData.image} alt="img:math-1"/>
                         </div>
                         <div className="description">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                when an unknown printer took a galley of type and scrambled it to make a type specimen
-                                book. </p>
-                            <p> It has survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged.
-                                It was popularised in the 1960s with the release of Letraset sheets containing
-                                Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
-                                PageMaker
-                                including versions of Lorem Ipsum.</p>
-                            <p>Why do we use it?
-                                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+                            <p>{FakeData.description}</p>
                         </div>
                         <div className="btn_wrapper">
                             <button onClick={() => setPageNumber(oldState => oldState + 1)}>next</button>
                         </div>
                     </div>}
-                    {pageNumber === 1 && <div className='content'>
-                        <h3 className="question">Question: 2+2=?</h3>
-                        <div className="answer_list">
-                            <RadioComponent/>
-                        </div>
-                        <div className="btn_wrapper center">
-                            <button onClick={() => setPageNumber(oldState => oldState - 1)}>prev</button>
-                            <button onClick={() => setPageNumber(oldState => oldState + 1)}>next</button>
-                        </div>
-                    </div>}
-                    {pageNumber === 2 && <div className='content'>
-                        <h3 className="question">Question: 2+3=?</h3>
-                        <div className="answer_list">
-                            <RadioComponent/>
-                        </div>
-                        <div className="btn_wrapper center">
-                            <button onClick={() => setPageNumber(oldState => oldState - 1)}>prev</button>
-                            <button onClick={() => setPageNumber(oldState => oldState + 1)}>next</button>
-                        </div>
-                    </div>}
+
+                    {FakeQuiz.map((element, index) =>(
+                        pageNumber === index+1 && <SubjectQuestionCard key={element.id} isFinish={isFinish} setPageNumber={setPageNumber} DropQuestion={element?.DropQuestion} question={element.question} type={element.type} variant={element.variants}/>
+                    ))}
                 </div>
             </div>
         </StudentIndex>

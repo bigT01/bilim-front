@@ -18,21 +18,27 @@ const Login = () =>{
     const {setAuth, isAuth} = UseAuthContext()
 
     const onSubmit: SubmitHandler<FormValues> = data => {
-        axios.post('http://127.0.0.1:8000/api/token/', {
-            // username: data?.email,
-            // password: data?.password
-            username: 'admin',
-            password: 'QWEazxc@04'
+        // axios.post('http://185.22.67.92:8000/', {
+        //     // username: data?.email,
+        //     // password: data?.password
+        //     username: 'admin',
+        //     password: 'QWEazxc@04'
+        // })
+        //     .then(() =>{
+        //         setAuth({
+        //             id:'kmvdfkvmdlfkmvdfvmdkf',
+        //             token:'skjfbnkjsnfnjkff',
+        //             role:'admin'
+        //         })
+        //        navigate('/')
+        //     })
+        //     .catch((err) => {setMessage(err.message, 'error')})
+        setAuth({
+            id: 'kmvdfkvmdlfkmvdfvmdkf',
+            token: 'skjfbnkjsnfnjkff',
+            role: 'admin'
         })
-            .then(() =>{
-                setAuth({
-                    id:'kmvdfkvmdlfkmvdfvmdkf',
-                    token:'skjfbnkjsnfnjkff',
-                    role:'admin'
-                })
-               navigate('/')
-            })
-            .catch((err) => {setMessage(err.message, 'error')})
+        navigate('/')
     };
 
     useEffect(() =>{
