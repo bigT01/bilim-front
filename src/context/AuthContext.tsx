@@ -1,5 +1,7 @@
-import {createContext, ReactNode, useContext, useState} from "react";
+import {createContext, ReactNode, useContext, useEffect, useState} from "react";
 import {Auth} from "../constants/Interfaces";
+import {useSelector} from "react-redux";
+import {SelectIsAuth} from "../Redux/slices/auth";
 
 type AuthProviderType = {
     children: ReactNode
@@ -24,7 +26,14 @@ export const AuthProvider = ({children}: AuthProviderType) =>{
     const [isAuth, setIsAuth] = useState<boolean>(false)
     const [role, setRole] = useState<string>('')
     const [token, setToken] = useState<string>('')
-
+    // const selector = useSelector(SelectIsAuth)
+    //
+    // useEffect(() =>{
+    //     if(selector){
+    //         setIsAuth(true)
+    //     }
+    //     console.log(selector)
+    // },[selector])
 
     const setAuth = (data: Auth) => {
         if(data?.token){

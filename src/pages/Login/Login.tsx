@@ -5,6 +5,8 @@ import axios from "axios";
 import {UseAuthContext} from "../../context/AuthContext";
 import {useNavigate} from "react-router-dom";
 import {useMessageContext} from "../../context/MessageContext";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchAuth, SelectIsAuth} from "../../Redux/slices/auth";
 
 type FormValues = {
     email: string;
@@ -13,26 +15,15 @@ type FormValues = {
 
 const Login = () =>{
     const { register, handleSubmit } = useForm<FormValues>();
+    const dispatch = useDispatch()
+    // const isAuthRedux = useSelector(SelectIsAuth)
     const {setMessage} = useMessageContext()
     const navigate = useNavigate()
     const {setAuth, isAuth} = UseAuthContext()
 
     const onSubmit: SubmitHandler<FormValues> = data => {
-        // axios.post('http://185.22.67.92:8000/', {
-        //     // username: data?.email,
-        //     // password: data?.password
-        //     username: 'admin',
-        //     password: 'QWEazxc@04'
-        // })
-        //     .then(() =>{
-        //         setAuth({
-        //             id:'kmvdfkvmdlfkmvdfvmdkf',
-        //             token:'skjfbnkjsnfnjkff',
-        //             role:'admin'
-        //         })
-        //        navigate('/')
-        //     })
-        //     .catch((err) => {setMessage(err.message, 'error')})
+        // @ts-ignore
+        dispatch(fetchAuth({data}))
         setAuth({
             id: 'kmvdfkvmdlfkmvdfvmdkf',
             token: 'skjfbnkjsnfnjkff',
@@ -41,13 +32,9 @@ const Login = () =>{
         navigate('/')
     };
 
-    useEffect(() =>{
-        if(isAuth){
-            navigate('/')
-
-        }
-    }, [])
-
+    // if(isAuthRedux){
+    //     navigate('/')
+    // }
     return(
         <div className={'login_wrapper'}>
             <div className="login_container">

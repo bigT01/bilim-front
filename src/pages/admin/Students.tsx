@@ -1,12 +1,26 @@
 import AdminIndex from "./index";
 import './adminStudents.scss'
 import {Avatar, Edit, Student, UserAdd, UserRemove} from "../../components/assets/MainAssets";
+import StudentCard from "../../components/AdminStudent/StudentCard/StudentCard";
+import CreateStudent from "../../components/AdminStudent/StudentCard/CreateStudent";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchStudents} from "../../Redux/slices/students";
 
 const Students = () =>{
+    // const dispatch = useDispatch()
+    const {students} = useSelector((state:any) => state.students)
+    // useEffect(() =>{
+    //     dispatch(fetchStudents())
+    // },[])
+    
+
+    const [isCreate, setIsCreate] = useState(false)
+
     return(
         <AdminIndex>
             <div className="admin_students">
-
+                {isCreate && <CreateStudent setIsCreate={setIsCreate}/>}
                 <div className="table_wrapper">
                     <div className="header">
                         <div className="search_wrapper">
@@ -15,247 +29,15 @@ const Students = () =>{
                             </svg>
                             <input type="text" className={"search_input"}/>
                         </div>
-                        <button className="btn_add">
+                        <button className="btn_add" onClick={() => setIsCreate( old => !old)}>
                             <UserAdd color={'#FFFFFF'} />
                         </button>
                     </div>
 
                     <div className='students_wrapper'>
-                        <div className="student_card">
-                            <div className="card-header">
-                                <button className='card-btn'>
-                                    <Edit color={'#706f6f'}/>
-                                </button>
-                                <button className='card-btn'>
-                                    <UserRemove color={'#706f6f'}/>
-                                </button>
-                            </div>
-                            <div className="card_user_info">
-                                <div className="user_avatar">
-                                    <Avatar color={'#2c0101'} background={'#c50303'}/>
-                                </div>
-                                <div className="user_info">
-                                    <p className="info_name">Tanat Azan</p>
-                                    <p className="info_age">18 лет</p>
-                                </div>
-                            </div>
-                            <div className="card_additional_info">
-                                <div className="info_wrapper">
-                                    <div className="info_img">
-                                        <Student color={'#706f6f'}/>
-                                    </div>
-                                    <p>11 A класс</p>
-                                </div>
-                                <div className="info_wrapper">
-                                    <div className="info_img">
-                                        <Student color={'#706f6f'}/>
-                                    </div>
-                                    <p>общ оценки: 99</p>
-                                </div>
-                                <div className="info_wrapper">
-                                    <div className="info_img">
-                                        <Student color={'#706f6f'}/>
-                                    </div>
-                                    <p>рейтинг: 10</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="student_card">
-                            <div className="card-header">
-                                <button className='card-btn'>
-                                    <Edit color={'#706f6f'}/>
-                                </button>
-                                <button className='card-btn'>
-                                    <UserRemove color={'#706f6f'}/>
-                                </button>
-                            </div>
-                            <div className="card_user_info">
-                                <div className="user_avatar">
-                                    <Avatar color={'#2c0101'} background={'#c50303'}/>
-                                </div>
-                                <div className="user_info">
-                                    <p className="info_name">Tanat Azan</p>
-                                    <p className="info_age">18 лет</p>
-                                </div>
-                            </div>
-                            <div className="card_additional_info">
-                                <div className="info_wrapper">
-                                    <div className="info_img">
-                                        <Student color={'#706f6f'}/>
-                                    </div>
-                                    <p>11 A класс</p>
-                                </div>
-                                <div className="info_wrapper">
-                                    <div className="info_img">
-                                        <Student color={'#706f6f'}/>
-                                    </div>
-                                    <p>общ оценки: 99</p>
-                                </div>
-                                <div className="info_wrapper">
-                                    <div className="info_img">
-                                        <Student color={'#706f6f'}/>
-                                    </div>
-                                    <p>рейтинг: 10</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="student_card">
-                            <div className="card-header">
-                                <button className='card-btn'>
-                                    <Edit color={'#706f6f'}/>
-                                </button>
-                                <button className='card-btn'>
-                                    <UserRemove color={'#706f6f'}/>
-                                </button>
-                            </div>
-                            <div className="card_user_info">
-                                <div className="user_avatar">
-                                    <Avatar color={'#2c0101'} background={'#c50303'}/>
-                                </div>
-                                <div className="user_info">
-                                    <p className="info_name">Tanat Azan</p>
-                                    <p className="info_age">18 лет</p>
-                                </div>
-                            </div>
-                            <div className="card_additional_info">
-                                <div className="info_wrapper">
-                                    <div className="info_img">
-                                        <Student color={'#706f6f'}/>
-                                    </div>
-                                    <p>11 A класс</p>
-                                </div>
-                                <div className="info_wrapper">
-                                    <div className="info_img">
-                                        <Student color={'#706f6f'}/>
-                                    </div>
-                                    <p>общ оценки: 99</p>
-                                </div>
-                                <div className="info_wrapper">
-                                    <div className="info_img">
-                                        <Student color={'#706f6f'}/>
-                                    </div>
-                                    <p>рейтинг: 10</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="student_card">
-                            <div className="card-header">
-                                <button className='card-btn'>
-                                    <Edit color={'#706f6f'}/>
-                                </button>
-                                <button className='card-btn'>
-                                    <UserRemove color={'#706f6f'}/>
-                                </button>
-                            </div>
-                            <div className="card_user_info">
-                                <div className="user_avatar">
-                                    <Avatar color={'#2c0101'} background={'#c50303'}/>
-                                </div>
-                                <div className="user_info">
-                                    <p className="info_name">Tanat Azan</p>
-                                    <p className="info_age">18 лет</p>
-                                </div>
-                            </div>
-                            <div className="card_additional_info">
-                                <div className="info_wrapper">
-                                    <div className="info_img">
-                                        <Student color={'#706f6f'}/>
-                                    </div>
-                                    <p>11 A класс</p>
-                                </div>
-                                <div className="info_wrapper">
-                                    <div className="info_img">
-                                        <Student color={'#706f6f'}/>
-                                    </div>
-                                    <p>общ оценки: 99</p>
-                                </div>
-                                <div className="info_wrapper">
-                                    <div className="info_img">
-                                        <Student color={'#706f6f'}/>
-                                    </div>
-                                    <p>рейтинг: 10</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="student_card">
-                            <div className="card-header">
-                                <button className='card-btn'>
-                                    <Edit color={'#706f6f'}/>
-                                </button>
-                                <button className='card-btn'>
-                                    <UserRemove color={'#706f6f'}/>
-                                </button>
-                            </div>
-                            <div className="card_user_info">
-                                <div className="user_avatar">
-                                    <Avatar color={'#2c0101'} background={'#c50303'}/>
-                                </div>
-                                <div className="user_info">
-                                    <p className="info_name">Tanat Azan</p>
-                                    <p className="info_age">18 лет</p>
-                                </div>
-                            </div>
-                            <div className="card_additional_info">
-                                <div className="info_wrapper">
-                                    <div className="info_img">
-                                        <Student color={'#706f6f'}/>
-                                    </div>
-                                    <p>11 A класс</p>
-                                </div>
-                                <div className="info_wrapper">
-                                    <div className="info_img">
-                                        <Student color={'#706f6f'}/>
-                                    </div>
-                                    <p>общ оценки: 99</p>
-                                </div>
-                                <div className="info_wrapper">
-                                    <div className="info_img">
-                                        <Student color={'#706f6f'}/>
-                                    </div>
-                                    <p>рейтинг: 10</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="student_card">
-                            <div className="card-header">
-                                <button className='card-btn'>
-                                    <Edit color={'#706f6f'}/>
-                                </button>
-                                <button className='card-btn'>
-                                    <UserRemove color={'#706f6f'}/>
-                                </button>
-                            </div>
-                            <div className="card_user_info">
-                                <div className="user_avatar">
-                                    <Avatar color={'#2c0101'} background={'#c50303'}/>
-                                </div>
-                                <div className="user_info">
-                                    <p className="info_name">Tanat Azan</p>
-                                    <p className="info_age">18 лет</p>
-                                </div>
-                            </div>
-                            <div className="card_additional_info">
-                                <div className="info_wrapper">
-                                    <div className="info_img">
-                                        <Student color={'#706f6f'}/>
-                                    </div>
-                                    <p>11 A класс</p>
-                                </div>
-                                <div className="info_wrapper">
-                                    <div className="info_img">
-                                        <Student color={'#706f6f'}/>
-                                    </div>
-                                    <p>общ оценки: 99</p>
-                                </div>
-                                <div className="info_wrapper">
-                                    <div className="info_img">
-                                        <Student color={'#706f6f'}/>
-                                    </div>
-                                    <p>рейтинг: 10</p>
-                                </div>
-                            </div>
-                        </div>
-
+                        {students.items.map((elem: any) => (
+                            <StudentCard key={elem.id} id={elem.id} name={elem.name} age={elem.age} grade={elem.grade} avgGrade={elem.avgGrade} rating={elem.rating}/>
+                        ))}
                     </div>
                 </div>
             </div>
