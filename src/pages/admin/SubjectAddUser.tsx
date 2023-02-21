@@ -5,33 +5,56 @@ import { Checkbox } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {StudentItem} from "../../constants/Interfaces";
+import {StudentItem, subjectStudentsI} from "../../constants/Interfaces";
 import {search} from "../../Redux/actions/searchActions";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "../../axios";
 import {useMessageContext} from "../../context/MessageContext";
+import CourseAddUser from "../../components/course/CourseAddUser";
 
 
 const SubjectAddUser = () => {
     const {id} = useParams()
-    const [checkedStudent, setCheckedStudent] = useState<string[]>([])
-    const {students} = useSelector((state:any) => state.students)
-    const {subjectStudents} = useSelector((state:any) => state.subjectStudents)
-    const searchQuery = useSelector((state:any) => state.search);
     const {setMessage} = useMessageContext()
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const onChange = (e: CheckboxChangeEvent, id: string) => {
-        if(e.target.checked){
+    const {students} = useSelector((state:any) => state.students)
+    const {subjectStudents} = useSelector((state:any) => state.subjectStudents)
+    const searchQuery = useSelector((state:any) => state.search);
 
-            setCheckedStudent(old => [...old, id])
+    const [checkedStudent, setCheckedStudent] = useState<any[]>([...subjectStudents.items.students])
+    const [allChecked, setAllChecked] = useState(false);
+
+
+    const handleChange = (id: string) => {
+        const fil = checkedStudent.filter(item => item === id)
+        if(fil[0]){
+            setAllChecked(false)
+            setCheckedStudent(old => old.filter(item => item !== id) )
         }
         else{
-            setCheckedStudent(old => old.filter(elem => elem !== id))
+            setCheckedStudent(old => [...old, id])
         }
     };
 
+    const handleAllCheck = () => {
+        if(checkedStudent.length === students.items.length){
+            setAllChecked(false)
+            setCheckedStudent([])
+        }
+        else{
+            setAllChecked(old => !old)
+            setCheckedStudent(students.items.map((item:any) => item.id ))
+        }
+
+    }
+
+    useEffect(() => {
+        if(checkedStudent.length === students.items.length){
+            setAllChecked(true)
+        }
+    }, [checkedStudent])
 
     const SearchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const query = e.target.value;
@@ -41,6 +64,7 @@ const SubjectAddUser = () => {
     const filteredStudents = students.items.filter((student:StudentItem) =>
         student.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
 
     const SubmitHandler = (checkedStudent:string[]) => {
         if(checkedStudent[0]){
@@ -67,7 +91,7 @@ const SubjectAddUser = () => {
                         </svg>
                         <input type="text" className={"search_input"} onChange={SearchHandler}/>
                     </div>
-                    <Checkbox>
+                    <Checkbox checked={allChecked} onChange={() => handleAllCheck()}>
                         Check all
                     </Checkbox>
                     <button className={`btn_add ${checkedStudent[0] ? 'able': 'disable'}`} onClick={() => SubmitHandler(checkedStudent)}>Добавить</button>
@@ -88,12 +112,7 @@ const SubjectAddUser = () => {
                         </th>
                     </tr>
                     {filteredStudents.map((elem:StudentItem) => (
-                        <tr className='table_row' key={elem.id}>
-                            <td className='table_row__cail'><Checkbox onChange={e => onChange(e, elem.id)} /></td>
-                            <td className='table_row__cail'>{elem.id}</td>
-                            <td className='table_row__cail'>{elem.name}</td>
-                            <td className='table_row__cail'>{elem.grade}</td>
-                        </tr>
+                        <CourseAddUser id={elem.id} name={elem.name} grade={elem.grade} checked={checkedStudent} onChange={handleChange}/>
                     ))}
                 </table>
             </div>

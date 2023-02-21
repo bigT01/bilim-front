@@ -11,89 +11,13 @@ export const fetchSubjectStudents = createAsyncThunk<{}, {}, any>('subjects/fetc
 
 const initialState = {
     subjectStudents: {
-        items: [
+        items:
             {
                 id: "COURSE1",
                 students: [
-                    {id: '1',},
-                    {id: '8'},
-                    {id: '0'}
+                    '1', '9', '4'
                 ]
             },
-            {
-                id: "COURSE2",
-                students: [
-                    {id: '5',},
-                    {id: '4'},
-                    {id: '6'}
-                ]
-            },
-            {
-                id: "COURSE3",
-                students: [
-                    {id: '3',},
-                    {id: '5'},
-                    {id: '10'}
-                ]
-            },
-            {
-                id: "COURSE4",
-                students: [
-                    {id: '1',},
-                    {id: '2'},
-                    {id: '3'}
-                ]
-            },
-            {
-                id: "COURSE5",
-                students: [
-                    {id: '9',},
-                    {id: '7'},
-                    {id: '6'}
-                ]
-            },
-            {
-                id: "COURSE6",
-                students: [
-                    {id: '1',},
-                    {id: '8'},
-                    {id: '0'}
-                ]
-            },
-            {
-                id: "COURSE7",
-                students: [
-                    {id: '5',},
-                    {id: '4'},
-                    {id: '6'}
-                ]
-            },
-            {
-                id: "COURSE8",
-                students: [
-                    {id: '3',},
-                    {id: '5'},
-                    {id: '10'}
-                ]
-            },
-            {
-                id: "COURSE9",
-                students: [
-                    {id: '1',},
-                    {id: '2'},
-                    {id: '3'}
-                ]
-            },
-            {
-                id: "COURSE10",
-                students: [
-                    {id: '9',},
-                    {id: '7'},
-                    {id: '6'}
-                ]
-            },
-
-        ],
         status: 'loading'
     }
 }
