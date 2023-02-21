@@ -1,4 +1,4 @@
-import './adminDashboard.scss'
+import './styles/adminDashboard.scss'
 import {useEffect, useRef, useState} from "react";
 import StudentsChart from "../../components/Charts/StudentsChart";
 import {More} from "../../components/assets/MainAssets";

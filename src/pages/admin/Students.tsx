@@ -1,5 +1,5 @@
 import AdminIndex from "./index";
-import './adminStudents.scss'
+import './styles/adminStudents.scss'
 import {Avatar, Edit, Student, UserAdd, UserRemove} from "../../components/assets/MainAssets";
 import StudentCard from "../../components/AdminStudent/StudentCard/StudentCard";
 import CreateStudent from "../../components/AdminStudent/StudentCard/CreateStudent";
@@ -13,7 +13,7 @@ const Students = () =>{
     // useEffect(() =>{
     //     dispatch(fetchStudents())
     // },[])
-    
+
 
     const [isCreate, setIsCreate] = useState(false)
 

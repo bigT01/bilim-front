@@ -1,5 +1,5 @@
 import AdminIndex from "./index";
-import './adminTeachers.scss'
+import './styles/adminTeachers.scss'
 import {Edit, UserAdd, UserRemove} from "../../components/assets/MainAssets";
 
 const Teachers = () =>{

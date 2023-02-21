@@ -14,6 +14,8 @@ import Subjects from "./pages/admin/Subjects";
 import DashboardStudent from "./pages/student/DashboardStudent";
 import SubjectStudent from "./pages/student/SubjectStudent";
 import SubjectCardStudent from "./pages/student/SubjectCardStudent";
+import StudentsCard from "./pages/admin/StudentsCard";
+import SubjectAddUser from "./pages/admin/SubjectAddUser";
 
 
 function App() {
@@ -30,8 +32,10 @@ function App() {
                                 <Route path={'/student/subject'} element={<SubjectStudent/>}/>
                                 <Route path={'/admin/teachers'} element={<Teachers/>}/>
                                 <Route path={'/admin/students'} element={<Students/>}/>
+                                <Route path={'/admin/students/:id'} element={<StudentsCard/>}/>
                                 <Route path={'/admin/subjects'} element={<Subjects/>}/>
                                 <Route path={'/student/subject/:id'} element={<SubjectCardStudent/>}/>
+                                <Route path={'/admin/subjects/:id/adduser'} element={<SubjectAddUser/>}/>
                             </Route>
                             <Route path={'/login'} element={<Login/>}/>
                         </Routes>

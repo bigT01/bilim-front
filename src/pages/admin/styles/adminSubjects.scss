@@ -1,0 +1,247 @@
+@import "../../../styles/root";
+@import "../../../styles/mixin";
+
+.admin_subject{
+  .header{
+    margin-bottom: 2rem;
+
+  }
+  .table_wrapper{
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 20px;
+    .header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .search_wrapper{
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        border: 1px solid $MainColor;
+        padding: 5px 10px;
+        gap: 5px;
+        width: 40%;
+        .search_input{
+          padding: 5px 10px;
+          font-size: 16px;
+          border: none;
+          width: 100%;
+        }
+        .search_input:active{
+          border-color: $SuccessColor;
+        }
+        .search_input:focus-visible{
+          outline: none;
+        }
+      }
+
+      .btn_add{
+        @include success-btn;
+        box-sizing: border-box;
+        padding: 10px;
+        svg{
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+    .table{
+      width: 100%;
+      box-sizing: border-box;
+      box-shadow: 1px 1px 10px;
+      border-radius: 5px;
+      border-collapse: collapse;
+      &_header{
+        text-align: left;
+        opacity: 0.5;
+        .table_header__cail{
+          padding: 15px 10px;
+        }
+      }
+      &_row{
+        &__cail{
+          font-size: 14px;
+          padding: 10px 10px;
+          .content_wrapper{
+            display: flex;
+            max-width: 400px;
+            flex-wrap: wrap;
+            gap: 10px;
+            .content_info{
+              padding: 10px 15px;
+              border-radius: 10px;
+              background-color: #d496a7;
+              width: fit-content;
+            }
+            .btn_cail{
+              border: none;
+              cursor: pointer;
+              svg{
+                width: 18px;
+                height: 18px;
+              }
+            }
+          }
+        }
+      }
+      &_row:nth-child(even){
+        background-color: #efefef;
+      }
+    }
+  }
+
+  .courses_wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    .course{
+      display: grid;
+      grid-template-columns: 100px 1fr 200px 1fr;
+      padding: 10px;
+      .picture{
+        width: 80px;
+        height: 80px;
+        background-color: rgba(130, 172, 245, 0.63);
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .name{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        .course_name{
+          font-weight: 500;
+          text-decoration: none;
+          margin-bottom: 10px;
+          font-size: 16px;
+          color: #000000;
+          &:hover{
+            color: #292dd6;
+          }
+        }
+        .course_lessons{
+          font-weight: 400;
+          font-size: 14px;
+          color: #b9b9b9;
+        }
+      }
+      .student_number{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        p{
+          font-weight: 300;
+          font-size: 18px;
+        }
+      }
+      .btn_wrapper{
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        button{
+          background-color: inherit;
+          border: none;
+          font-size: 30px;
+          cursor: pointer;
+        }
+        .more{
+          position: absolute;
+          box-sizing: border-box;
+          bottom: 10px;
+          right: 15px;
+          width: 200px;
+          padding: 10px;
+          border-radius: 10px;
+          box-shadow: 2px 4px 10px #000000;
+          background-color: #ffffff;
+          &.show{
+            display: block;
+            opacity: 1;
+          }
+          &.disable{
+            display: none;
+            opacity: 0;
+          }
+          .edit{
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: #000000;
+            text-decoration: none;
+            border-radius: 5px;
+            background-color: #ffffff;
+            transition: background-color 0.2s linear;
+            svg{
+              width: 16px;
+              height: 16px;
+              margin-right: 5px;
+            }
+            &:hover{
+              background-color: rgba(104, 255, 139, 0.5);
+              transition: background-color 0.2s linear;
+            }
+          }
+          .delete{
+            width: 100%;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: #000000;
+            text-decoration: none;
+            border-radius: 5px;
+            background-color: #ffffff;
+            transition: background-color 0.2s linear;
+            svg{
+              width: 16px;
+              height: 16px;
+              margin-right: 5px;
+            }
+            &:hover{
+              background-color: rgba(255, 104, 157, 0.5);
+              transition: background-color 0.2s linear;
+            }
+          }
+          .add{
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: #000000;
+            text-decoration: none;
+            border-radius: 5px;
+            background-color: #ffffff;
+            transition: background-color 0.2s linear;
+            svg{
+              width: 16px;
+              height: 16px;
+              margin-right: 5px;
+            }
+            &:hover{
+              background-color: rgba(104, 174, 255, 0.5);
+              transition: background-color 0.2s linear;
+            }
+          }
+        }
+      }
+    }
+    .header{
+      display: grid;
+      grid-template-columns: 100px 1fr 200px 1fr;
+      grid-template-areas: 'name name count count';
+      padding: 10px;
+      margin-bottom: 0;
+      .name{
+        grid-area: name;
+      }
+      .count{
+        grid-area: count;
+      }
+    }
+  }
+}

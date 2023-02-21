@@ -1,4 +1,7 @@
 import {Avatar, Edit, Eye, Student, UserRemove} from "../../assets/MainAssets";
+import {useDispatch} from "react-redux";
+import {fetchRemoveStudent} from "../../../Redux/slices/students";
+import {Link} from "react-router-dom";
 
 type StudentCardProps = {
     id: string,
@@ -10,16 +13,22 @@ type StudentCardProps = {
 }
 
 const StudentCard = ({id, name, age, grade, rating, avgGrade}:StudentCardProps) => {
+    const dispatch = useDispatch()
+
+    const handleRemove = (id:string) =>{
+        // @ts-ignore
+        dispatch(fetchRemoveStudent(id))
+    }
     return(
         <div className="student_card">
             <div className="card-header">
-                <button className='card-btn'>
+                <Link to={`/admin/students/${id}`} className='card-btn'>
                     <Eye color={'#706f6f'}/>
-                </button>
+                </Link>
                 <button className='card-btn'>
                     <Edit color={'#706f6f'}/>
                 </button>
-                <button className='card-btn'>
+                <button className='card-btn' onClick={() => handleRemove(id)}>
                     <UserRemove color={'#706f6f'}/>
                 </button>
             </div>

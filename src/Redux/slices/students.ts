@@ -6,11 +6,17 @@ export const fetchStudents = createAsyncThunk<{}, {}, any>('students/fetchStuden
     return data
 })
 
+export const fetchRemoveStudent = createAsyncThunk<{}, {}, any>('students/fetchRemoveStudent', async ({id}:any) => {
+    const {data} = await axios.delete(`/student/${id}`);
+    return data
+})
+
+
 const initialState = {
     students: {
         items:[
             {
-                id: '56723jofv',
+                id: '0',
                 name: "Azan Tanat",
                 age: 18,
                 grade: "9 a",
@@ -102,8 +108,6 @@ const initialState = {
     }
 }
 
-
-
 const StudentSlice = createSlice({
     name: 'students',
     initialState,
@@ -121,8 +125,23 @@ const StudentSlice = createSlice({
         // @ts-ignore
         [fetchStudents.rejected] : (state:any) =>{
             state.students.status = 'failed';
+        },
+        // @ts-ignore
+        [fetchRemoveStudent.pending] : (state:any, action:any) =>{
+            state.students.items = state.students.items.filter((elem: any) => elem.id !== action.meta.arg)
+            state.students.status = 'loading'
+        },
+        // @ts-ignore
+        [fetchRemoveStudent.fulfilled] : (state:any) =>{
+            state.students.status = 'loaded';
+        },
+        // @ts-ignore
+        [fetchRemoveStudent.rejected] : (state:any) =>{
+            state.students.status = 'failed';
         }
     }
 })
+
+export const SelectRemoveStudent = ({state}: any) => Boolean(state?.auth?.data)
 
 export const StudentReducer = StudentSlice.reducer;

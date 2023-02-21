@@ -1,8 +1,13 @@
 import AdminIndex from "./index";
-import './adminSubjects.scss'
+import './styles/adminSubjects.scss'
 import {Edit, UserAdd, UserRemove} from "../../components/assets/MainAssets";
+import CourseItem from "../../components/course/CourseItem";
+import {useSelector} from "react-redux";
+import {CourseItemProps} from "../../constants/Interfaces";
 
 const Subjects = () =>{
+    const {subjects} = useSelector((state:any) => state.subjects)
+
     return(
         <AdminIndex>
             <div className="admin_subject">
@@ -18,175 +23,15 @@ const Subjects = () =>{
                             <UserAdd color={'#FFFFFF'} />
                         </button>
                     </div>
-                    <table className={'table'}>
-                        <tr className='table_header'>
-                            <th className='table_header__cail'>Subject</th>
-                            <th className='table_header__cail'>Teachers</th>
-                            <th className='table_header__cail'>Classes</th>
-                        </tr>
-                        <tr className='table_row'>
-                            <td className='table_row__cail'>Azan Tanat</td>
-                            <td className='table_row__cail'>
-                                <div className="content_wrapper">
-                                    <p className='content_info' style={{backgroundColor:'#d496a7'}}>Math</p>
-                                    <p className='content_info' style={{backgroundColor:'#78e0dc'}}>History</p>
-                                    <p className='content_info' style={{backgroundColor:'#8eedf7'}}>PE</p>
-                                </div>
-                            </td>
-                            <td className='table_row__cail'>
-                                <div className="content_wrapper">
-                                    <p className='content_info' style={{backgroundColor:'#48e5c2'}}>11A</p>
-                                    <p className='content_info' style={{backgroundColor:'#fcfaf8'}}>10C</p>
-                                    <p className='content_info' style={{backgroundColor:'#f3d3bd'}}>6F</p>
-                                </div>
-                            </td>
-                            <td className='table_row__cail'>
-                                <div className="content_wrapper" style={{justifyContent: 'right', gap:20}}>
-                                    <button className="btn_cail">
-                                        <Edit/>
-                                    </button>
-                                    <button className="btn_cail">
-                                        <UserRemove />
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr className='table_row'>
-                            <td className='table_row__cail'>Azan Tanat</td>
-                            <td className='table_row__cail'>
-                                <div className="content_wrapper">
-                                    <p className='content_info' style={{backgroundColor:'#d496a7'}}>Math</p>
-                                    <p className='content_info' style={{backgroundColor:'#78e0dc'}}>History</p>
-                                    <p className='content_info' style={{backgroundColor:'#8eedf7'}}>PE</p>
-                                </div>
-                            </td>
-                            <td className='table_row__cail'>
-                                <div className="content_wrapper">
-                                    <p className='content_info' style={{backgroundColor:'#48e5c2'}}>11A</p>
-                                    <p className='content_info' style={{backgroundColor:'#fcfaf8'}}>10C</p>
-                                    <p className='content_info' style={{backgroundColor:'#f3d3bd'}}>6F</p>
-                                </div>
-                            </td>
-                            <td className='table_row__cail'>
-                                <div className="content_wrapper" style={{justifyContent: 'right', gap:20}}>
-                                    <button className="btn_cail">
-                                        <Edit/>
-                                    </button>
-                                    <button className="btn_cail">
-                                        <UserRemove />
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr className='table_row'>
-                            <td className='table_row__cail'>Azan Tanat</td>
-                            <td className='table_row__cail'>
-                                <div className="content_wrapper">
-                                    <p className='content_info' style={{backgroundColor:'#d496a7'}}>Math</p>
-                                    <p className='content_info' style={{backgroundColor:'#78e0dc'}}>History</p>
-                                    <p className='content_info' style={{backgroundColor:'#8eedf7'}}>PE</p>
-                                </div>
-                            </td>
-                            <td className='table_row__cail'>
-                                <div className="content_wrapper">
-                                    <p className='content_info' style={{backgroundColor:'#48e5c2'}}>11A</p>
-                                    <p className='content_info' style={{backgroundColor:'#fcfaf8'}}>10C</p>
-                                    <p className='content_info' style={{backgroundColor:'#f3d3bd'}}>6F</p>
-                                </div>
-                            </td>
-                            <td className='table_row__cail'>
-                                <div className="content_wrapper" style={{justifyContent: 'right', gap:20}}>
-                                    <button className="btn_cail">
-                                        <Edit/>
-                                    </button>
-                                    <button className="btn_cail">
-                                        <UserRemove />
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr className='table_row'>
-                            <td className='table_row__cail'>Azan Tanat</td>
-                            <td className='table_row__cail'>
-                                <div className="content_wrapper">
-                                    <p className='content_info' style={{backgroundColor:'#d496a7'}}>Math</p>
-                                    <p className='content_info' style={{backgroundColor:'#78e0dc'}}>History</p>
-                                    <p className='content_info' style={{backgroundColor:'#8eedf7'}}>PE</p>
-                                </div>
-                            </td>
-                            <td className='table_row__cail'>
-                                <div className="content_wrapper">
-                                    <p className='content_info' style={{backgroundColor:'#48e5c2'}}>11A</p>
-                                    <p className='content_info' style={{backgroundColor:'#fcfaf8'}}>10C</p>
-                                    <p className='content_info' style={{backgroundColor:'#f3d3bd'}}>6F</p>
-                                </div>
-                            </td>
-                            <td className='table_row__cail'>
-                                <div className="content_wrapper" style={{justifyContent: 'right', gap:20}}>
-                                    <button className="btn_cail">
-                                        <Edit/>
-                                    </button>
-                                    <button className="btn_cail">
-                                        <UserRemove />
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr className='table_row'>
-                            <td className='table_row__cail'>Azan Tanat</td>
-                            <td className='table_row__cail'>
-                                <div className="content_wrapper">
-                                    <p className='content_info' style={{backgroundColor:'#d496a7'}}>Math</p>
-                                    <p className='content_info' style={{backgroundColor:'#78e0dc'}}>History</p>
-                                    <p className='content_info' style={{backgroundColor:'#8eedf7'}}>PE</p>
-                                </div>
-                            </td>
-                            <td className='table_row__cail'>
-                                <div className="content_wrapper">
-                                    <p className='content_info' style={{backgroundColor:'#48e5c2'}}>11A</p>
-                                    <p className='content_info' style={{backgroundColor:'#fcfaf8'}}>10C</p>
-                                    <p className='content_info' style={{backgroundColor:'#f3d3bd'}}>6F</p>
-                                </div>
-                            </td>
-                            <td className='table_row__cail'>
-                                <div className="content_wrapper" style={{justifyContent: 'right', gap:20}}>
-                                    <button className="btn_cail">
-                                        <Edit/>
-                                    </button>
-                                    <button className="btn_cail">
-                                        <UserRemove />
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr className='table_row'>
-                            <td className='table_row__cail'>Azan Tanat</td>
-                            <td className='table_row__cail'>
-                                <div className="content_wrapper">
-                                    <p className='content_info' style={{backgroundColor:'#d496a7'}}>Math</p>
-                                    <p className='content_info' style={{backgroundColor:'#78e0dc'}}>History</p>
-                                    <p className='content_info' style={{backgroundColor:'#8eedf7'}}>PE</p>
-                                </div>
-                            </td>
-                            <td className='table_row__cail'>
-                                <div className="content_wrapper">
-                                    <p className='content_info' style={{backgroundColor:'#48e5c2'}}>11A</p>
-                                    <p className='content_info' style={{backgroundColor:'#fcfaf8'}}>10C</p>
-                                    <p className='content_info' style={{backgroundColor:'#f3d3bd'}}>6F</p>
-                                </div>
-                            </td>
-                            <td className='table_row__cail'>
-                                <div className="content_wrapper" style={{justifyContent: 'right', gap:20}}>
-                                    <button className="btn_cail">
-                                        <Edit/>
-                                    </button>
-                                    <button className="btn_cail">
-                                        <UserRemove />
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                    <div className="courses_wrapper">
+                        <div className="header">
+                            <p className='name'>Называние курса</p>
+                            <p className='count'>Количество студенов</p>
+                        </div>
+                        {subjects.items.map((elem: CourseItemProps) => (
+                            <CourseItem key={elem.id} id={elem.id} courseName={elem.courseName} lessonsNumber={elem.lessonsNumber} studentsNumber={elem.studentsNumber}/>
+                        ))}
+                    </div>
                 </div>
             </div>
         </AdminIndex>
