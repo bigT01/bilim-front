@@ -1,0 +1,102 @@
+.subject_item_wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .btn_add{
+      color: #ffffff;
+      background-color: #4CC790;
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      box-shadow: 2px 1px 5px #19412f;
+    }
+  }
+  .lessons_wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr ;
+    grid-column-gap: 30px;
+    grid-row-gap: 50px;
+    .lesson_item{
+      width: 100%;
+      background-color: #ffffff;
+      box-shadow: 2px 3px 5px #000000;
+      border-radius: 10px;
+      position: relative;
+      .lesson_picture_wrapper{
+        margin-bottom: 1rem;
+        img{
+          width: 100%;
+          border-top-right-radius: 10px;
+          border-top-left-radius: 10px;
+          height: 175px;
+          object-fit: cover;
+        }
+      }
+      .lesson_body{
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        .body_information{
+          display: flex;
+          flex-direction: column;
+          width: 70%;
+          gap: 10px;
+          .lesson_name{
+            font-size: 14px;
+          }
+          .lesson_time{
+            font-size: 10px;
+            color: #706f6f;
+          }
+        }
+        .btn_delete{
+          border: none;
+          background-color: rgba(229, 15, 33, 0.5);
+          width: 40px;
+          height: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+          margin-left: auto;
+          cursor: pointer;
+          svg{
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+      .btn_edit{
+        position: absolute;
+        opacity: 0;
+        transition: opacity 0.3s linear;
+        right: 10px;
+        top: 10px;
+        border: none;
+        background-color: rgba(3, 147, 3, 0.7);
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        margin-left: auto;
+        cursor: pointer;
+        svg{
+          width: 20px;
+          height: 20px;
+        }
+      }
+      &:hover{
+        .btn_edit{
+          opacity: 1;
+          transition: opacity 0.3s linear;
+        }
+      }
+    }
+  }
+}

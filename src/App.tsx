@@ -6,7 +6,6 @@ import PrivateRoute from "./utils/PrivateRoute";
 import {AuthProvider} from "./context/AuthContext";
 import MainLayout from "./components/MainLayout/MainLayout";
 import {MessageProvider} from "./context/MessageContext";
-// import StudentIndex from "./pages/student/index";
 import Dashboard from "./pages/admin/Dashboard";
 import Teachers from "./pages/admin/Teachers";
 import Students from "./pages/admin/Students";
@@ -16,6 +15,8 @@ import SubjectStudent from "./pages/student/SubjectStudent";
 import SubjectCardStudent from "./pages/student/SubjectCardStudent";
 import StudentsCard from "./pages/admin/StudentsCard";
 import SubjectAddUser from "./pages/admin/SubjectAddUser";
+import SubjectsItem from "./pages/admin/subject/SubjectsItem";
+import AddLesson from "./pages/admin/subject/AddLesson";
 
 
 function App() {
@@ -34,6 +35,8 @@ function App() {
                                 <Route path={'/admin/students'} element={<Students/>}/>
                                 <Route path={'/admin/students/:id'} element={<StudentsCard/>}/>
                                 <Route path={'/admin/subjects'} element={<Subjects/>}/>
+                                <Route path={'/admin/subjects/:id'} element={<SubjectsItem/>}/>
+                                <Route path={'/admin/subject/:id/addLesson'} element={<AddLesson/>}/>
                                 <Route path={'/student/subject/:id'} element={<SubjectCardStudent/>}/>
                                 <Route path={'/admin/subjects/:id/adduser'} element={<SubjectAddUser/>}/>
                             </Route>

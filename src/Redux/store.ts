@@ -4,6 +4,7 @@ import {AuthReducer} from "./slices/auth";
 import {SubjectsReducer} from "./slices/subject";
 import SearchReducer from "./reducer/searchReducer";
 import {SubjectStudentReducer} from "./slices/subjectStudents";
+import {LessonsReducer} from "./slices/lessons";
 
 const store = configureStore({
     reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
         subjects: SubjectsReducer,
         auth: AuthReducer,
         subjectStudents: SubjectStudentReducer,
+        subjectLessons: LessonsReducer,
         search: SearchReducer
     },
 });

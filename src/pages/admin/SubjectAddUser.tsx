@@ -77,6 +77,7 @@ const SubjectAddUser = () => {
                 })
                 .catch(err => {
                     setMessage('Ошибка сети попробуйте еще раз','error')
+                    navigate('/admin/subjects')
                 })
         }
     }
