@@ -2,6 +2,8 @@ import {Avatar, Edit, Eye, Student, UserRemove} from "../../assets/MainAssets";
 import {useDispatch} from "react-redux";
 import {fetchRemoveStudent} from "../../../Redux/slices/students";
 import {Link} from "react-router-dom";
+import axios from "../../../axios";
+import {message} from "antd";
 
 type StudentCardProps = {
     id: string,
@@ -16,8 +18,13 @@ const StudentCard = ({id, name, age, grade, rating, avgGrade}:StudentCardProps) 
     const dispatch = useDispatch()
 
     const handleRemove = (id:string) =>{
-        // @ts-ignore
-        dispatch(fetchRemoveStudent(id))
+        axios.delete(`/user/${id}`)
+            .then(req => {
+                // @ts-ignore
+                dispatch(fetchRemoveStudent(id))
+                message.success('ученик был успешно удалено')
+            })
+            .catch(err => message.error('ошибка сервера попробуйте поздее'))
     }
     return(
         <div className="student_card">
@@ -38,27 +45,7 @@ const StudentCard = ({id, name, age, grade, rating, avgGrade}:StudentCardProps) 
                 </div>
                 <div className="user_info">
                     <p className="info_name">{name}</p>
-                    <p className="info_age">{age} лет</p>
-                </div>
-            </div>
-            <div className="card_additional_info">
-                <div className="info_wrapper">
-                    <div className="info_img">
-                        <Student color={'#706f6f'}/>
-                    </div>
-                    <p>{grade} класс</p>
-                </div>
-                <div className="info_wrapper">
-                    <div className="info_img">
-                        <Student color={'#706f6f'}/>
-                    </div>
-                    <p>общ оценки: {avgGrade}</p>
-                </div>
-                <div className="info_wrapper">
-                    <div className="info_img">
-                        <Student color={'#706f6f'}/>
-                    </div>
-                    <p>рейтинг: {rating}</p>
+                    <p className="info_age">{grade} класс</p>
                 </div>
             </div>
         </div>

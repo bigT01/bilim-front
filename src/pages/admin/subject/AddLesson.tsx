@@ -9,6 +9,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import Dragger from "antd/es/upload/Dragger";
 import { InboxOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
+import {useNavigate, useParams} from "react-router-dom";
 
 
 const getBase64 = (file: RcFile): Promise<string> =>
@@ -20,12 +21,14 @@ const getBase64 = (file: RcFile): Promise<string> =>
     });
 
 const AddLesson = () => {
+    const {id} = useParams()
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
     const [loadings, setLoadings] = useState<boolean[]>([]);
     const handleCancel = () => setPreviewOpen(false);
     const [fileList, setFileList] = useState<UploadFile[]>([]);
+    const navigate = useNavigate()
 
     const handlePreview = async (file: UploadFile) => {
         if (!file.url && !file.preview) {
@@ -80,6 +83,7 @@ const AddLesson = () => {
             setLoadings((prevLoadings) => {
                 const newLoadings = [...prevLoadings];
                 newLoadings[index] = false;
+                navigate(`/admin/subject/${id}/addLesson/2345678/quiz`)
                 return newLoadings;
             });
         }, 6000);

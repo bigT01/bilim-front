@@ -24,3 +24,9 @@ export interface subjectStudentsI {
     id: string,
     students: string[]
 }
+
+export interface MainStudent {
+    id: string,
+    full_name: string,
+    attend: string,
+}

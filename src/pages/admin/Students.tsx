@@ -6,21 +6,25 @@ import CreateStudent from "../../components/AdminStudent/StudentCard/CreateStude
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchStudents} from "../../Redux/slices/students";
+import {Link} from "react-router-dom";
 
 const Students = () =>{
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
     const {students} = useSelector((state:any) => state.students)
-    // useEffect(() =>{
-    //     dispatch(fetchStudents())
-    // },[])
 
 
-    const [isCreate, setIsCreate] = useState(false)
+    useEffect(() =>{
+        // @ts-ignore
+        dispatch(fetchStudents())
+    },[])
+
+
+
 
     return(
         <AdminIndex>
             <div className="admin_students">
-                {isCreate && <CreateStudent setIsCreate={setIsCreate}/>}
+
                 <div className="table_wrapper">
                     <div className="header">
                         <div className="search_wrapper">
@@ -29,14 +33,14 @@ const Students = () =>{
                             </svg>
                             <input type="text" className={"search_input"}/>
                         </div>
-                        <button className="btn_add" onClick={() => setIsCreate( old => !old)}>
+                        <Link to={'/admin/students/createStudent'} className="btn_add" >
                             <UserAdd color={'#FFFFFF'} />
-                        </button>
+                        </Link>
                     </div>
 
                     <div className='students_wrapper'>
                         {students.items.map((elem: any) => (
-                            <StudentCard key={elem.id} id={elem.id} name={elem.name} age={elem.age} grade={elem.grade} avgGrade={elem.avgGrade} rating={elem.rating}/>
+                            <StudentCard key={elem.id} id={elem.id} name={elem.full_name} age={elem.age} grade={elem.attend} avgGrade={elem.avgGrade} rating={elem.rating}/>
                         ))}
                     </div>
                 </div>

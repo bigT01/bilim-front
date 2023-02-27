@@ -1,14 +1,10 @@
 .wrapper{
-  position: absolute;
   box-sizing: border-box;
   background-color: #e5e5e5;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   box-shadow: 1px 1px 1px black;
   padding: 20px 30px;
   border-radius: 20px;
-  width: 50%;
+  width: 100%;
   .header{
     display: flex;
     justify-content: space-between;

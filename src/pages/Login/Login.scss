@@ -17,6 +17,7 @@
     background-color: #FFFFFF;
     box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.1);
     &_information{
+      position: relative;
       width: 45%;
       height: 100%;
       box-sizing: border-box;
@@ -29,6 +30,10 @@
       align-items: center;
       display: flex;
       justify-content: center;
+      flex-direction: column;
+      img{
+        object-fit: cover;
+      }
       .header{
         line-height: 30px;
         font-size: 26px;

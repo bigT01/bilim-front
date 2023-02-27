@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {useMessageContext} from "../../context/MessageContext";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAuth, SelectIsAuth} from "../../Redux/slices/auth";
+import LoginPage from './loginPage.png'
 
 type FormValues = {
     email: string;
@@ -40,7 +41,7 @@ const Login = () =>{
             <div className="login_container">
                 <div className="login_container_information">
                     <h3 className={'header'}>Welcome to <br/><span className={'mainWord'}>BILIM</span> <br/>online platform</h3>
-                    <p></p>
+                    <img src={LoginPage} alt="img:login-page" width={300} height={300}/>
                 </div>
                 <div className="login_container_login">
                     <div className="header">

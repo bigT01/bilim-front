@@ -17,6 +17,8 @@ import StudentsCard from "./pages/admin/StudentsCard";
 import SubjectAddUser from "./pages/admin/SubjectAddUser";
 import SubjectsItem from "./pages/admin/subject/SubjectsItem";
 import AddLesson from "./pages/admin/subject/AddLesson";
+import AddQuiz from "./pages/admin/subject/addQuiz";
+import CreateStudent from "./components/AdminStudent/StudentCard/CreateStudent";
 
 
 function App() {
@@ -29,16 +31,21 @@ function App() {
                             <Route path={'/'} element={<PrivateRoute />}>
                                 <Route path={'/'} element={<Index/>}/>
                                 <Route path={'/admin/dashboard'} element={<Dashboard/>}/>
-                                <Route path={'/student/dashboard'} element={<DashboardStudent/>}/>
-                                <Route path={'/student/subject'} element={<SubjectStudent/>}/>
                                 <Route path={'/admin/teachers'} element={<Teachers/>}/>
                                 <Route path={'/admin/students'} element={<Students/>}/>
                                 <Route path={'/admin/students/:id'} element={<StudentsCard/>}/>
                                 <Route path={'/admin/subjects'} element={<Subjects/>}/>
                                 <Route path={'/admin/subjects/:id'} element={<SubjectsItem/>}/>
                                 <Route path={'/admin/subject/:id/addLesson'} element={<AddLesson/>}/>
-                                <Route path={'/student/subject/:id'} element={<SubjectCardStudent/>}/>
+                                <Route path={'/admin/subject/:id/addLesson/:lessonId/quiz'} element={<AddQuiz/>}/>
                                 <Route path={'/admin/subjects/:id/adduser'} element={<SubjectAddUser/>}/>
+                                <Route path={'/admin/students/createStudent'} element={<CreateStudent/>}/>
+
+                                <Route path={'/student/dashboard'} element={<DashboardStudent/>}/>
+                                <Route path={'/student/subject'} element={<SubjectStudent/>}/>
+
+                                <Route path={'/student/subject/:id'} element={<SubjectCardStudent/>}/>
+
                             </Route>
                             <Route path={'/login'} element={<Login/>}/>
                         </Routes>
