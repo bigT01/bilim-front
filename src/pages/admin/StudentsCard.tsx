@@ -53,6 +53,7 @@ const StudentsCard = () => {
         },
     ]
 
+
     return(
         <AdminIndex>
             <h2 style={{marginBottom: 30}}>Профиль студента</h2>

@@ -2,11 +2,19 @@ import AdminIndex from "./index";
 import './styles/adminSubjects.scss'
 import {Edit, UserAdd, UserRemove} from "../../components/assets/MainAssets";
 import CourseItem from "../../components/course/CourseItem";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {CourseItemProps} from "../../constants/Interfaces";
+import {useEffect} from "react";
+import {fetchSubjects} from "../../Redux/slices/subject";
 
 const Subjects = () =>{
+    const dispatch = useDispatch()
     const {subjects} = useSelector((state:any) => state.subjects)
+
+    useEffect(() => {
+        // @ts-ignore
+        dispatch(fetchSubjects())
+    }, [])
 
     return(
         <AdminIndex>
@@ -29,7 +37,7 @@ const Subjects = () =>{
                             <p className='count'>Количество студенов</p>
                         </div>
                         {subjects.items.map((elem: CourseItemProps) => (
-                            <CourseItem key={elem.id} id={elem.id} courseName={elem.courseName} lessonsNumber={elem.lessonsNumber} studentsNumber={elem.studentsNumber}/>
+                            <CourseItem key={elem.id} id={elem.id} name={elem.name} num_lessons={elem.num_lessons} num_students={elem.num_students}/>
                         ))}
                     </div>
                 </div>

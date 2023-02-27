@@ -6,9 +6,9 @@ export interface Auth {
 
 export interface CourseItemProps {
     id: string,
-    courseName: string,
-    lessonsNumber: number,
-    studentsNumber: number,
+    name: string,
+    num_lessons: number,
+    num_students: number,
 }
 
 export interface StudentItem {

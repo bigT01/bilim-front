@@ -1,0 +1,70 @@
+.addQuiz_wrapper{
+  width: 100%;
+  background-color: #ffffff;
+  padding: 2rem;
+  .lesson_form{
+    display: flex;
+    gap: 2rem;
+    .type_of_quiz{
+      display: flex;
+      height: 50px;
+      align-items: center;
+      gap: 30px;
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+.lesson_body{
+  width: 70%;
+  .variant_list{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .add_variant{
+    padding: 5px 10px;
+    background-color: #00bb00;
+    color: #ffffff;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    margin-right: 1.5rem;
+    cursor: pointer;
+    &:hover{
+      color: #ffffff;
+    }
+  }
+  .remove_variant{
+    padding: 8px 10px;
+    background-color: #e50f21;
+    color: #ffffff;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    svg{
+      width: 16px;
+      height: 16px;
+    }
+    &:hover{
+      color: #ffffff;
+    }
+  }
+}
+
+.drop_variant_wrapper{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .drop_variant_label{
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    border: 1px solid #000000;
+  }
+}

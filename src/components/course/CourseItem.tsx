@@ -7,7 +7,7 @@ import {fetchRemoveSubjects} from "../../Redux/slices/subject";
 
 
 
-const CourseItem = ({id, courseName, lessonsNumber, studentsNumber}:CourseItemProps) => {
+const CourseItem = ({id, name, num_lessons, num_students}:CourseItemProps) => {
     const [isClick, setIsClick] = useState(false)
     const dispatch = useDispatch()
     const more = useRef(null);
@@ -39,11 +39,11 @@ const CourseItem = ({id, courseName, lessonsNumber, studentsNumber}:CourseItemPr
                 </svg>
             </div>
             <div className="name">
-                <Link to={`/admin/subjects/${id}`} className="course_name">{courseName}</Link>
-                <p className="course_lessons">{lessonsNumber} lessons</p>
+                <Link to={`/admin/subjects/${id}`} className="course_name">{name}</Link>
+                <p className="course_lessons">{num_lessons} lessons</p>
             </div>
             <div className="student_number">
-                <p>{studentsNumber}</p>
+                <p>{num_students}</p>
             </div>
             <div className="btn_wrapper">
                 <button onClick={() => setIsClick(true)} >...</button>
