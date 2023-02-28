@@ -5,12 +5,12 @@ import {CheckboxChangeEvent} from "antd/es/checkbox";
 type CourseAddUser = {
     id: string,
     name: string,
-    grade: string,
+    attend: string,
     checked: any,
     onChange: ( id:string) => void
 }
 
-const CourseAddUser = ({id, name, grade, onChange, checked,}:CourseAddUser) => {
+const CourseAddUser = ({id, name, attend, onChange, checked,}:CourseAddUser) => {
     const [isChecked, setIsChecked] = useState(false)
 
     useEffect(() => {
@@ -27,7 +27,7 @@ const CourseAddUser = ({id, name, grade, onChange, checked,}:CourseAddUser) => {
             <td className='table_row__cail'><Checkbox checked={isChecked} onChange={() => onChange( id )} /></td>
             <td className='table_row__cail'>{id}</td>
             <td className='table_row__cail'>{name}</td>
-            <td className='table_row__cail'>{grade}</td>
+            <td className='table_row__cail'>{attend}</td>
         </tr>
     )
 }

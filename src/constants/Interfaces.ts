@@ -13,9 +13,9 @@ export interface CourseItemProps {
 
 export interface StudentItem {
     id: string,
-    name: string,
+    full_name: string,
     age: number,
-    grade: string,
+    attend: string,
     rating: number,
     avgGrade: number,
 }

@@ -3,9 +3,11 @@ import {CloseButton} from "../../assets/MainAssets";
 import {SubmitHandler, useForm} from "react-hook-form";
 import axios from "axios";
 import {message} from "antd";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import AdminIndex from "../../../pages/admin";
 import {Link, useNavigate} from "react-router-dom";
+import {fetchCreateStudent} from "../../../Redux/slices/students";
+import {useEffect} from "react";
 
 type FormValues = {
     full_name: string;
@@ -18,24 +20,22 @@ type FormValues = {
 
 
 const CreateStudent = () => {
-    const { register, handleSubmit } = useForm<FormValues>();
+    const { register, handleSubmit,formState: { errors } } = useForm<FormValues>();
+    const dispatch = useDispatch()
     const navigate = useNavigate()
+    const status = useSelector((state:any, ) => state.students.students.status)
 
     const onSubmit: SubmitHandler<FormValues> =  data => {
-        axios.post('http://localhost:4444/api/user', {
-            login: data.login,
-            full_name: data.full_name,
-            password: data.password,
-            attend : data.attend
-        }).then(res => {
-
-            message.success('Ученик успешно был создан')
-        })
-            .catch(err => message.error('ошибка с сервером'))
-
-        navigate('/admin/dashboard')
-
+        // @ts-ignore
+        dispatch(fetchCreateStudent(data))
     };
+
+    useEffect(() => {
+        if(status === 'created'){
+            message.success('Ученик успешно был создан')
+            navigate('/admin/students')
+        }
+    }, [status])
     return(
         <AdminIndex>
             <div className={s.wrapper}>
@@ -47,19 +47,19 @@ const CreateStudent = () => {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className={s.inputWrapper}>
                             <label>Логин для входа</label>
-                            <input type="text" {...register('login')}/>
+                            <input className={`${errors.login ? null: s.error}`} type="text" {...register('login', { required: true })}/>
                         </div>
                         <div className={s.inputWrapper}>
                             <label>Пароль</label>
-                            <input type="text" {...register('password')}/>
+                            <input className={`${errors.password ? null: s.error}`} type="text" {...register('password', { required: true })}/>
                         </div>
                         <div className={s.inputWrapper}>
                             <label>Имя ученика</label>
-                            <input type="text" {...register('full_name')}/>
+                            <input className={`${errors.full_name ? null: s.error}`} type="text" {...register('full_name', { required: true })}/>
                         </div>
                         <div className={s.inputWrapper}>
                             <label>в каком классе учиться</label>
-                            <input type="text" {...register('attend')}/>
+                            <input className={`${errors.attend ? null: s.error}`} type="text" {...register('attend', { required: true })}/>
                         </div>
                         <div className={s.btnWrapper}>
                             <button className={s.formButton} type={'submit'}>Create</button>

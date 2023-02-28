@@ -11,6 +11,8 @@ import {useNavigate, useParams} from "react-router-dom";
 import axios from "../../axios";
 import {useMessageContext} from "../../context/MessageContext";
 import CourseAddUser from "../../components/course/CourseAddUser";
+import {fetchSubjectStudents} from "../../Redux/slices/subjectStudents";
+import {fetchStudents} from "../../Redux/slices/students";
 
 
 const SubjectAddUser = () => {
@@ -19,11 +21,20 @@ const SubjectAddUser = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+
+    useEffect(() =>{
+        // @ts-ignore
+        dispatch(fetchSubjectStudents(id))
+        // @ts-ignore
+        dispatch(fetchStudents())
+    },[])
+
+
     const {students} = useSelector((state:any) => state.students)
     const {subjectStudents} = useSelector((state:any) => state.subjectStudents)
     const searchQuery = useSelector((state:any) => state.search);
 
-    const [checkedStudent, setCheckedStudent] = useState<any[]>([...subjectStudents.items.students])
+    const [checkedStudent, setCheckedStudent] = useState<any[]>([...subjectStudents.items])
     const [allChecked, setAllChecked] = useState(false);
 
 
@@ -62,7 +73,7 @@ const SubjectAddUser = () => {
     }
 
     const filteredStudents = students.items.filter((student:StudentItem) =>
-        student.name.toLowerCase().includes(searchQuery.toLowerCase())
+        student.full_name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
 
@@ -113,7 +124,7 @@ const SubjectAddUser = () => {
                         </th>
                     </tr>
                     {filteredStudents.map((elem:StudentItem) => (
-                        <CourseAddUser id={elem.id} name={elem.name} grade={elem.grade} checked={checkedStudent} onChange={handleChange}/>
+                        <CourseAddUser id={elem.id} name={elem.full_name} attend={elem.attend}  checked={checkedStudent} onChange={handleChange}/>
                     ))}
                 </table>
             </div>

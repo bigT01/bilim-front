@@ -1,5 +1,5 @@
 import {Avatar, Edit, Eye, Student, UserRemove} from "../../assets/MainAssets";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {fetchRemoveStudent} from "../../../Redux/slices/students";
 import {Link} from "react-router-dom";
 import axios from "../../../axios";
@@ -18,14 +18,11 @@ const StudentCard = ({id, name, age, grade, rating, avgGrade}:StudentCardProps) 
     const dispatch = useDispatch()
 
     const handleRemove = (id:string) =>{
-        axios.delete(`/user/${id}`)
-            .then(req => {
-                // @ts-ignore
-                dispatch(fetchRemoveStudent(id))
-                message.success('ученик был успешно удалено')
-            })
-            .catch(err => message.error('ошибка сервера попробуйте поздее'))
+        // @ts-ignore
+        dispatch(fetchRemoveStudent(id))
+
     }
+
     return(
         <div className="student_card">
             <div className="card-header">

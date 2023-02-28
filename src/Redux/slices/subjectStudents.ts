@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axios";
 
 
-export const fetchSubjectStudents = createAsyncThunk<{}, {}, any>('subjects/fetchSubjectsStudents', async ({id}:any) => {
-    const {data} = await axios.get(`/subject/${id}/students`);
+export const fetchSubjectStudents = createAsyncThunk<{}, string, any>('subjects/fetchSubjectsStudents', async (id:string) => {
+    const {data} = await axios.get(`/course/${id}/user`);
     return data
 })
 
@@ -11,13 +11,7 @@ export const fetchSubjectStudents = createAsyncThunk<{}, {}, any>('subjects/fetc
 
 const initialState = {
     subjectStudents: {
-        items:
-            {
-                id: "COURSE1",
-                students: [
-                    '1', '9', '4'
-                ]
-            },
+        items: [],
         status: 'loading'
     }
 }

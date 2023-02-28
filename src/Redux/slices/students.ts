@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axios";
+import {message} from "antd";
+
 
 
 export const fetchStudents = createAsyncThunk<{}, {}, any>('students/fetchStudents', async () => {
@@ -7,10 +9,21 @@ export const fetchStudents = createAsyncThunk<{}, {}, any>('students/fetchStuden
     return data
 })
 
+export const fetchCreateStudent = createAsyncThunk<any, any, any>('students/fetchCreateStudent', async (params:any) => {
+    const {data} = await axios.post(`/user`, {
+            login: params.login,
+            full_name: params.full_name,
+            password: params.password,
+            attend : params.attend
+    })
 
-export const fetchRemoveStudent = createAsyncThunk<{}, {}, any>('students/fetchRemoveStudent', async ({id}:any) => {
-    // const {data} = await axios.delete(`/user/${id}`)
-    return id
+    return data
+})
+
+export const fetchRemoveStudent = createAsyncThunk<{}, any, any>('students/fetchRemoveStudent', async (id:any) => {
+    const {data} = await axios.delete(`/user/${id}`)
+
+    return data
 })
 
 
@@ -40,16 +53,36 @@ const StudentSlice = createSlice({
             state.students.status = 'failed';
         },
         // @ts-ignore
-        [fetchRemoveStudent.pending] : (state:any, action:any) =>{
-            state.students.items = state.students.items.filter((elem: any) => elem.id !== action.meta.arg)
+        [fetchCreateStudent.pending] : (state:any, action:any) =>{
             state.students.status = 'loading'
         },
         // @ts-ignore
-        [fetchRemoveStudent.fulfilled] : (state:any) =>{
+        [fetchCreateStudent.fulfilled] : (state:any, action:any) =>{
+            state.students.items.push(action.payload)
+            state.students.status = 'created';
+        },
+        // @ts-ignore
+        [fetchCreateStudent.rejected] : (state:any) =>{
+            state.students.status = 'failed';
+        },
+        // @ts-ignore
+        [fetchRemoveStudent.pending] : (state:any) =>{
+            state.students.status = 'loading'
+        },
+        // @ts-ignore
+        [fetchRemoveStudent.fulfilled] : (state:any, action:any) =>{
+            message.success('успешно удално')
+            state.students.items = state.students.items.filter((elem: any) => elem.id !== action.meta.arg)
             state.students.status = 'loaded';
         },
         // @ts-ignore
-        [fetchRemoveStudent.rejected] : (state:any) =>{
+        [fetchRemoveStudent.rejected] : (state:any, action:any) =>{
+            if(action.error.message === 'Request failed with status code 503'){
+                message.error('этот ученик состоит в курсе')
+            }else{
+                message.error('ошибка сервера')
+            }
+
             state.students.status = 'failed';
         },
     }
