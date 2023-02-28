@@ -13,8 +13,9 @@ type CourseAddUser = {
 const CourseAddUser = ({id, name, attend, onChange, checked,}:CourseAddUser) => {
     const [isChecked, setIsChecked] = useState(false)
 
+
     useEffect(() => {
-        const fil = checked.filter((item: any) => item === id)
+        const fil = checked.filter((item: any) => item.student_id === id)
         if (fil[0]) {
             setIsChecked(true)
         } else {

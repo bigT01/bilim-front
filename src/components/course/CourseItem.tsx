@@ -49,7 +49,7 @@ const CourseItem = ({id, name, num_lessons, num_students}:CourseItemProps) => {
                 <button onClick={() => setIsClick(true)} >...</button>
                 <div className={`more ${isClick? 'show': 'disable'}`} ref={more}>
                     {isClick && <>
-                        <Link to={`/admin/subjects/${id}/adduser`} className='add'><UserAdd/> добавить участника</Link>
+                        <Link to={`/admin/subjects/${id}/adduser`} className='add'><UserAdd/> изменить участников</Link>
                         <button onClick={() => handleRemove(id)} className='delete'><Trash/> удалить курс</button>
                     </>}
                 </div>

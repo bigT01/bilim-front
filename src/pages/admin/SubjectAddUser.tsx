@@ -11,15 +11,16 @@ import {useNavigate, useParams} from "react-router-dom";
 import axios from "../../axios";
 import {useMessageContext} from "../../context/MessageContext";
 import CourseAddUser from "../../components/course/CourseAddUser";
-import {fetchSubjectStudents} from "../../Redux/slices/subjectStudents";
+import {fetchSubjectAddStudents, fetchSubjectStudents} from "../../Redux/slices/subjectStudents";
 import {fetchStudents} from "../../Redux/slices/students";
 
 
 const SubjectAddUser = () => {
     const {id} = useParams()
-    const {setMessage} = useMessageContext()
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const status = useSelector((state:any, ) => state.subjectStudents.subjectStudents.status)
+    const [isLoading, setIsLoading] = useState(true)
 
 
     useEffect(() =>{
@@ -32,20 +33,20 @@ const SubjectAddUser = () => {
 
     const {students} = useSelector((state:any) => state.students)
     const {subjectStudents} = useSelector((state:any) => state.subjectStudents)
-    const searchQuery = useSelector((state:any) => state.search);
 
+    const searchQuery = useSelector((state:any) => state.search);
     const [checkedStudent, setCheckedStudent] = useState<any[]>([...subjectStudents.items])
     const [allChecked, setAllChecked] = useState(false);
 
 
     const handleChange = (id: string) => {
-        const fil = checkedStudent.filter(item => item === id)
+        const fil = checkedStudent.filter(item => item.student_id === id)
         if(fil[0]){
             setAllChecked(false)
-            setCheckedStudent(old => old.filter(item => item !== id) )
+            setCheckedStudent(old => old.filter(item => item.student_id !== id) )
         }
         else{
-            setCheckedStudent(old => [...old, id])
+            setCheckedStudent(old => [...old, {student_id: id}])
         }
     };
 
@@ -55,8 +56,12 @@ const SubjectAddUser = () => {
             setCheckedStudent([])
         }
         else{
+            let arr:any = []
             setAllChecked(old => !old)
-            setCheckedStudent(students.items.map((item:any) => item.id ))
+            students.items.map((item:any) => {
+                arr.push({student_id: item.id})
+            } )
+            setCheckedStudent(arr)
         }
 
     }
@@ -76,22 +81,30 @@ const SubjectAddUser = () => {
         student.full_name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
+    useEffect(() => {
+        if(status === 'loaded'){
+            setIsLoading(false)
+        }
+    }, [status])
+
 
     const SubmitHandler = (checkedStudent:string[]) => {
         if(checkedStudent[0]){
-            axios.post(`/subject/${id}/student`, {
-                userId: checkedStudent
-            })
-                .then(req => {
-                    setMessage('участники были добавлены','success')
-                    navigate('/admin/subjects')
-                })
-                .catch(err => {
-                    setMessage('Ошибка сети попробуйте еще раз','error')
-                    navigate('/admin/subjects')
-                })
+            let arr:any = []
+            checkedStudent.map((item:any) => {arr.push(item.student_id)})
+            const params = {
+                id: id,
+                students: arr
+            }
+            // @ts-ignore
+            dispatch(fetchSubjectAddStudents(params))
+            if(status === 'loaded'){
+                navigate('/admin/subjects')
+            }
         }
     }
+
+
 
     return(
         <AdminIndex>
@@ -123,9 +136,10 @@ const SubjectAddUser = () => {
                             grade
                         </th>
                     </tr>
-                    {filteredStudents.map((elem:StudentItem) => (
-                        <CourseAddUser id={elem.id} name={elem.full_name} attend={elem.attend}  checked={checkedStudent} onChange={handleChange}/>
-                    ))}
+
+                    {!isLoading ? filteredStudents.map((elem:StudentItem) => (
+                        <CourseAddUser key={elem.id} id={elem.id} name={elem.full_name} attend={elem.attend}  checked={checkedStudent} onChange={handleChange}/>
+                    )) : 'loading'}
                 </table>
             </div>
 

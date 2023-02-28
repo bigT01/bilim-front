@@ -1,9 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axios";
+import {message} from "antd";
 
 
 export const fetchSubjectStudents = createAsyncThunk<{}, string, any>('subjects/fetchSubjectsStudents', async (id:string) => {
     const {data} = await axios.get(`/course/${id}/user`);
+    return data
+})
+
+export const fetchSubjectAddStudents = createAsyncThunk<{}, any, any>('subjects/fetchSubjectsAddStudents', async (params:any) => {
+    const {data} = await axios.put(`/course/${params.id}/user`, {
+        students: params.students
+    });
+
     return data
 })
 
@@ -34,19 +43,23 @@ const SubjectStudentSlice = createSlice({
         [fetchSubjectStudents.rejected] : (state:any) =>{
             state.subjectStudents.status = 'failed';
         },
-        // // @ts-ignore
-        // [fetchRemoveSubjects.pending] : (state:any, action:any) =>{
-        //     state.subjects.items = state.subjects.items.filter((elem: any) => elem.id !== action.meta.arg)
-        //     state.subjects.status = 'loading'
-        // },
-        // // @ts-ignore
-        // [fetchRemoveSubjects.fulfilled] : (state:any) =>{
-        //     state.subjects.status = 'loaded';
-        // },
-        // // @ts-ignore
-        // [fetchRemoveSubjects.rejected] : (state:any) =>{
-        //     state.subjects.status = 'failed';
-        // },
+        // @ts-ignore
+        [fetchSubjectAddStudents.pending] : (state:any) =>{
+            state.subjectStudents.status = 'loading'
+        },
+        // @ts-ignore
+        [fetchSubjectAddStudents.fulfilled] : (state:any, action:any) =>{
+            const students:any = []
+            action.meta.arg.students.map((item:any) => students.push({student_id: item}))
+            state.subjectStudents.items = students
+
+            state.subjectStudents.status = 'loaded';
+            message.success('участники успешно добавлены')
+        },
+        // @ts-ignore
+        [fetchSubjectAddStudents.rejected] : (state:any) =>{
+            state.subjectStudents.status = 'failed';
+        },
     }
 })
 
