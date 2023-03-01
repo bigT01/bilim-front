@@ -1,15 +1,17 @@
 import AdminIndex from "../index";
 import SimpleMDE from "react-simplemde-editor";
-import {message, Modal, Upload, UploadFile, UploadProps} from 'antd';
+import {message, Modal, Upload, UploadFile, UploadProps, DatePicker, Space} from 'antd';
 import "easymde/dist/easymde.min.css";
 import '../styles/Addlesson.scss'
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {RcFile} from "antd/es/upload";
 import { PlusOutlined } from '@ant-design/icons';
 import Dragger from "antd/es/upload/Dragger";
 import { InboxOutlined } from '@ant-design/icons';
+import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
 import { Button } from 'antd';
 import {useNavigate, useParams} from "react-router-dom";
+import axios from "../../../axios";
 
 
 const getBase64 = (file: RcFile): Promise<string> =>
@@ -20,14 +22,27 @@ const getBase64 = (file: RcFile): Promise<string> =>
         reader.onerror = (error) => reject(error);
     });
 
+const { RangePicker } = DatePicker;
+
 const AddLesson = () => {
     const {id} = useParams()
+    const [title, setTitle] = useState('')
+    const [previewURL, setPreviewURL] = useState('')
+    const [description, setDescription] = useState('')
+    const [materialURL, setMaterialURL] = useState('')
+    const [startTime, setStartTime] = useState('')
+    const [endTime, setEndTime] = useState('')
+
+
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
+
+
     const [loadings, setLoadings] = useState<boolean[]>([]);
-    const handleCancel = () => setPreviewOpen(false);
+
     const [fileList, setFileList] = useState<UploadFile[]>([]);
+    const handleCancel = () => setPreviewOpen(false);
     const navigate = useNavigate()
 
     const handlePreview = async (file: UploadFile) => {
@@ -42,6 +57,20 @@ const AddLesson = () => {
 
     const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => setFileList(newFileList);
 
+    const onChangeDescription = useCallback((value:string) => {
+        setDescription(value)
+    }, [])
+
+    const onChangeStartDate = (
+        value: DatePickerProps['value'] | RangePickerProps['value'],
+        dateString: [string, string] | string,
+    ) => {
+        setStartTime(dateString[0])
+        setEndTime(dateString[0])
+    };
+
+
+
 
     const uploadButton = (
         <div>
@@ -50,17 +79,21 @@ const AddLesson = () => {
         </div>
     );
 
+    useEffect(() => {
+        setPreviewURL(fileList[0]?.response?.url)
+    }, [fileList])
+
 
     const { Dragger } = Upload;
 
     const props: UploadProps = {
         name: 'file',
         multiple: true,
-        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+        action: 'http://localhost:4444/upload',
         onChange(info) {
             const { status } = info.file;
             if (status !== 'uploading') {
-                console.log(info.file, info.fileList);
+                setMaterialURL(info?.file?.response?.url);
             }
             if (status === 'done') {
                 message.success(`${info.file.name} file uploaded successfully.`);
@@ -69,9 +102,10 @@ const AddLesson = () => {
             }
         },
         onDrop(e) {
-            console.log('Dropped files', e.dataTransfer.files);
+            e.dataTransfer.files
         },
     };
+
     const enterLoading = (index: number) => {
         setLoadings((prevLoadings) => {
             const newLoadings = [...prevLoadings];
@@ -79,33 +113,49 @@ const AddLesson = () => {
             return newLoadings;
         });
 
-        setTimeout(() => {
-            setLoadings((prevLoadings) => {
-                const newLoadings = [...prevLoadings];
-                newLoadings[index] = false;
-                navigate(`/admin/subject/${id}/addLesson/2345678/quiz`)
-                return newLoadings;
-            });
-        }, 6000);
+        axios.post(`/course/${id}/lesson`, {
+            title: title,
+            preview_image: previewURL,
+            description: description,
+            material: materialURL,
+            start_time: startTime,
+            end_time: endTime
+        })
+            .then((res:any) => {
+                message.success('урок успешно был создан')
+                navigate(`/admin/subject/${id}/addLesson/${res.data.lesson_id}/quiz`)
+            })
+            .catch(err => {
+                message.error('Ошибка с сервером попробуйте позднее')
+
+            })
+            .finally(() =>{
+                setLoadings((prevLoadings) => {
+                    const newLoadings = [...prevLoadings];
+                    newLoadings[index] = false;
+                    return newLoadings;
+                });
+            })
     };
+
     return(
         <AdminIndex>
             <div className="addLesson_wrapper">
                 <form className='lesson_form'>
                     <div className="input_wrapper">
                         <label>Название урока<span className='require'>*</span></label>
-                        <input type="text" className='lesson_input'/>
+                        <input type="text" className='lesson_input' onChange={e => setTitle(e.target.value)}/>
                     </div>
                     <div className="input_wrapper">
                         <label className='preview_text'>превию фото</label>
                         <Upload
-                            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                            action="http://localhost:4444/upload"
                             listType="picture-card"
                             fileList={fileList}
                             onPreview={handlePreview}
                             onChange={handleChange}
                         >
-                            {fileList.length >= 8 ? null : uploadButton}
+                            {fileList.length >= 1 ? null : uploadButton}
                         </Upload>
                         <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
                             <img alt="example" style={{ width: '100%'}} src={previewImage} />
@@ -131,10 +181,22 @@ const AddLesson = () => {
 
                     <div className="input_wrapper">
                         <label>материал для обучения<span className='require'>*</span></label>
-                        <SimpleMDE />
+                        <SimpleMDE onChange={onChangeDescription}/>
+                    </div>
+
+                    <div className="input_wrapper">
+                        <label>дата началы  обучение<span className='require'>*</span></label>
+                        <Space direction="vertical" size={12}>
+                            <RangePicker
+                                showTime={{ format: 'HH:mm' }}
+                                format="YYYY-MM-DD HH:mm"
+                                onChange={onChangeStartDate}
+                            />
+                        </Space>
                     </div>
                     <div className="btn_wrapper">
-                        <Button type="primary" size={"large"} loading={loadings[0]} onClick={() => enterLoading(0)}>Создавть Квиз</Button>
+                        <Button type="primary"  size={"large"} loading={loadings[0]} onClick={() => enterLoading(0)}>Создавть Квиз</Button>
+                        <Button type="primary" style={{backgroundColor: '#00bb00'}} size={"large"} loading={loadings[0]} >Сохранить</Button>
                     </div>
                 </form>
             </div>
