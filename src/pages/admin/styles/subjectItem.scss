@@ -40,9 +40,11 @@
         padding: 10px;
         display: flex;
         align-items: center;
+        position: relative;
         .body_information{
           display: flex;
           flex-direction: column;
+          min-height: 40px;
           width: 70%;
           gap: 10px;
           .lesson_name{
@@ -54,6 +56,10 @@
           }
         }
         .btn_delete{
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          transform: translate(0, -50%);
           border: none;
           background-color: rgba(229, 15, 33, 0.5);
           width: 40px;

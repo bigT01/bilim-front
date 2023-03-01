@@ -25,6 +25,7 @@ const AddSubject = () => {
             })
             .finally(() => {
                 navigate('/admin/subjects')
+                setIsLoading(false)
             })
 
     }

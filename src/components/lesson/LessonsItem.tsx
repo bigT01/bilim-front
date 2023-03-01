@@ -20,12 +20,11 @@ const LessonsItem = ({name, id, added}: LessonsItemProps) => {
         <div className="lesson_item">
             <button className="btn_edit"><Edit color={'#ffffff'}/></button>
             <div className="lesson_picture_wrapper">
-                <img src={pictureLesson} alt="pictureLesson"/>
+                <img src={`http://localhost:4444${added}`} alt="pictureLesson"/>
             </div>
             <div className="lesson_body">
                 <div className="body_information">
                     <p className='lesson_name'>{name}</p>
-                    <p className='lesson_time'>added 5 min ago</p>
                 </div>
                 <button className='btn_delete' onClick={() => handleRemove(id)}><Trash color={'#ffffff'}/></button>
             </div>

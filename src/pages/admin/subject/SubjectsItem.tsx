@@ -2,12 +2,21 @@ import AdminIndex from "../index";
 import {Link, useParams} from "react-router-dom";
 
 import '../styles/subjectItem.scss'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import LessonsItem from "../../../components/lesson/LessonsItem";
+import {useEffect} from "react";
+import {fetchSubjectLesson} from "../../../Redux/slices/lessons";
 
 const SubjectsItem = () => {
     const {id} = useParams()
+    const dispatch = useDispatch()
     const {lessons} = useSelector((state:any) => state.subjectLessons)
+
+    useEffect(() =>{
+        // @ts-ignore
+        dispatch(fetchSubjectLesson(id))
+    } ,[])
+
 
     return(
         <AdminIndex>
@@ -19,7 +28,7 @@ const SubjectsItem = () => {
 
                 <div className="lessons_wrapper">
                     {lessons.items.map((elem: any) => (
-                        <LessonsItem key={elem.id} id={elem.id} name={elem.name} added={elem.addedTime}/>
+                        <LessonsItem key={elem.lesson_id} id={elem.lesson_id} name={elem.title} added={elem.preview_image}/>
                     ))}
                 </div>
             </div>

@@ -1,6 +1,5 @@
 import AdminIndex from "./index";
 import './styles/adminSubjects.scss'
-import {Edit, UserAdd, UserRemove} from "../../components/assets/MainAssets";
 import CourseItem from "../../components/course/CourseItem";
 import {useDispatch, useSelector} from "react-redux";
 import {CourseItemProps} from "../../constants/Interfaces";
