@@ -19,6 +19,7 @@ import SubjectsItem from "./pages/admin/subject/SubjectsItem";
 import AddLesson from "./pages/admin/subject/AddLesson";
 import AddQuiz from "./pages/admin/subject/addQuiz";
 import CreateStudent from "./components/AdminStudent/StudentCard/CreateStudent";
+import AddSubject from "./pages/admin/subject/AddSubject";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
                                 <Route path={'/admin/students'} element={<Students/>}/>
                                 <Route path={'/admin/students/:id'} element={<StudentsCard/>}/>
                                 <Route path={'/admin/subjects'} element={<Subjects/>}/>
+                                <Route path={'/admin/subjects/addSubject'} element={<AddSubject/>}/>
                                 <Route path={'/admin/subjects/:id'} element={<SubjectsItem/>}/>
                                 <Route path={'/admin/subject/:id/addLesson'} element={<AddLesson/>}/>
                                 <Route path={'/admin/subject/:id/addLesson/:lessonId/quiz'} element={<AddQuiz/>}/>

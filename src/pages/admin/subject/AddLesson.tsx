@@ -196,7 +196,7 @@ const AddLesson = () => {
                     </div>
                     <div className="btn_wrapper">
                         <Button type="primary"  size={"large"} loading={loadings[0]} onClick={() => enterLoading(0)}>Создавть Квиз</Button>
-                        <Button type="primary" style={{backgroundColor: '#00bb00'}} size={"large"} loading={loadings[0]} >Сохранить</Button>
+                        <Button type="primary" style={{backgroundColor: '#00bb00'}} size={"large"} loading={loadings[1]} >Сохранить</Button>
                     </div>
                 </form>
             </div>

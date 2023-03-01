@@ -39,6 +39,7 @@
       .btn_add{
         @include success-btn;
         box-sizing: border-box;
+        text-decoration: none;
         padding: 10px;
         svg{
           width: 16px;

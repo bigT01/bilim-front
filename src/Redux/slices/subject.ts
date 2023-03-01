@@ -1,13 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axios";
+import {message} from "antd";
 
 export const fetchSubjects = createAsyncThunk<{}, {}, any>('subjects/fetchSubjects', async () => {
     const {data} = await axios.get('/course');
     return data
 })
 
-export const fetchRemoveSubjects = createAsyncThunk<{}, {}, any>('subjects/fetchRemoveSubjects', async ({id}:any) => {
-    const {data} = await axios.delete(`/subjects/${id}`);
+
+export const fetchRemoveSubjects = createAsyncThunk<{}, any, any>('subjects/fetchRemoveSubjects', async (id:any) => {
+    const {data} = await axios.delete(`/course/${id}`);
     return data
 })
 
@@ -45,10 +47,16 @@ const SubjectsSlice = createSlice({
         },
         // @ts-ignore
         [fetchRemoveSubjects.fulfilled] : (state:any) =>{
+            message.success('успешно удално')
             state.subjects.status = 'loaded';
         },
         // @ts-ignore
-        [fetchRemoveSubjects.rejected] : (state:any) =>{
+        [fetchRemoveSubjects.rejected] : (state:any, action:any) =>{
+            if(action.error.message === 'Request failed with status code 503'){
+                message.error('этот ученик состоит в курсе')
+            }else{
+                message.error('ошибка сервера')
+            }
             state.subjects.status = 'failed';
         },
 

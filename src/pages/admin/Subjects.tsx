@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {CourseItemProps} from "../../constants/Interfaces";
 import {useEffect} from "react";
 import {fetchSubjects} from "../../Redux/slices/subject";
+import {Link} from "react-router-dom";
 
 const Subjects = () =>{
     const dispatch = useDispatch()
@@ -27,9 +28,9 @@ const Subjects = () =>{
                             </svg>
                             <input type="text" className={"search_input"}/>
                         </div>
-                        <button className="btn_add">
-                            <UserAdd color={'#FFFFFF'} />
-                        </button>
+                        <Link to={'/admin/subjects/addSubject'} className="btn_add">
+                            +
+                        </Link>
                     </div>
                     <div className="courses_wrapper">
                         <div className="header">
