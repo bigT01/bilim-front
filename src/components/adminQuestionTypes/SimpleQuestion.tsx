@@ -73,6 +73,12 @@ const SimpleQuestion = ({id, typeQuestion}:LessonQAProps) => {
 
     }
 
+    const deleteQuestionHandler = () =>{
+        axios.delete(`/question/${id}`)
+            .then(() => {message.success('вопрос успешно удалено')})
+            .catch(() => {message.error('ошибка сервера попробуйте позднее')})
+    }
+
 
     return (
         <>
@@ -89,7 +95,7 @@ const SimpleQuestion = ({id, typeQuestion}:LessonQAProps) => {
                 </Radio.Group>
             </div>
             <Button style={{backgroundColor: '#00bb00', color: "#ffffff", marginRight: 30}} onClick={() => saveHandler()}>Сохранить</Button>
-            <Button type="primary" danger>Удалить</Button>
+            <Button type="primary" danger onClick={e => deleteQuestionHandler()}>Удалить</Button>
         </>
     );
 }

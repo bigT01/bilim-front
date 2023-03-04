@@ -14,6 +14,7 @@ type MenuQuizProps = {
 const MenuQuiz = ({quizId, setValue}:MenuQuizProps) => {
     const [data, setData] = useState<any>()
     const [activeBtn, setActiveBtn] = useState('1')
+
     useEffect(() => {
         axios.get(`http://localhost:4444/api/${quizId}/question`)
             .then(res => setData(res.data))
@@ -23,10 +24,24 @@ const MenuQuiz = ({quizId, setValue}:MenuQuizProps) => {
             })
     }, [])
 
+    useEffect(() => {
+        if(activeBtn === '-1'){
+            axios.post(`/quiz/${quizId}/question`)
+                .then(res => {
+                    message.success('вопрос был добавлен')
+                })
+                .catch(err => {
+                    message.error('не удалось добавить вопрос')
+                })
+        }
+    }, [activeBtn])
+
 
     return(
         <div className={s.menuWrapper}>
-            <button className={`${s.Btn} ${activeBtn === 'menu' ?s.active: null}`} onClick={() => {setActiveBtn('menu')}}>Квиз</button>
+            <button className={`${s.Btn} ${activeBtn === '1' ?s.active: null}`} onClick={() => {
+                setValue('1')
+                setActiveBtn('1')}}>Квиз</button>
             {data ? data.map((item: any, index:number) =>(
                 <button
                     className={`${s.Btn} ${activeBtn === item.question_id ?s.active: null}`}

@@ -16,7 +16,7 @@ const AddQuiz = () => {
             <div className="addQuiz_wrapper">
                 {quizId?<MenuQuiz quizId={quizId} setValue={setValue}/>:<>Loading...</>}
                 <div className="lesson_body">
-                    <LessonQA key={value} id={value}/>
+                    {quizId?<LessonQA key={value} id={value} quizId={quizId}/>:<>Loading...</>}
                 </div>
             </div>
         </AdminIndex>
