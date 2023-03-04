@@ -1,4 +1,3 @@
-import AdminIndex from "../index";
 import SimpleMDE from "react-simplemde-editor";
 import {message, Modal, Upload, UploadFile, UploadProps, DatePicker, Space} from 'antd';
 import "easymde/dist/easymde.min.css";
@@ -11,7 +10,13 @@ import { InboxOutlined } from '@ant-design/icons';
 import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
 import { Button } from 'antd';
 import {useNavigate, useParams} from "react-router-dom";
+import AdminIndex from "../index";
 import axios from "../../../axios";
+import dayjs, {Dayjs} from "dayjs";
+import {BiPaperclip} from "react-icons/bi";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+import moment, {Moment} from "moment";
+
 
 
 const getBase64 = (file: RcFile): Promise<string> =>
@@ -24,25 +29,54 @@ const getBase64 = (file: RcFile): Promise<string> =>
 
 const { RangePicker } = DatePicker;
 
-const AddLesson = () => {
+dayjs.extend(advancedFormat);
+
+const UpdateLesson = () => {
     const {id} = useParams()
+    const [quizId, setQuizId] = useState('')
     const [title, setTitle] = useState('')
     const [previewURL, setPreviewURL] = useState('')
     const [description, setDescription] = useState('')
     const [materialURL, setMaterialURL] = useState('')
     const [startTime, setStartTime] = useState('')
     const [endTime, setEndTime] = useState('')
+
     const [lessonId, setLessonId] = useState('')
     const [isSuccess, setIsSuccess] = useState(false)
 
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
+    const [fileList, setFileList] = useState<UploadFile[]>([]);
+
+
+    useEffect(() => {
+        axios.get(`/lesson/${id}`)
+            .then(res => {
+                setTitle(res.data.title)
+                setPreviewURL(res.data.preview_image)
+                setDescription(res.data.description)
+                setMaterialURL(res.data.material)
+                setStartTime((res.data.start_time))
+                setEndTime((res.data.end_time))
+            })
+            .catch(err => {
+                console.log(err)
+                message.error('не удалось найти урок попробуйте позднее')
+            })
+        axios.get(`/lesson/${id}/quiz`)
+            .then(res => {
+                setQuizId(res.data.quiz_id)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, [])
 
 
     const [loadings, setLoadings] = useState<boolean[]>([]);
 
-    const [fileList, setFileList] = useState<UploadFile[]>([]);
+
     const handleCancel = () => setPreviewOpen(false);
     const navigate = useNavigate()
 
@@ -114,7 +148,7 @@ const AddLesson = () => {
             return newLoadings;
         });
 
-        axios.post(`/course/${id}/lesson`, {
+        axios.put(`/lesson/${id}`, {
             title: title,
             preview_image: previewURL,
             description: description,
@@ -123,8 +157,8 @@ const AddLesson = () => {
             end_time: endTime
         })
             .then((res:any) => {
-                message.success('урок успешно был создан')
-                navigate(`/admin/subjects/${id}`)
+                message.success('урок успешно был обновлено')
+                // navigate(`/admin/subjects/${id}`)
             })
             .catch(err => {
                 message.error('Ошибка с сервером попробуйте позднее')
@@ -147,7 +181,7 @@ const AddLesson = () => {
             return newLoadings;
         });
 
-        axios.post(`/course/${id}/lesson`, {
+        axios.put(`/lesson/${id}`, {
             title: title,
             preview_image: previewURL,
             description: description,
@@ -157,8 +191,10 @@ const AddLesson = () => {
         })
             .then((res:any) => {
                 message.success('урок успешно был создан')
-                setLessonId(res.data.lesson_id)
+                // @ts-ignore
+                setLessonId(id)
                 setIsSuccess(true)
+                // navigate(`/admin/subject/${id}/addLesson/${res.data.lesson_id}/quiz`)
             })
             .catch(err => {
                 message.error('Ошибка с сервером попробуйте позднее')
@@ -174,12 +210,25 @@ const AddLesson = () => {
     };
 
 
+    const updateQuiz = (index: number) =>{
+        if(quizId){
+            navigate(`/admin/subjects/quiz/${quizId}`)
+            setLoadings((prevLoadings) => {
+                const newLoadings = [...prevLoadings];
+                newLoadings[index] = true;
+                return newLoadings;
+            });
+        }
+    }
+
+
+
     useEffect(() => {
-        if(isSuccess && lessonId){
+        if(isSuccess && lessonId && !quizId){
             axios.post(`/lesson/${lessonId}/quiz`)
                 .then(res => {
                     message.success('квиз был успешно создан')
-                    navigate(`/admin/subjects/quiz/${res.data.quiz_id}`)
+                    navigate(`/admin/subject/${id}/addLesson/${lessonId}/quiz/${res.data.quiz_id}`)
                 })
                 .catch(err => {
                     console.log(err)
@@ -189,65 +238,88 @@ const AddLesson = () => {
     }, [isSuccess])
 
 
+    // @ts-ignore
+    const defaultValue: [EventValue<Dayjs>, EventValue<Dayjs>] = [
+        dayjs(endTime),
+        dayjs(startTime)
+    ];
+
     return(
         <AdminIndex>
             <div className="addLesson_wrapper">
                 <form className='lesson_form'>
                     <div className="input_wrapper">
                         <label>Название урока<span className='require'>*</span></label>
-                        <input type="text" className='lesson_input' onChange={e => setTitle(e.target.value)}/>
+                        <input type="text" className='lesson_input' value={title} onChange={e => setTitle(e.target.value)}/>
                     </div>
                     <div className="input_wrapper">
                         <label className='preview_text'>превию фото</label>
-                        <Upload
-                            action="http://localhost:4444/upload"
-                            listType="picture-card"
-                            fileList={fileList}
-                            onPreview={handlePreview}
-                            onChange={handleChange}
-                        >
-                            {fileList.length >= 1 ? null : uploadButton}
-                        </Upload>
-                        <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
-                            <img alt="example" style={{ width: '100%'}} src={previewImage} />
-                        </Modal>
+                        {previewURL ? <div style={{display: 'flex', alignItems: 'center', justifyContent:'space-between'}}><img src={`http://localhost:4444${previewURL}`} alt='img:preview' width={250} height={200} style={{objectFit:'cover', marginRight: '2rem'}}/> <Button type={'primary'} onClick={() => setPreviewURL('')} danger>удалить</Button></div> : <>
+                            <Upload
+                                action="http://localhost:4444/upload"
+                                listType="picture-card"
+                                fileList={fileList}
+                                onPreview={handlePreview}
+                                onChange={handleChange}
+                            >
+                                {fileList.length >= 1 ? null : uploadButton}
+                            </Upload>
+                            <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
+                                <img alt="example" style={{width: '100%'}} src={previewImage} />
+                            </Modal>
+                        </>}
+
                     </div>
 
                     <div className="input_wrapper">
                         <label className='preview_text'>фото или файл для урока</label>
-                        <Dragger {...props}>
-                            <p className="ant-upload-drag-icon">
-                                <InboxOutlined />
-                            </p>
-                            <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                            <p className="ant-upload-hint">
-                                Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                                band files
-                            </p>
-                        </Dragger>
-                        <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
-                            <img alt="example" style={{ width: '100%'}} src={previewImage} />
-                        </Modal>
+                        {materialURL ? <div style={{display: 'flex', alignItems: 'center', justifyContent:'space-between'}}><div style={{display:'flex', gap: '2rem'}}><BiPaperclip/> <p>{materialURL}</p></div> <Button type={'primary'} onClick={() => setMaterialURL('')} danger>удалить</Button></div> : <>
+                            <Dragger {...props}>
+                                <p className="ant-upload-drag-icon">
+                                    <InboxOutlined />
+                                </p>
+                                <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                                <p className="ant-upload-hint">
+                                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other
+                                    band files
+                                </p>
+                            </Dragger>
+                            <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
+                                <img alt="example" style={{ width: '100%'}} src={previewImage} />
+                            </Modal>
+                        </>}
                     </div>
 
                     <div className="input_wrapper">
                         <label>материал для обучения<span className='require'>*</span></label>
-                        <SimpleMDE onChange={onChangeDescription}/>
+                        <SimpleMDE value={description} onChange={onChangeDescription}/>
                     </div>
 
                     <div className="input_wrapper">
                         <label>дата началы  обучение<span className='require'>*</span></label>
                         <Space direction="vertical" size={12}>
-                            <RangePicker
-                                showTime={{ format: 'HH:mm' }}
-                                format="YYYY-MM-DD HH:mm"
-                                onChange={onChangeStartDate}
-                            />
+                            {startTime && endTime ? (
+                                <RangePicker
+                                    value={defaultValue}
+                                    showTime={{ format: 'HH:mm' }}
+                                    format="YYYY-MM-DD HH:mm"
+                                    onChange={onChangeStartDate}
+                                />
+                            ): (
+                                <RangePicker
+                                    // defaultValue={defaultRangeValue}
+                                    showTime={{ format: 'HH:mm' }}
+                                    format="YYYY-MM-DD HH:mm"
+                                    onChange={onChangeStartDate}
+                                />
+                            )}
+
                         </Space>
                     </div>
 
                     <div className="btn_wrapper">
-                        <Button type="primary"  size={"large"} loading={loadings[0]} onClick={() => enterLoading(0)}>Создавть Квиз</Button>
+                        {quizId ? <Button type="primary" size={"large"} style={{backgroundColor: 'rgb(246 153 16)'}} loading={loadings[2]} onClick={() => updateQuiz(2)}>Обновить Квиз</Button> :<Button type="primary" size={"large"} loading={loadings[0]} onClick={() => enterLoading(0)}>Создавть
+                            Квиз</Button>}
                         <Button type="primary" style={{backgroundColor: '#00bb00'}} size={"large"} loading={loadings[1]} onClick={() => CreateLesson(1)}>Сохранить</Button>
                     </div>
                 </form>
@@ -256,4 +328,4 @@ const AddLesson = () => {
     )
 }
 
-export default AddLesson
+export default UpdateLesson

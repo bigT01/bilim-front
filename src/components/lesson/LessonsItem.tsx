@@ -2,6 +2,7 @@ import {Edit, Trash} from "../assets/MainAssets";
 import pictureLesson from "../../pages/admin/subject/pictureLessone.png";
 import {useDispatch} from "react-redux";
 import {fetchRemoveLesson} from "../../Redux/slices/lessons";
+import {Link} from "react-router-dom";
 
 type LessonsItemProps = {
     id: string,
@@ -18,7 +19,7 @@ const LessonsItem = ({name, id, added}: LessonsItemProps) => {
     }
     return(
         <div className="lesson_item">
-            <button className="btn_edit"><Edit color={'#ffffff'}/></button>
+            <Link to={`/admin/subjects/updateLesson/${id}`} className="btn_edit"><Edit color={'#ffffff'}/></Link>
             <div className="lesson_picture_wrapper">
                 <img src={`http://localhost:4444${added}`} alt="pictureLesson"/>
             </div>

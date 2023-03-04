@@ -1,18 +1,21 @@
 .addQuiz_wrapper{
   width: 100%;
   background-color: #ffffff;
+  box-sizing: border-box;
+  border-radius: 15px;
+  display: flex;
+  gap: 2rem;
   padding: 2rem;
-  .lesson_form{
-    display: flex;
-    gap: 2rem;
+
     .type_of_quiz{
       display: flex;
+      flex-direction: column;
       height: 50px;
-      align-items: center;
-      gap: 30px;
-      margin-bottom: 1.5rem;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      width: 70%;
     }
-  }
+
 }
 
 .lesson_body{

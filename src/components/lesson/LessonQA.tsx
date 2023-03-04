@@ -1,85 +1,72 @@
-import {Button, Input, InputNumber, Radio, RadioChangeEvent, Select, Space} from "antd";
+import {Button, Input, InputNumber, message, Radio, RadioChangeEvent, Select, Space} from "antd";
 import {useEffect, useState} from "react";
 import {Trash} from "../assets/MainAssets";
+import axios from "../../axios";
+import SimpleQuestion from "../adminQuestionTypes/SimpleQuestion";
 
 const { Option } = Select;
-const LessonQA = () =>{
-    const [radioQuestions, setRadioQuestions] = useState([{value: 1, variant: 'Option 1'}])
-    const [value, setValue] = useState(1);
-    const [typeQuestion, setTypeQuestion] = useState<'checkbox' | 'drop'>('checkbox')
-    const [Property, setProperty] = useState([{property:1, variant: 'option 1'}])
+type LessonQAProps = {
+    id:string
+}
+
+const LessonQA = ({id}:LessonQAProps) =>{
+    const [typeQuestion, setTypeQuestion] = useState<'checkbox' | 'drop' | 'multiple'>('checkbox')
+    const [isLoaded, setIsLoaded] = useState(false)
 
 
-    const onChange = (e: RadioChangeEvent) => {
-        setValue(e.target.value)
-        if(e.target.value === 1000){
-            setRadioQuestions(old => [...old, {value:(radioQuestions.length + 1), variant: `Option ${radioQuestions.length+1}`}])
-            setValue(1)
-        }
-    };
+    useEffect(() => {
+        axios.get(`/question/${id}`)
+            .then(res => {
+                setIsLoaded(true)
+                if(res.data.type){
+                    setTypeQuestion(res.data.type)
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                message.error('не удалось загрузить вопрос')
+            })
+    }, [])
 
-    const addVariantHandler = () => {
-        setProperty(old => [...old, {property: (Property.length+1), variant: `option ${(Property.length+1)}`}])
-    }
-    // @ts-ignore
-    const removeVariantHandler = (e) => {
-        if(Property.length > 1){
-            const name = e.target.getAttribute("name")
-            console.log(name)
-            setProperty(Property.filter(item => item.variant !== name));
-        }
-
-    }
 
 
 
     return(
+        !isLoaded ? <h1>loading</h1> :
         <>
             <div className="type_of_quiz">
                 <p>Выберите тип Квиза:</p>
                 <Select defaultValue={typeQuestion} onChange={e => setTypeQuestion(e)}>
                     <Option value="checkbox">checkbox</Option>
                     <Option value="drop">drop</Option>
+                    <Option value="multiple">multiple</Option>
                 </Select>
             </div>
             <div className="quiz_qa">
                 {typeQuestion === 'checkbox' ? <>
-                    <Input placeholder={'Напишите вопрос ...'} style={{width: '70%', height: 45, marginBottom: 20}}/>
-                    <div className="variant_list">
-                        <Radio.Group onChange={onChange} value={value}>
-                            <Space direction="vertical">
-                                <p>правильный вариант укажите</p>
-                                {radioQuestions.map(elem => (
-                                    <Radio value={elem.value}><Input placeholder={elem.variant} defaultValue={elem.variant} style={{width: '120%'}}/></Radio>
-                                ))}
-
-                                <Radio value={1000}>more</Radio>
-                            </Space>
-                        </Radio.Group>
-                    </div>
+                    <SimpleQuestion id={id} typeQuestion={typeQuestion}/>
                 </>: null}
-                {typeQuestion === 'drop' ? <>
-                    <Input placeholder={'Напишите инструкцую'} style={{width: '70%', height: 20, marginBottom: 20}}/>
-                    <Input placeholder={'Напишите вопрос ...'} style={{width: '100%', height: 45, marginBottom: 40}}/>
-                    <div className="variant_list">
+                {/*{typeQuestion === 'drop' ? <>*/}
+                {/*    <Input placeholder={'Напишите инструкцую'} style={{width: '70%', height: 20, marginBottom: 20}}/>*/}
+                {/*    <Input placeholder={'Напишите вопрос ...'} style={{width: '100%', height: 45, marginBottom: 40}}/>*/}
+                {/*    <div className="variant_list">*/}
 
-                        {Property.map((elem) => (
-                            <div className="drop_variant_wrapper">
-                                <Input/>
-                                <Button className='remove_variant' name={elem.variant} onClick={removeVariantHandler}>
-                                    <Trash color={'#ffffff'}/>
-                                </Button>
-                            </div>
-                        ))}
-                    </div>
-                    <Button className='add_variant' onClick={addVariantHandler}>
-                        + добавить вариант
-                    </Button>
+                {/*        {Property.map((elem) => (*/}
+                {/*            <div className="drop_variant_wrapper">*/}
+                {/*                <Input/>*/}
+                {/*                <Button className='remove_variant' name={elem.variant} onClick={removeVariantHandler}>*/}
+                {/*                    <Trash color={'#ffffff'}/>*/}
+                {/*                </Button>*/}
+                {/*            </div>*/}
+                {/*        ))}*/}
+                {/*    </div>*/}
+                {/*    <Button className='add_variant' onClick={addVariantHandler}>*/}
+                {/*        + добавить вариант*/}
+                {/*    </Button>*/}
 
-                </>: null}
+                {/*</>: null}*/}
 
             </div>
-
         </>
     )
 }

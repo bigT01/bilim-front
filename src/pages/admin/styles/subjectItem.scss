@@ -41,10 +41,10 @@
         display: flex;
         align-items: center;
         position: relative;
+        min-height: 40px;
+        width: auto;
         .body_information{
           display: flex;
-          flex-direction: column;
-          min-height: 40px;
           width: 70%;
           gap: 10px;
           .lesson_name{
