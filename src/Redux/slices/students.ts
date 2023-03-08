@@ -5,7 +5,7 @@ import {message} from "antd";
 
 
 export const fetchStudents = createAsyncThunk<{}, {}, any>('students/fetchStudents', async () => {
-    const {data} = await axios.get('/user');
+    const {data} = await axios.get('/user/student');
     return data
 })
 
@@ -14,7 +14,8 @@ export const fetchCreateStudent = createAsyncThunk<any, any, any>('students/fetc
             login: params.login,
             full_name: params.full_name,
             password: params.password,
-            attend : params.attend
+            attend : params.attend,
+            role: 'student'
     })
 
     return data

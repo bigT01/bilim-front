@@ -16,6 +16,8 @@ import dayjs, {Dayjs} from "dayjs";
 import {BiPaperclip} from "react-icons/bi";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import moment, {Moment} from "moment";
+import {useDispatch} from "react-redux";
+import {fetchUpdateQuiz} from "../../../Redux/slices/quiz";
 
 
 
@@ -48,6 +50,8 @@ const UpdateLesson = () => {
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
     const [fileList, setFileList] = useState<UploadFile[]>([]);
+
+    const dispatch = useDispatch()
 
 
     useEffect(() => {
@@ -225,10 +229,13 @@ const UpdateLesson = () => {
 
     useEffect(() => {
         if(isSuccess && lessonId && !quizId){
+            // @ts-ignore
+            dispatch(fetchUpdateQuiz())
+            
             axios.post(`/lesson/${lessonId}/quiz`)
                 .then(res => {
                     message.success('квиз был успешно создан')
-                    navigate(`/admin/subject/${id}/addLesson/${lessonId}/quiz/${res.data.quiz_id}`)
+                    navigate(`/admin/subjects/quiz/${res.data.quiz_id}`)
                 })
                 .catch(err => {
                     console.log(err)

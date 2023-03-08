@@ -8,7 +8,7 @@ export const fetchSubjectLesson = createAsyncThunk<{}, any, any>('lesson/fetchLe
 })
 
 export const fetchRemoveLesson = createAsyncThunk<{}, any, any>('lesson/fetchRemoveLessons', async (id:any) => {
-    const {data} = await axios.delete(`/course/${id}`);
+    const {data} = await axios.delete(`/lesson/${id}`);
     return data
 })
 

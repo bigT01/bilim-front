@@ -8,7 +8,7 @@ import {useEffect, useState} from "react";
 
 const AddQuiz = () => {
     const {quizId} = useParams()
-    const [value, setValue] = useState('')
+    const [value, setValue] = useState('1')
 
 
     return(

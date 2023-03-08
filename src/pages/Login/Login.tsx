@@ -1,16 +1,17 @@
 import {useForm, SubmitHandler} from 'react-hook-form';
 import "./Login.scss"
 import { useEffect} from "react";
-import axios from "axios";
 import {UseAuthContext} from "../../context/AuthContext";
 import {useNavigate} from "react-router-dom";
 import {useMessageContext} from "../../context/MessageContext";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAuth, SelectIsAuth} from "../../Redux/slices/auth";
 import LoginPage from './loginPage.png'
+import axios from "../../axios";
+import {message} from "antd";
 
 type FormValues = {
-    email: string;
+    login: string;
     password: string;
 };
 
@@ -23,19 +24,43 @@ const Login = () =>{
     const {setAuth, isAuth} = UseAuthContext()
 
     const onSubmit: SubmitHandler<FormValues> = data => {
-        // @ts-ignore
-        dispatch(fetchAuth({data}))
-        setAuth({
-            id: 'kmvdfkvmdlfkmvdfvmdkf',
-            token: 'skjfbnkjsnfnjkff',
-            role: 'admin'
+        axios.post('/login', {
+            login: data.login,
+            password: data.password
         })
-        navigate('/')
+            .then(res => {
+                setAuth({
+                    id: res.data.id,
+                    token: res.data.token,
+                    role: res.data.role
+                })
+                message.success('вы успешно прошли авторизацию')
+                navigate('/')
+
+            })
+            .catch(err => {
+                console.log(err)
+                message.error('пароль или логин неверно')
+            })
+
+
     };
 
-    // if(isAuthRedux){
-    //     navigate('/')
-    // }
+
+    useEffect(() => {
+        axios.get('/auth/me')
+            .then(res => {
+                setAuth({
+                    id: res.data.id,
+                    token: res.data.token,
+                    role: res.data.role
+                })
+                navigate('/')
+            })
+            .catch(err => {
+                message.error('не удалось авторизоваться пожалуйста ведите пароль')
+            })
+    }, [])
     return(
         <div className={'login_wrapper'}>
             <div className="login_container">
@@ -50,7 +75,7 @@ const Login = () =>{
                     <form className={'form_signUp'} onSubmit={handleSubmit(onSubmit)}>
                         <div className="input_wrapper">
                             <label className={'signUp_label'}>E-mail</label>
-                            <input type="email" {...register('email')} className={'signUp_input'}/>
+                            <input type="text" {...register('login')} className={'signUp_input'}/>
                         </div>
                         <div className="input_wrapper">
                             <label className={'signUp_label'}>password</label>

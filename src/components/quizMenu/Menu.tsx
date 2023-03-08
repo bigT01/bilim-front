@@ -1,10 +1,7 @@
 import s from './QuizMenu.module.scss'
-import {BiArrowToBottom, BiDownArrow} from "react-icons/bi";
-import {BsArrowDown} from "react-icons/bs";
-import AnimateHeight from "react-animate-height";
 import {useEffect, useState} from "react";
-import axios from "../../axios";
-import {message} from "antd";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchCreateQuestion, fetchQuestion} from "../../Redux/slices/questions";
 
 type MenuQuizProps = {
     quizId: string,
@@ -12,29 +9,28 @@ type MenuQuizProps = {
 }
 
 const MenuQuiz = ({quizId, setValue}:MenuQuizProps) => {
-    const [data, setData] = useState<any>()
+    const {question} = useSelector((state:any) => state.question)
+    const [data, setData] = useState<any>(question.items)
     const [activeBtn, setActiveBtn] = useState('1')
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        axios.get(`http://localhost:4444/api/${quizId}/question`)
-            .then(res => setData(res.data))
-            .catch(err => {
-                console.log(err)
-                message.error('ошибка сервера')
-            })
+        // @ts-ignore
+        dispatch(fetchQuestion(quizId))
     }, [])
 
     useEffect(() => {
         if(activeBtn === '-1'){
-            axios.post(`/quiz/${quizId}/question`)
-                .then(res => {
-                    message.success('вопрос был добавлен')
-                })
-                .catch(err => {
-                    message.error('не удалось добавить вопрос')
-                })
+            // @ts-ignore
+            dispatch(fetchCreateQuestion(quizId))
         }
     }, [activeBtn])
+
+    useEffect(() => {
+        if(question.status === 'loaded'){
+            setData(question.items)
+        }
+    }, [question])
 
 
     return(

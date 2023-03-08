@@ -305,3 +305,30 @@
     }
   }
 }
+
+.lessons_wrapper{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 30px;
+  grid-row-gap: 50px;
+  .student_subject_item{
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 2px 3px 5px #000000;
+    border-radius: 10px;
+    position: relative;
+    padding: 10px;
+    .lesson_name{
+      margin-bottom: 2rem;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      color: #000000;
+      transition: color 0.2s linear;
+      &:hover{
+        color: #292dd6;
+        transition: color 0.2s linear;
+      }
+    }
+  }
+}

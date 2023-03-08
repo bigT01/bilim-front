@@ -20,9 +20,9 @@ const Menu = ({Links}: MenuProps) =>{
     return(
         <div className={'menu_wrapper'}>
             <div className="header">
-                <button className={'close_btn'}>
-                    <CloseButton />
-                </button>
+                <h3>
+                    Bilim Platform
+                </h3>
             </div>
             <nav className={'navbar'}>
                 <ul className={'navbar_wrapper'}>

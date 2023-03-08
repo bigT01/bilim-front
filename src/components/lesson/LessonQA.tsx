@@ -17,6 +17,9 @@ import SimpleQuestion from "../adminQuestionTypes/SimpleQuestion";
 import {DatePickerProps, RangePickerProps} from "antd/es/date-picker";
 import dayjs, {Dayjs} from "dayjs";
 import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchQuiz} from "../../Redux/slices/quiz";
+import MainQuiz from "../quizMenu/MainQuiz";
 
 const { Option } = Select;
 type LessonQAProps = {
@@ -26,91 +29,51 @@ type LessonQAProps = {
 
 
 const LessonQA = ({id, quizId}:LessonQAProps) =>{
+    const {quiz} = useSelector((state:any) => state.quiz)
+
     const [typeQuestion, setTypeQuestion] = useState<'checkbox' | 'drop' | 'multiple'>('checkbox')
     const [isLoaded, setIsLoaded] = useState(false)
-    const [time, setTime] = useState('')
-    const [title, setTitle] = useState('')
     const navigate = useNavigate()
 
+    const dispatch = useDispatch()
+
     useEffect(() => {
-        if(id === '1'){
-            axios.get(`/quiz/${quizId}`)
-                .then(res => {
-                    if(res.data.title && res.data.duration){
-                        setTime(res.data.duration)
-                        setTitle(res.data.title)
-                    }
-                    setIsLoaded(true)
-                })
-                .catch(err =>{
-                    console.log(err)
-                    message.error('не удалось найти квиз')
-                })
-        }
-        else{
-            axios.get(`/question/${id}`)
-                .then(res => {
-                    setIsLoaded(true)
-                    if(res.data.type){
-                        setTypeQuestion(res.data.type)
-                    }
-                })
-                .catch(err => {
-                    console.log(err)
-                    message.error('не удалось загрузить вопрос')
-                })
+        if(quizId){
+            if(id === '1'){
+                // @ts-ignore
+                dispatch(fetchQuiz(quizId))
+            }
+            else{
+                axios.get(`/question/${id}`)
+                    .then(res => {
+                        setIsLoaded(true)
+                        if(res.data.type){
+                            setTypeQuestion(res.data.type)
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        message.error('не удалось загрузить вопрос')
+                    })
+            }
         }
     }, [id])
 
-    const onSaveHandler = () => {
-        axios.put(`/quiz/${quizId}`, {
-            title: title,
-            duration: time,
-            total_points: 100,
-            is_active: false
-        })
-            .then(() =>{
-                message.success('квиз успешно было обновлено')
-            })
-            .catch(() =>{
-                message.error('ошибка сети')
-            })
+    useEffect(() => {
+        if(quiz.status === 'loaded'){
+            setIsLoaded(true)
+        }
+        if(quiz.status === 'deleted'){
+            navigate('/admin/dashboard')
+        }
+    }, [quiz])
 
-    }
-
-    const onDeleteHandler = () =>{
-        axios.delete(`/quiz/${quizId}`)
-            .then(() =>{
-                message.success('квиз успешно было удалено')
-                navigate('/admin/subjects')
-            })
-            .catch(() =>{
-                message.error('ошибка сети')
-            })
-    }
-
-    const onChangeTime = (value: TimePickerProps['value'], dateString: string,) => {
-        setTime(dateString)
-    };
 
     return(
         !isLoaded ? <h1>loading</h1> :
         <>
             {id === '1' ? (
-                <>
-                    <div className='quiz_information'>
-
-                        <label style={{width: '280px'}}>Дайте название квизу</label>
-                        <Input value={title} onChange={e => setTitle(e.target.value)}/>
-
-                        <label style={{width: '280px'}}>Сколько оно длиться</label>
-
-                        {time? <TimePicker defaultValue={dayjs(time, 'HH:mm:ss')}  onChange={onChangeTime}/> :<TimePicker onChange={onChangeTime}/>}
-
-                    </div>
-                    <Button style={{backgroundColor: '#00bb00', color: "#ffffff", marginRight: 30}} onClick={() => onSaveHandler()}>Сохранить</Button>
-                    <Button type="primary" danger onClick={() =>onDeleteHandler()}>Удалить</Button>
-                </>
+                <MainQuiz quizId={quizId}/>
             ) : <>
                 <div className="type_of_quiz">
                     <p>Выберите тип Квиза:</p>

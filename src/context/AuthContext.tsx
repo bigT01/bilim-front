@@ -2,6 +2,7 @@ import {createContext, ReactNode, useContext, useEffect, useState} from "react";
 import {Auth} from "../constants/Interfaces";
 import {useSelector} from "react-redux";
 import {SelectIsAuth} from "../Redux/slices/auth";
+import {useLocalStorage} from "../hooks/UseLocalStorage";
 
 type AuthProviderType = {
     children: ReactNode
@@ -10,6 +11,7 @@ type AuthProviderType = {
 type AuthContextType = {
     setAuth: (data:Auth) => void,
     isAuth: boolean,
+    userId: string,
     token: string,
     role: string,
 }
@@ -24,22 +26,18 @@ export const UseAuthContext = () => {
 
 export const AuthProvider = ({children}: AuthProviderType) =>{
     const [isAuth, setIsAuth] = useState<boolean>(false)
+    const [userId, setUserId] = useState('')
     const [role, setRole] = useState<string>('')
     const [token, setToken] = useState<string>('')
-    // const selector = useSelector(SelectIsAuth)
-    //
-    // useEffect(() =>{
-    //     if(selector){
-    //         setIsAuth(true)
-    //     }
-    //     console.log(selector)
-    // },[selector])
+
 
     const setAuth = (data: Auth) => {
         if(data?.token){
             setToken(token)
             setIsAuth(true)
             setRole(data?.role)
+            setUserId(data?.id)
+            window.localStorage.setItem('token', data?.token)
         }
     }
 
@@ -47,6 +45,7 @@ export const AuthProvider = ({children}: AuthProviderType) =>{
         <AuthContext.Provider value={{
             setAuth,
             isAuth,
+            userId,
             token,
             role
         }}>
