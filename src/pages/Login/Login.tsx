@@ -18,7 +18,6 @@ type FormValues = {
 const Login = () =>{
     const { register, handleSubmit } = useForm<FormValues>();
     const dispatch = useDispatch()
-    // const isAuthRedux = useSelector(SelectIsAuth)
     const {setMessage} = useMessageContext()
     const navigate = useNavigate()
     const {setAuth, isAuth} = UseAuthContext()

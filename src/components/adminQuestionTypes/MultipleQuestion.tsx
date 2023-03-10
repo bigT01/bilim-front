@@ -24,6 +24,8 @@ const MultipleQuestion = ({id, typeQuestion}:LessonQAProps) => {
     const [value, setValue] = useState<string[]>([]);
     const [questionSender, setQuestionSender] = useState('')
     const [photo, setPhoto] = useState('')
+
+    const [previewImage, setPreviewImage] = useState('');
     const [isPhoto, setIsPhoto] = useState(false);
     const [photoTitle, setPhotoTitle] = useState('');
     const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -34,12 +36,18 @@ const MultipleQuestion = ({id, typeQuestion}:LessonQAProps) => {
         if(certainQuestion[0]){
             const options = certainQuestion[0].options ? JSON.parse(certainQuestion[0].options) : null
             const correct_answer = certainQuestion[0].correct_answer ? JSON.parse(certainQuestion[0].correct_answer) : []
-            // options ? setVariants(options) : null
+            setPhoto(certainQuestion[0].photo)
+            options ? setVariants(options) : null
             setValue(correct_answer)
             setQuestionSender(certainQuestion[0].question ? certainQuestion[0].question : '')
         }
     }, [])
 
+    useEffect(() => {
+        if(fileList[0]?.response?.url){
+            setPhoto(fileList[0]?.response?.url)
+        }
+    }, [fileList])
 
 
     const handlePreview = async (file: UploadFile) => {
@@ -47,7 +55,7 @@ const MultipleQuestion = ({id, typeQuestion}:LessonQAProps) => {
             file.preview = await getBase64(file.originFileObj as RcFile);
         }
 
-        setPhoto(file.url || (file.preview as string));
+        setPreviewImage(file.url || (file.preview as string));
         setIsPhoto(true);
         setPhotoTitle(file.name || file.url!.substring(file.url!.lastIndexOf('/') + 1));
     };
@@ -68,9 +76,10 @@ const MultipleQuestion = ({id, typeQuestion}:LessonQAProps) => {
         const params = {
             id: id,
             question: questionSender.trim(),
-            options:questionJSON,
-            correct_answer: answerJSON,
-            type: typeQuestion
+            options:questionJSON.trim(),
+            correct_answer: answerJSON.trim(),
+            type: typeQuestion.trim(),
+            photo: photo
         }
         // @ts-ignore
         dispatch(fetchUpdateQuestion(params))
@@ -138,7 +147,7 @@ const MultipleQuestion = ({id, typeQuestion}:LessonQAProps) => {
                     {fileList.length >= 1 ? null : uploadButton}
                 </Upload>
                 <Modal open={isPhoto} title={photoTitle} footer={null} onCancel={handleCancel}>
-                    <img alt="example" style={{width: '100%'}} src={photo} />
+                    <img alt="example" style={{width: '100%'}} src={previewImage} />
                 </Modal>
             </>}
             <div className="variant_list">

@@ -17,7 +17,8 @@ export const fetchUpdateQuestion = createAsyncThunk<{}, any, any>('lesson/fetchU
             question: params.question,
             options: params.options,
             correct_answer: params.correct_answer,
-            type: params.type
+            type: params.type,
+            photo: params.photo
     });
     return data
 })
@@ -78,6 +79,7 @@ const QuestionSlice = createSlice({
                 question: action.meta.arg.question,
                 options: action.meta.arg.options,
                 correct_answer: action.meta.arg.correct_answer,
+                photo: action.meta.arg.photo,
                 type: action.meta.arg.type,
                 created_at: question.created_at,
                 updated_at: question.updated_at

@@ -1,17 +1,43 @@
 import './Header.scss'
-import {Avatar, Bell, More} from "../assets/MainAssets";
+import {Avatar, Bell, More, Trash, UserAdd} from "../assets/MainAssets";
+import {useEffect, useRef, useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
+import {Button} from "antd";
 
 
 const Header = () =>{
+    const [isClick, setIsClick] = useState(false);
+    const more = useRef(null);
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        function handleClickOutside(event: any) {
+            // @ts-ignore
+            if (more.current && !more.current.contains(event.target)) {
+                setIsClick(false);
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [more, isClick]);
+
+    const LogOutHandler = () => {
+        window.localStorage.setItem('token', '')
+        navigate('/')
+    }
+
     return(
-        <div className={'header_main'}>
+        <div className={'header_main'} style={{position: 'relative'}}>
             <div className="notification_wrapper">
                 <Bell/>
                 <div className="notification_number">
                     3
                 </div>
             </div>
-            <div className="profile_wrapper">
+            <div className="profile_wrapper" onClick={() => setIsClick(oldValue => !oldValue)}>
                 <div className="avatar">
                     <Avatar/>
                 </div>
@@ -19,6 +45,13 @@ const Header = () =>{
                     <More/>
                 </button>
             </div>
+            {isClick && <>
+                <div style={{position:'absolute', bottom: '-15px'}}  className={`more ${isClick? 'show': 'disable'}` } ref={more}>
+                    {isClick && <>
+                        <Button type={'primary'} danger={true} onClick={() => LogOutHandler()}>выйти</Button>
+                    </>}
+                </div>
+            </>}
         </div>
     )
 }

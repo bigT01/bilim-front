@@ -21,6 +21,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchQuiz} from "../../Redux/slices/quiz";
 import MainQuiz from "../quizMenu/MainQuiz";
 import MultipleQuestion from "../adminQuestionTypes/MultipleQuestion";
+import DropQuestion from "../adminQuestionTypes/DropQuestion";
+import SelectQuestion from "../adminQuestionTypes/SelectQuestion";
 
 const { Option } = Select;
 type LessonQAProps = {
@@ -32,7 +34,7 @@ type LessonQAProps = {
 const LessonQA = ({id, quizId}:LessonQAProps) =>{
     const {quiz} = useSelector((state:any) => state.quiz)
     const {question} = useSelector((state:any) => state.question)
-    const [typeQuestion, setTypeQuestion] = useState<'checkbox' | 'drop' | 'multiple'>('checkbox')
+    const [typeQuestion, setTypeQuestion] = useState<'checkbox' | 'drop' | 'multiple' | 'select'>('checkbox')
     const [isDisable, setIsDisable] = useState(false)
     const [isLoaded, setIsLoaded] = useState(false)
     const navigate = useNavigate()
@@ -94,15 +96,13 @@ const LessonQA = ({id, quizId}:LessonQAProps) =>{
                 <MainQuiz quizId={quizId}/>
             ) : <>
                 <div className="type_of_quiz">
-                        <>
-                            <p>Выберите тип Квиза:</p>
-                            <Select disabled={isDisable} value={typeQuestion} onChange={e => setTypeQuestion(e)}>
-                                <Option value="checkbox">checkbox</Option>
-                                <Option value="drop">drop</Option>
-                                <Option value="multiple">multiple</Option>
-                            </Select>
-                        </>
-
+                    <p>Выберите тип Квиза:</p>
+                    <Select disabled={isDisable} value={typeQuestion} onChange={e => setTypeQuestion(e)}>
+                        <Option value="checkbox">checkbox</Option>
+                        <Option value="drop">drop</Option>
+                        <Option value="multiple">multiple</Option>
+                        <Option value="select">select</Option>
+                    </Select>
                 </div>
                 <div className="quiz_qa">
                     {typeQuestion === 'checkbox' ? <>
@@ -111,7 +111,12 @@ const LessonQA = ({id, quizId}:LessonQAProps) =>{
                     {typeQuestion === 'multiple' ? <>
                         <MultipleQuestion id={id} typeQuestion={typeQuestion} />
                     </>: null}
-
+                    {typeQuestion === 'drop' ? <>
+                        <DropQuestion id={id} typeQuestion={typeQuestion} />
+                    </>: null}
+                    {typeQuestion === 'select' ? <>
+                        <SelectQuestion id={id} typeQuestion={typeQuestion} />
+                    </>: null}
                 </div>
             </>}
         </>
