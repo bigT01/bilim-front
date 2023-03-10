@@ -1,9 +1,8 @@
-import {Button, Input, message, Modal, Radio, RadioChangeEvent, Space, Upload, UploadFile, UploadProps} from "antd";
-import {useEffect, useState} from "react";
-import axios from "../../axios";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchDeleteQuestion, fetchUpdateQuestion} from "../../Redux/slices/questions";
 import {RcFile} from "antd/es/upload";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {Button, Checkbox, Input, Modal, Upload, UploadFile, UploadProps} from "antd";
+import {fetchDeleteQuestion, fetchUpdateQuestion} from "../../Redux/slices/questions";
 import {PlusOutlined} from "@ant-design/icons";
 
 type LessonQAProps = {
@@ -19,10 +18,10 @@ const getBase64 = (file: RcFile): Promise<string> =>
         reader.onerror = (error) => reject(error);
     });
 
-const SimpleQuestion = ({id, typeQuestion}:LessonQAProps) => {
+const MultipleQuestion = ({id, typeQuestion}:LessonQAProps) => {
     const {question} = useSelector((state:any) => state.question)
-    const [radioQuestions, setRadioQuestions] = useState([{value: 1, variant: 'Option 1'}])
-    const [value, setValue] = useState(1);
+    const [Variants, setVariants] = useState([{value: '1', variant: 'Option 1'}, {value: '2', variant: 'Option 1'}])
+    const [value, setValue] = useState<string[]>([]);
     const [questionSender, setQuestionSender] = useState('')
     const [photo, setPhoto] = useState('')
     const [isPhoto, setIsPhoto] = useState(false);
@@ -34,33 +33,14 @@ const SimpleQuestion = ({id, typeQuestion}:LessonQAProps) => {
         const certainQuestion = question.items.filter((item:any) => item.question_id === id)
         if(certainQuestion[0]){
             const options = certainQuestion[0].options ? JSON.parse(certainQuestion[0].options) : null
-            const correct_answer = certainQuestion[0].correct_answer ? JSON.parse(certainQuestion[0].correct_answer) : 1
-            options ? setRadioQuestions(options) : null
+            const correct_answer = certainQuestion[0].correct_answer ? JSON.parse(certainQuestion[0].correct_answer) : []
+            // options ? setVariants(options) : null
             setValue(correct_answer)
             setQuestionSender(certainQuestion[0].question ? certainQuestion[0].question : '')
         }
     }, [])
 
-    const onChange = (e: RadioChangeEvent) => {
-        setValue(e.target.value)
-        if(e.target.value === 1000){
-            setRadioQuestions(old => [...old, {value:(radioQuestions.length + 1), variant: `Option ${radioQuestions.length+1}`}])
-            setValue(old => 1)
-        }
-    };
 
-    // @ts-ignore
-    const QuestionHandler = (e, id) => {
-        setRadioQuestions(prevQuestions => {
-            return prevQuestions.map(question => {
-                if (question.value === id) {
-                    return { ...question, variant: e.target.value };
-                } else {
-                    return question;
-                }
-            });
-        });
-    }
 
     const handlePreview = async (file: UploadFile) => {
         if (!file.url && !file.preview) {
@@ -76,15 +56,21 @@ const SimpleQuestion = ({id, typeQuestion}:LessonQAProps) => {
 
     const handleCancel = () => setIsPhoto(false);
 
+    const AddQuestionHandler = () => {
+        setVariants((old:any) => {
+            return [...old, {value: (Variants.length + 1), variant: `Option ${Variants.length + 1}`}];
+        })
+    }
+
     const saveHandler = () =>{
-        const questionJSON = JSON.stringify(radioQuestions).trim()
+        const questionJSON = JSON.stringify(Variants).trim()
         const answerJSON = JSON.stringify(value).trim()
         const params = {
             id: id,
             question: questionSender.trim(),
-                options:questionJSON,
-                correct_answer: answerJSON,
-                type: typeQuestion
+            options:questionJSON,
+            correct_answer: answerJSON,
+            type: typeQuestion
         }
         // @ts-ignore
         dispatch(fetchUpdateQuestion(params))
@@ -95,6 +81,41 @@ const SimpleQuestion = ({id, typeQuestion}:LessonQAProps) => {
         dispatch((fetchDeleteQuestion(id)))
     }
 
+    const CheckBoxHandler = (value: any, isChecked: boolean) => {
+        const origin = value.split('abc')
+        if (isChecked) {
+            setValue(oldData => {
+                if (Array.isArray(oldData)) {
+                    return [...oldData, origin[0]];
+                }
+                return [origin[0]];
+            })
+        }
+        else{
+            setValue(oldData => {
+                if (Array.isArray(oldData)) {
+                    return oldData.filter((elem: any) => elem !== origin[0]);
+                }
+                return [origin[0]];
+            })
+        }
+
+    }
+
+    const CheckBoxInputHandler = (id:any, value:string) => {
+        const origin = id.split('abcd')
+        setVariants(prevQuestions => {
+            return prevQuestions.map(question => {
+                if (question.value.toString() === origin[0]) {
+                    return { ...question, variant: value };
+                } else {
+                    return question;
+                }
+            });
+        });
+    }
+
+
     const uploadButton = (
         <div>
             <PlusOutlined />
@@ -102,7 +123,8 @@ const SimpleQuestion = ({id, typeQuestion}:LessonQAProps) => {
         </div>
     );
 
-    return (
+
+    return(
         <>
             <Input placeholder={'Напишите вопрос ...'} onChange={e =>setQuestionSender(e.target.value)} value={questionSender} style={{width: '70%', height: 45, marginBottom: 20}}/>
             {photo ? <div style={{display: 'flex', alignItems: 'center', justifyContent:'space-between'}}><img src={`http://localhost:4444${photo}`} alt='img:preview' width={250} height={200} style={{objectFit:'cover', marginRight: '2rem'}}/> <Button type={'primary'} onClick={() => setPhoto('')} danger>удалить</Button></div> : <>
@@ -120,20 +142,15 @@ const SimpleQuestion = ({id, typeQuestion}:LessonQAProps) => {
                 </Modal>
             </>}
             <div className="variant_list">
-                <Radio.Group onChange={onChange} value={value}>
-                    <Space direction="vertical">
-                        <p>правильный вариант укажите</p>
-                        {radioQuestions.map(elem => (
-                            <Radio value={elem.value}><Input onChange={e => QuestionHandler(e, elem.value)} placeholder={elem.variant} value={elem.variant} style={{width: '120%'}}/></Radio>))}
-
-                        <Radio value={1000}>more</Radio>
-                    </Space>
-                </Radio.Group>
+                {Variants.map(elem => (
+                    <Checkbox key={elem.value} onChange={(e) => CheckBoxHandler(e.target.id, e.target.checked)} id={elem.value+'abc'}><Input id={elem.value+'abcd'} value={elem.variant} onChange={e => CheckBoxInputHandler(e.target.id, e.target.value)}/></Checkbox>
+                ))}
+                <Button type={"primary"} onClick={() => AddQuestionHandler()}>Добавить вариант</Button>
             </div>
             <Button style={{backgroundColor: '#00bb00', color: "#ffffff", marginRight: 30}} onClick={() => saveHandler()}>Сохранить</Button>
             <Button type="primary" danger onClick={e => deleteQuestionHandler()}>Удалить</Button>
         </>
-    );
+    )
 }
 
-export default SimpleQuestion
+export default MultipleQuestion
