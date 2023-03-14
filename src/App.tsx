@@ -46,7 +46,7 @@ function App() {
 
                                 <Route path={'/student/dashboard'} element={<DashboardStudent/>}/>
                                 <Route path={'/student/subject'} element={<SubjectStudent/>}/>
-
+x
                                 <Route path={'/student/subject/lesson/:id'} element={<LessonStudent/>}/>
                                 <Route path={'/student/subject/:id'} element={<SubjectCardStudent/>}/>
                             </Route>

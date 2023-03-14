@@ -4,41 +4,56 @@ import LessonsItem from "../../components/lesson/LessonsItem";
 import {useEffect, useState} from "react";
 import axios from "../../axios";
 import {Edit, Trash} from "../../components/assets/MainAssets";
+import StudentLessonItem from "../../components/StudentLessonItem/StudentLessonItem";
+import {UseAuthContext} from "../../context/AuthContext";
 
 
 const LessonStudent = () => {
+    const {userId} = UseAuthContext()
     const {id} = useParams()
     const [data, setData] = useState<any>()
+    const [grades, setGrades] = useState([])
 
     useEffect(() => {
-        axios.get(`/course/${id}`)
-            .then(res => {
-                setData(res.data)
+        if(userId){
+            axios.get(`/course/${id}/lesson`)
+                .then(res => {
+                    setData(res.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+            axios.get(`/user/${userId}/grade`)
+                .then(res => {
+                    setGrades(res.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+    },[userId])
+
+    useEffect(() => {
+        if(grades[0]){
+            const filteredData = data.map((elem:any) => {
+                const isGraded = grades.some((item: any) => item.lesson_id === elem.lesson_id);
+                return { ...elem, isGraded };
             })
-            .catch(err => {
-                console.log(err)
-            })
-    },[])
+            setData(filteredData)
+        }
+    }, [grades])
+
+
     return(
         <StudentIndex>
             <div className="subject_item_wrapper">
                 <div className="header">
-                    <h2>Course Name</h2>
+                    <h2 className='font-bold text-2xl mb-10'>Уроки</h2>
                 </div>
 
                 <div className="lessons_wrapper">
                     {data?.map((elem: any) => (
-                        <div className="lesson_item">
-                            <div className="lesson_picture_wrapper">
-                                <img src={`http://localhost:4444${elem.preview_image}`} alt="pictureLesson"/>
-                            </div>
-                            <div className="lesson_body">
-                                <div className="body_information">
-                                    <Link to={`/student/subject/${elem.lesson_id}`} className='lesson_name' style={{textDecoration: 'none', color: 'blue'}}>{elem.title}</Link>
-                                    <p></p>
-                                </div>
-                            </div>
-                        </div>
+                        <StudentLessonItem lesson_id={elem.lesson_id} title={elem.title} preview_image={elem.preview_image} start_time={elem.start_time} end_time={elem.end_time} isGraded={elem?.isGraded}/>
                     ))}
                 </div>
             </div>

@@ -5,161 +5,137 @@ import {useEffect, useState} from "react";
 import RadioComponent from "../../components/Buttons/RadioComponent";
 import Drop from "../../components/Buttons/Drop";
 import SubjectQuestionCard from "../../components/SubjectQuestionCard/SubjectQuestionCard";
+import {Link, useParams} from "react-router-dom";
+import axios from "../../axios";
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import {Button, message} from "antd";
+import StudentLessonMenu from "../../components/StudentLessonMenu/StudentLessonMenu";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchStudentQuestion} from "../../Redux/slices/questionStudent";
+import {UseAuthContext} from "../../context/AuthContext";
 
 
-const FakeData = {
-    id: "1",
-    description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n" +
-        "                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,\n" +
-        "                                when an unknown printer took a galley of type and scrambled it to make a type specimen\n" +
-        "                                book.",
-    image: math,
-    questions: 4
-}
-
-const FakeQuiz = [
-    {
-        id: 123,
-        type: 'checkbox',
-        question: 'Question: 2+2=?',
-        variants: [
-            {
-                id: "4234",
-                answer: "11"
-            },
-            {
-                id: "9421",
-                answer: "5"
-            },
-            {
-                id: "2342",
-                answer: "4"
-            },
-        ],
-        // backend should not give this information
-        correct: "2342"
-    },
-    {
-        id: 2345,
-        type: 'checkbox',
-        question: 'Question: 2+2=?',
-        variants: [
-            {
-                id: "4234",
-                answer: "11"
-            },
-            {
-                id: "9421",
-                answer: "5"
-            },
-            {
-                id: "2342",
-                answer: "4"
-            },
-        ],
-        // backend should not give this information
-        correct: "2342"
-    },
-    {
-        id: 94353,
-        type: 'checkbox',
-        question: 'Question: 2+2=?',
-        variants: [
-            {
-                id: "4234",
-                answer: "11"
-            },
-            {
-                id: "9421",
-                answer: "5"
-            },
-            {
-                id: "2342",
-                answer: "4"
-            },
-        ],
-        // backend should not give this information
-        correct: "2342"
-    },
-    {
-        id: 3452,
-        type: 'drop',
-        question: 'Question: palace with correct place',
-        DropQuestion: "some people [] love this place [] jnjkdnkdfsdf [] sdjnjsdnl",
-        variants: [
-            {
-                id: "4234",
-                answer: "most"
-            },
-            {
-                id: "9421",
-                answer: "very"
-            },
-            {
-                id: "2342",
-                answer: "high"
-            },
-        ],
-        // backend should not give this information
-        correct: "2342"
-    },
-]
 
 const SubjectCardStudent = () =>{
-    const [pageNumber, setPageNumber] = useState(0)
+    const {id} = useParams()
+    const {userId} = UseAuthContext()
+    const [pageNumber, setPageNumber] = useState('0')
+    const [firstQuestion, setFirstQuestion] = useState('')
+    const [isQuestion, setIsQuestion] = useState(false)
     const [isFinish, setIsFinish] = useState(false)
+    const [isStart, setIsStart] = useState(false)
+    const [description, setDescription] = useState('')
+    const [title, setTitle] = useState('')
+    const [quizId, setQuizId] = useState('')
+    const [material, setMaterial] = useState('')
+    const [totalPoint, SetTotalPoint] = useState(0)
+
+    const {StudentAnswers} = useSelector((state:any) => state.StudentAnswers)
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        if(pageNumber === FakeData.questions){
-            setIsFinish(true)
+        axios.get(`/lesson/${id}`)
+            .then(res => {
+                setDescription(res.data.description)
+                setMaterial(res.data.material)
+                setTitle(res.data.title)
+            })
+            .catch(err => console.log(err))
+        axios.get(`/lesson/${id}/quiz`)
+            .then(res => {
+                setQuizId(res.data.quiz_id)
+            })
+            .catch(err => console.log(err))
+    },[])
+
+    useEffect(() =>{
+        if(quizId){
+            // @ts-ignore
+            dispatch(fetchStudentQuestion(quizId))
         }
-        else{
-            setIsFinish(false)
+    }, [quizId])
+
+
+    const onStartQuizHandler = () =>{
+        setIsStart(true)
+        setIsQuestion(true)
+        setIsStart(true)
+        setPageNumber(firstQuestion)
+    }
+
+    const FinishHandler = () => {
+        axios.post(`/user/${userId}/lesson/${id}/quiz/${quizId}/question/answer`, {
+            answer: StudentAnswers.items
+        })
+            .then(res => {
+                SetTotalPoint(res.data.total_point)
+                setPageNumber('10')
+                setIsFinish(true)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    useEffect(() => {
+        if(pageNumber === '10'){
+            setIsQuestion(false)
+            setIsStart(false)
         }
     }, [pageNumber])
+
 
     return(
         <StudentIndex>
             <div className="subject_card">
                 <div className="header">
-                    <div className="subject_name">Math:</div>
-                    <div className="subject_description">loream ipsum</div>
+                    <div className="subject_description">{title}</div>
                 </div>
                 <div className="body">
-                    <div className="navbar">
-                        <ul className="navbar_wrapper">
-                            <li className="nav_link_wrapper">
-                                <Laptop/>
-                                <span>preview</span>
-                            </li>
-                            {FakeQuiz.map((element, index) => (
-                                <li className="nav_link_wrapper little">
-                                    <Idea/>
-                                    <span>{index+1} quiz</span>
-                                </li>
-                            ))}
-
-                            <li className="nav_link_wrapper disabled">
-                                <Power color={'#ffffff'}/>
-                                <span>overall</span>
-                            </li>
-                        </ul>
-                    </div>
-                    {pageNumber === 0 && <div className="content">
+                    {quizId ? <StudentLessonMenu pageId={pageNumber} setPageId={setPageNumber} isFinish={isFinish}
+                                        quizId={quizId} isStart={isStart} setFirstQuestion={setFirstQuestion} setIsQuestion={setIsQuestion}/>: <>LOADING...</>}
+                    {pageNumber === '0' && <div className="content">
                         <div className="image_wrapper">
-                            <img src={FakeData.image} alt="img:math-1"/>
+                            <iframe style={{width: '100%', height: '400px'}} src="https://www.youtube-nocookie.com/embed/oA55ckFYYoU"
+                                    title="YouTube video player" frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowFullScreen />
                         </div>
                         <div className="description">
-                            <p>{FakeData.description}</p>
+                            <ReactMarkdown children={description} remarkPlugins={[remarkGfm]} />
                         </div>
-                        <div className="btn_wrapper">
-                            <button onClick={() => setPageNumber(oldState => oldState + 1)}>next</button>
-                        </div>
-                    </div>}
 
-                    {FakeQuiz.map((element, index) =>(
-                        pageNumber === index+1 && <SubjectQuestionCard key={element.id} isFinish={isFinish} setPageNumber={setPageNumber} DropQuestion={element?.DropQuestion} question={element.question} type={element.type} variant={element.variants}/>
-                    ))}
+                    </div>}
+                    {pageNumber === '1' && (
+                        <div className='h-40 w-full flex justify-center items-center'>
+                            <Button type='primary' onClick={() => onStartQuizHandler()}>Начать квиз</Button>
+                        </div>
+                    )}
+                    {isQuestion && pageNumber && (
+                        <SubjectQuestionCard id={pageNumber} quizId={quizId} FinishHandler={FinishHandler}/>
+                    )}
+                    {isFinish && pageNumber === '10' && (
+                        <>
+                            <div className="flex items-center justify-center w-full flex-col gap-10">
+                                <div className="percent">
+                                    <div className="single-chart" style={{width: 200}}>
+                                        {totalPoint && <svg viewBox="0 0 36 36"
+                                              className={`circular-chart ${totalPoint >= 80 ? 'green' : ''} ${totalPoint < 80 && totalPoint >= 50 ? 'orange' : ''} ${totalPoint < 50 ? 'red' : ''}`}>
+                                            <path className="circle-bg"
+                                                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                            <path className="circle" strokeDasharray={`${totalPoint}, 100`}
+                                                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                            <text x="18" y="20.35" className="percentage">{totalPoint}%</text>
+                                        </svg>}
+                                    </div>
+                                </div>
+                                <p className='text-lg font-bold'>вы хорошо сдали квиз</p>
+                                <Link to={'/student/dashboard'} className={'px-4 py-2 bg-blue-500 text-white rounded-2xl'}>нажмите чтобы вернуться на главную страницу</Link>
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
         </StudentIndex>
