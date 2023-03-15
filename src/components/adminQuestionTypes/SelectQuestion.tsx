@@ -20,7 +20,7 @@ const getBase64 = (file: RcFile): Promise<string> =>
 
 const SelectQuestion = ({id, typeQuestion}:LessonQAProps) => {
     const {question} = useSelector((state:any) => state.question)
-    const [Variants, setVariants] = useState([{value: '1', question: 'Option 1', variant: ''}, {value: '2', question: 'Option 2', variant: ''}, {value: '3', question: 'Option 3', variant: ''}])
+    const [Variants, setVariants] = useState([{value: '1', question: 'Option 1', variant: ''}])
     const [questionSender, setQuestionSender] = useState('')
     const [photo, setPhoto] = useState('')
 

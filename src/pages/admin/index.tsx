@@ -19,7 +19,7 @@ const AdminIndex = ({children}: AdminIndex) =>{
         },
         {
             to: '/admin/teachers',
-            icon: <Teacher/>,
+            icon: <Teacher color={'black'}/>,
             name: 'Teachers'
         },
         {
@@ -31,11 +31,6 @@ const AdminIndex = ({children}: AdminIndex) =>{
             to: '/admin/subjects',
             icon: <Subjects/>,
             name: 'Subjects'
-        },
-        {
-            to: '/admin/settings',
-            icon: <Settings/>,
-            name: 'Settings'
         },
     ]
 

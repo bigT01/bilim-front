@@ -78,15 +78,11 @@ const LessonQA = ({id, quizId}:LessonQAProps) =>{
             const certainQuestion = question.items.filter((item:any) => item.question_id === id)
             if(certainQuestion[0]){
                 if(certainQuestion[0].type){
-                    setTypeQuestion('checkbox')
+                    setTypeQuestion(certainQuestion[0].type.trim())
                 }
-
             }
         }
     }, [question])
-
-
-
 
 
     return(

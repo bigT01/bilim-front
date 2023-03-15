@@ -21,7 +21,13 @@ const StudentIndex = ({children}:StudentIndexProps) =>{
             icon:  <Subjects/>,
             name: "Subjects"
         },
+            {
+                to: '/student/message',
+                icon:  <Subjects/>,
+                name: "сообщения"
+            },
     ]
+
 
     return(
         <Layout>

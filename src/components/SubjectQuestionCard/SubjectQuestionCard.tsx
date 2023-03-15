@@ -5,6 +5,7 @@ import axios from "../../axios";
 import {useSelector} from "react-redux";
 import {Button} from "antd";
 import Multiple from "../Buttons/Multiple";
+import SelectComponent from "../Buttons/SelectComponent";
 
 
 type SubjectQuestionCardProps = {
@@ -45,6 +46,7 @@ const SubjectQuestionCard = ({id, quizId, FinishHandler}:SubjectQuestionCardProp
                 {data?.type === 'checkbox' && <RadioComponent variants={data?.options} id={id} />}
                 {data?.type === 'multiple' && <Multiple variants={data?.options} id={id} />}
                 {data?.type === 'drop' && <Drop question={data?.question} variants={data?.options} id={id}/>}
+                {data?.type === 'select' && <SelectComponent variants={data?.options} selectVar={data?.variants}  id={id} />}
             </div>
 
             {/*<div className="btn_wrapper center">*/}
