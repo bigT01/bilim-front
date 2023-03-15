@@ -7,6 +7,11 @@ export const fetchStudentAnswers = createAsyncThunk<{}, any, any>('lesson/fetchS
     return data
 })
 
+export const fetchStudentAnswersUpdate = createAsyncThunk<{}, any, any>('lesson/fetchStudentAnswersUpdate', async (id:any) => {
+    const data = '';
+    return data
+})
+
 export const fetchStudentAnswersCreate = createAsyncThunk<{}, any, any>('lesson/fetchStudentAnswersCreate', async (id:any) => {
     const data = '';
     return data
@@ -68,6 +73,19 @@ const StudentAnswersSlice = createSlice({
         },
         // @ts-ignore
         [fetchStudentAnswersCreate.rejected] : (state:any) =>{
+            state.StudentAnswers.status = 'failed';
+        },
+        // @ts-ignore
+        [fetchStudentAnswersUpdate.pending] : (state:any) =>{
+            state.StudentAnswers.status = 'loading'
+        },
+        // @ts-ignore
+        [fetchStudentAnswersUpdate.fulfilled] : (state:any, action:any) =>{
+            state.StudentAnswers.items = [];
+            state.StudentAnswers.status = 'loaded';
+        },
+        // @ts-ignore
+        [fetchStudentAnswersUpdate.rejected] : (state:any) =>{
             state.StudentAnswers.status = 'failed';
         },
     }

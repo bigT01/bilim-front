@@ -1,25 +1,24 @@
 @import "../../styles/root";
 
-.menu_wrapper{
+.menu_wrapper {
   box-sizing: border-box;
   position: fixed;
   width: 15%;
   height: 100vh;
   border-right: 2px solid #00000070;
-  //border-bottom-right-radius: 30px;
-  //border-top-right-radius: 30px;
-  //box-shadow: 0 20px 40px $MainColor;
   padding: 10px 30px 10px 0;
   background-color: #FFFFFF;
   grid-area: navbar;
   z-index: 100;
-  .header{
+
+  .header {
     width: 100%;
     display: flex;
     justify-content: center;
     font-weight: 700;
     margin-bottom: 25px;
-    .close_btn{
+
+    .close_btn {
       background-color: #FFFFFF;
       border: none;
       padding: 9px;
@@ -31,13 +30,15 @@
       cursor: pointer;
     }
   }
-  .navbar{
-    .navbar_wrapper{
+
+  .navbar {
+    .navbar_wrapper {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      .nav_link{
-        &_a{
+
+      .nav_link {
+        &_a {
           opacity: 0.5;
           font-weight: 700;
           display: flex;
@@ -49,15 +50,16 @@
           padding: 15px 20px 15px 30px;
           border-top-right-radius: 20px;
           border-bottom-right-radius: 20px;
-          svg{
+
+          svg {
             width: 24px;
             height: 24px;
           }
         }
       }
-      .nav_link_a.active{
+      .nav_link_a.active {
         opacity: 1;
-        background-color: rgba(0, 133, 255, 0.1);
+        background-color: rgba(130, 172, 245, 0.63);
       }
     }
   }

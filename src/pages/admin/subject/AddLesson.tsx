@@ -1,6 +1,6 @@
 import AdminIndex from "../index";
 import SimpleMDE from "react-simplemde-editor";
-import {message, Modal, Upload, UploadFile, UploadProps, DatePicker, Space} from 'antd';
+import {message, Modal, Upload, UploadFile, UploadProps, DatePicker, Space, Input} from 'antd';
 import "easymde/dist/easymde.min.css";
 import '../styles/Addlesson.scss'
 import {useCallback, useEffect, useState} from "react";
@@ -195,7 +195,7 @@ const AddLesson = () => {
                 <form className='lesson_form'>
                     <div className="input_wrapper">
                         <label>Название урока<span className='require'>*</span></label>
-                        <input type="text" className='lesson_input' onChange={e => setTitle(e.target.value)}/>
+                        <Input onChange={e => setTitle(e.target.value)}/>
                     </div>
                     <div className="input_wrapper">
                         <label className='preview_text'>превию фото</label>
@@ -215,19 +215,7 @@ const AddLesson = () => {
 
                     <div className="input_wrapper">
                         <label className='preview_text'>фото или файл для урока</label>
-                        <Dragger {...props}>
-                            <p className="ant-upload-drag-icon">
-                                <InboxOutlined />
-                            </p>
-                            <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                            <p className="ant-upload-hint">
-                                Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                                band files
-                            </p>
-                        </Dragger>
-                        <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
-                            <img alt="example" style={{ width: '100%'}} src={previewImage} />
-                        </Modal>
+                        <Input value={materialURL} onChange={e => setMaterialURL(e.target.value)}/>
                     </div>
 
                     <div className="input_wrapper">

@@ -28,7 +28,7 @@ const VariantItem = ({variant, id}:VariantItemProps) => {
                 }}
 
             >
-                <p style={{wordBreak: 'break-all'}}>{variant}</p>
+                <p >{variant}</p>
             </div>
     )
 }

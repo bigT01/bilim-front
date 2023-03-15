@@ -14,6 +14,7 @@ import StudentLessonMenu from "../../components/StudentLessonMenu/StudentLessonM
 import {useDispatch, useSelector} from "react-redux";
 import {fetchStudentQuestion} from "../../Redux/slices/questionStudent";
 import {UseAuthContext} from "../../context/AuthContext";
+import {fetchStudentAnswersUpdate} from "../../Redux/slices/StudentAnswers";
 
 
 
@@ -48,6 +49,8 @@ const SubjectCardStudent = () =>{
                 setQuizId(res.data.quiz_id)
             })
             .catch(err => console.log(err))
+        // @ts-ignore
+        dispatch(fetchStudentAnswersUpdate())
     },[])
 
     useEffect(() =>{

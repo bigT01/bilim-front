@@ -1,7 +1,12 @@
 import StudentIndex from "./index";
 import './student.scss'
+import {UseAuthContext} from "../../context/AuthContext";
+import {useEffect, useState} from "react";
+import axios from "../../axios";
 
 const DashboardStudent =() =>{
+    const {userId} = UseAuthContext()
+    const [gradeData, setGradeData] = useState([])
     const fakeData = [
         {
             subjectName: 'Math',
@@ -29,15 +34,21 @@ const DashboardStudent =() =>{
         },
     ]
 
+    useEffect(() => {
+        axios.get(`http://localhost:4444/api/user/${userId}/grade/lessons`)
+            .then(res => {
+                setGradeData(res.data)
+            })
+    }, [])
+
     return(
         <StudentIndex>
-            <h1 className="font-bold text-2xl mb-2">Оценки</h1>
+            <h1 className="font-bold text-2xl mb-10">Оценки</h1>
             <div className="grid grid-cols-4 gap-10">
-                {fakeData.map(element => (
-                    <div className={`shadow-xl py-2 px-4 w-full rounded-xl ${element.grade >= 80 ? 'bg-[#afffc133]' : ''} ${element.grade < 80 && element.grade >= 50? 'bg-[#ffdcaf33]' : ''} ${element.grade < 50? 'bg-[#ffafaf33]' : ''}`}>
+                {gradeData[0] && gradeData.map((element:any) => (
+                    <div key={element.id} className={`shadow-xl py-2 px-4 w-full rounded-xl ${element.grade >= 80 ? 'bg-[#afffc133]' : ''} ${element.grade < 80 && element.grade >= 50? 'bg-[#ffdcaf33]' : ''} ${element.grade < 50? 'bg-[#ffafaf33]' : ''}`}>
                         <div className="flex justify-between">
-                            <p>{element.subjectName}</p>
-                            <p>{element.teacherName}</p>
+                            <p>{element.title}</p>
                         </div>
                         <div className="flex items-center justify-center">
                             <div className="percent">

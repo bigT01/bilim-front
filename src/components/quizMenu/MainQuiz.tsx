@@ -40,7 +40,6 @@ const MainQuiz = ({quizId}: MainQuizProps) => {
                 <label style={{width: '280px'}}>Дайте название квизу</label>
                 <Input value={title} onChange={e => setTitle(e.target.value)}/>
 
-                <label style={{width: '280px'}}>Сколько оно длиться</label>
             </div>
             <Button style={{backgroundColor: '#00bb00', color: "#ffffff", marginRight: 30}} onClick={() => onSaveHandler()}>Сохранить</Button>
             <Button type="primary" danger onClick={() =>onDeleteHandler()}>Удалить</Button>

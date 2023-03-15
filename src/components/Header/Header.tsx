@@ -3,12 +3,14 @@ import {Avatar, Bell, More, Trash, UserAdd} from "../assets/MainAssets";
 import {useEffect, useRef, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {Button} from "antd";
+import {UseAuthContext} from "../../context/AuthContext";
 
 
 const Header = () =>{
     const [isClick, setIsClick] = useState(false);
     const more = useRef(null);
     const navigate = useNavigate()
+    const {setAuth} = UseAuthContext()
 
     useEffect(() => {
         function handleClickOutside(event: any) {
@@ -25,8 +27,13 @@ const Header = () =>{
     }, [more, isClick]);
 
     const LogOutHandler = () => {
+        setAuth({
+            id: '',
+            token: '',
+            role: ''
+        })
         window.localStorage.setItem('token', '')
-        navigate('/')
+        navigate('/login')
     }
 
     return(

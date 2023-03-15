@@ -34,7 +34,7 @@ const LessonStudent = () => {
     },[userId])
 
     useEffect(() => {
-        if(grades[0]){
+        if(grades[0] && data[0]){
             const filteredData = data.map((elem:any) => {
                 const isGraded = grades.some((item: any) => item.lesson_id === elem.lesson_id);
                 return { ...elem, isGraded };
@@ -52,7 +52,7 @@ const LessonStudent = () => {
                 </div>
 
                 <div className="lessons_wrapper">
-                    {data?.map((elem: any) => (
+                    {Array.isArray(data) && data?.map((elem: any) => (
                         <StudentLessonItem lesson_id={elem.lesson_id} title={elem.title} preview_image={elem.preview_image} start_time={elem.start_time} end_time={elem.end_time} isGraded={elem?.isGraded}/>
                     ))}
                 </div>
