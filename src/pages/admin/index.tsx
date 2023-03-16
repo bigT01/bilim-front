@@ -4,6 +4,8 @@ import Header from "../../components/Header/Header";
 import Main from "../../components/Main/Main";
 import { Dashboard,Teacher, Student, Subjects, Settings } from "../../components/assets/MainAssets";
 import {ReactNode} from "react";
+import {FiMail} from "react-icons/fi";
+import {BiDockLeft} from "react-icons/bi";
 
 type AdminIndex = {
     children: ReactNode;
@@ -31,6 +33,16 @@ const AdminIndex = ({children}: AdminIndex) =>{
             to: '/admin/subjects',
             icon: <Subjects/>,
             name: 'Subjects'
+        },
+        {
+            to: '/admin/message',
+            icon:  <FiMail />,
+            name: "сообщения"
+        },
+        {
+            to: '/admin/standards',
+            icon:  <BiDockLeft />,
+            name: "стандарты"
         },
     ]
 

@@ -9,6 +9,7 @@ import {QuizReducer} from "./slices/quiz";
 import {QuestionReducer} from "./slices/questions";
 import {StudentQuestionReducer} from "./slices/questionStudent";
 import {StudentAnswersReducer} from "./slices/StudentAnswers";
+import {MessageReducer} from "./slices/message";
 
 const store = configureStore({
     reducer: {
@@ -21,6 +22,7 @@ const store = configureStore({
         question: QuestionReducer,
         StudentQuestion: StudentQuestionReducer,
         StudentAnswers: StudentAnswersReducer,
+        message: MessageReducer,
         search: SearchReducer
     },
 });

@@ -126,7 +126,7 @@ const Dashboard = () =>{
     return(
         <AdminIndex>
             <div className='admin_dashboard'>
-                <h3 className='header'>Dashboard</h3>
+                <h3 className='font-bold text-2xl mb-10'>Dashboard</h3>
 
                 <div className="card_wrapper">
                     <div className="card">

@@ -38,12 +38,6 @@ const Header = () =>{
 
     return(
         <div className={'header_main'} style={{position: 'relative'}}>
-            <div className="notification_wrapper">
-                <Bell/>
-                <div className="notification_number">
-                    3
-                </div>
-            </div>
             <div className="profile_wrapper" onClick={() => setIsClick(oldValue => !oldValue)}>
                 <div className="avatar">
                     <Avatar/>

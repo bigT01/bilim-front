@@ -4,6 +4,7 @@ import Menu from "../../components/Menu/Menu";
 import {Dashboard, Settings, Student, Subjects, Teacher} from "../../components/assets/MainAssets";
 import Header from "../../components/Header/Header";
 import Main from "../../components/Main/Main";
+import {FiMail} from "react-icons/fi";
 
 type StudentIndexProps = {
     children: ReactNode
@@ -23,7 +24,7 @@ const StudentIndex = ({children}:StudentIndexProps) =>{
         },
             {
                 to: '/student/message',
-                icon:  <Subjects/>,
+                icon:  <FiMail />,
                 name: "сообщения"
             },
     ]

@@ -23,6 +23,11 @@ import AddSubject from "./pages/admin/subject/AddSubject";
 import UpdateLesson from "./pages/admin/subject/UpdateLesson";
 import LessonStudent from "./pages/student/LessonStudent";
 import StudentMessage from "./pages/student/StudentMessage";
+import StudentMessageTo from "./pages/student/StudentMessageTo";
+import AdminMessage from "./pages/admin/AdminMessage";
+import AdminMessageTo from "./pages/admin/AdminMessageTo";
+import Standards from "./pages/Standards";
+import AddStandards from "./pages/admin/AddStandards";
 
 
 function App() {
@@ -44,15 +49,20 @@ function App() {
                                 <Route path={'/admin/subjects/quiz/:quizId'} element={<AddQuiz/>}/>
                                 <Route path={'/admin/subjects/:id/adduser'} element={<SubjectAddUser/>}/>
                                 <Route path={'/admin/students/createStudent'} element={<CreateStudent/>}/>
+                                <Route path={'/admin/message'} element={<AdminMessage/>}/>
+                                <Route path={'/admin/message/:id'} element={<AdminMessageTo/>}/>
 
                                 <Route path={'/student/dashboard'} element={<DashboardStudent/>}/>
                                 <Route path={'/student/subject'} element={<SubjectStudent/>}/>
                                 <Route path={'/student/message'} element={<StudentMessage/>}/>
+                                <Route path={'/student/message/:id'} element={<StudentMessageTo/>}/>
 
                                 <Route path={'/student/subject/lesson/:id'} element={<LessonStudent/>}/>
                                 <Route path={'/student/subject/:id'} element={<SubjectCardStudent/>}/>
 
 
+                                <Route path={'/admin/standards'} element={<Standards/>}/>
+                                <Route path={'/admin/addStandards'} element={<AddStandards/>}/>
                             </Route>
                             <Route path={'/login'} element={<Login/>}/>
                         </Routes>
