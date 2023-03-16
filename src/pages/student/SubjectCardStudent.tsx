@@ -101,7 +101,7 @@ const SubjectCardStudent = () =>{
                                         quizId={quizId} isStart={isStart} setFirstQuestion={setFirstQuestion} setIsQuestion={setIsQuestion}/>: <>LOADING...</>}
                     {pageNumber === '0' && <div className="content">
                         <div className="image_wrapper">
-                            <iframe style={{width: '100%', height: '400px'}} src="https://www.youtube-nocookie.com/embed/oA55ckFYYoU"
+                            <iframe style={{width: '100%', height: '400px'}} src={`${material}`}
                                     title="YouTube video player" frameBorder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                     allowFullScreen />
@@ -124,13 +124,20 @@ const SubjectCardStudent = () =>{
                             <div className="flex items-center justify-center w-full flex-col gap-10">
                                 <div className="percent">
                                     <div className="single-chart" style={{width: 200}}>
-                                        {totalPoint && <svg viewBox="0 0 36 36"
+                                        {totalPoint ? <svg viewBox="0 0 36 36"
                                               className={`circular-chart ${totalPoint >= 80 ? 'green' : ''} ${totalPoint < 80 && totalPoint >= 50 ? 'orange' : ''} ${totalPoint < 50 ? 'red' : ''}`}>
                                             <path className="circle-bg"
                                                   d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
                                             <path className="circle" strokeDasharray={`${totalPoint}, 100`}
                                                   d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
                                             <text x="18" y="20.35" className="percentage">{totalPoint}%</text>
+                                        </svg> :<svg viewBox="0 0 36 36"
+                                                     className={`circular-chart ${0 >= 80 ? 'green' : ''} ${0 < 80 && 0 >= 50 ? 'orange' : ''} ${0 < 50 ? 'red' : ''}`}>
+                                            <path className="circle-bg"
+                                                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                            <path className="circle" strokeDasharray={`${0}, 100`}
+                                                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                            <text x="18" y="20.35" className="percentage">{0}%</text>
                                         </svg>}
                                     </div>
                                 </div>

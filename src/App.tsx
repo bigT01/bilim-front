@@ -28,6 +28,13 @@ import AdminMessage from "./pages/admin/AdminMessage";
 import AdminMessageTo from "./pages/admin/AdminMessageTo";
 import Standards from "./pages/Standards";
 import AddStandards from "./pages/admin/AddStandards";
+import AddTeacher from "./pages/admin/AddTeacher";
+import TeacherDashboard from "./pages/teacher/TeacherDashboard";
+import TeacherStadards from "./pages/teacher/TeacherStadards";
+import TeacherStudents from "./pages/teacher/TeacherStudents";
+import TeacherStudentCard from "./pages/teacher/TeacherStudentCard";
+
+
 
 
 function App() {
@@ -39,6 +46,7 @@ function App() {
                                 <Route path={'/'} element={<Index/>}/>
                                 <Route path={'/admin/dashboard'} element={<Dashboard/>}/>
                                 <Route path={'/admin/teachers'} element={<Teachers/>}/>
+                                <Route path={'/admin/addTeachers'} element={<AddTeacher />}/>
                                 <Route path={'/admin/students'} element={<Students/>}/>
                                 <Route path={'/admin/students/:id'} element={<StudentsCard/>}/>
                                 <Route path={'/admin/subjects'} element={<Subjects/>}/>
@@ -56,6 +64,11 @@ function App() {
                                 <Route path={'/student/subject'} element={<SubjectStudent/>}/>
                                 <Route path={'/student/message'} element={<StudentMessage/>}/>
                                 <Route path={'/student/message/:id'} element={<StudentMessageTo/>}/>
+
+                                <Route path={'/teacher/dashboard'} element={<TeacherDashboard/>}/>
+                                <Route path={'/teacher/student'} element={<TeacherStudents/>}/>
+                                <Route path={'/teacher/student/:id'} element={<TeacherStudentCard/>}/>
+                                <Route path={'/teacher/standards'} element={<TeacherStadards/>}/>
 
                                 <Route path={'/student/subject/lesson/:id'} element={<LessonStudent/>}/>
                                 <Route path={'/student/subject/:id'} element={<SubjectCardStudent/>}/>

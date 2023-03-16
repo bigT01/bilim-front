@@ -49,11 +49,7 @@ const SubjectQuestionCard = ({id, quizId, FinishHandler}:SubjectQuestionCardProp
                 {data?.type === 'select' && <SelectComponent variants={data?.options} selectVar={data?.variants}  id={id} />}
             </div>
 
-            {/*<div className="btn_wrapper center">*/}
-            {/*    <button onClick={() => setPageNumber(oldState => oldState - 1)}>prev</button>*/}
-            {/*    {isFinish ? <button>Finish</button>  :<button onClick={() => setPageNumber(oldState => oldState + 1)}>next</button>}*/}
-            {/*</div>*/}
-            {isFinish && isLastQuestion && <div className="flex w-full justify-end">
+            {isFinish && <div className="flex w-full justify-end">
                 <Button type='primary' onClick={() => FinishHandler()}>Finish</Button>
             </div>}
         </div>

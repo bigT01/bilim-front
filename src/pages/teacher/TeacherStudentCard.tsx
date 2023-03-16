@@ -1,12 +1,11 @@
-import AdminIndex from "./index";
-import './styles/StudentsCard.scss'
-import {Avatar} from "../../components/assets/MainAssets";
-import { ResponsiveLine } from '@nivo/line'
+import TeacherIndex from "./index";
+import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "../../axios";
-import {useParams} from "react-router-dom";
+import {Avatar} from "../../components/assets/MainAssets";
+import {ResponsiveLine} from "@nivo/line";
 
-const StudentsCard = () => {
+const TeacherStudentCard = () => {
     const {id} = useParams()
     const [data, setData] = useState<any>()
     const [grades, setGrades] = useState<any>()
@@ -30,10 +29,8 @@ const StudentsCard = () => {
             ])
         }
     }, [data])
-
-
     return(
-        <AdminIndex>
+        <TeacherIndex>
             <h2 className='font-bold text-2xl mb-10'>Профиль студента</h2>
             <div className="student_profile">
                 <div className="main_information">
@@ -133,8 +130,8 @@ const StudentsCard = () => {
                     )}
                 </div>
             </div>
-        </AdminIndex>
+        </TeacherIndex>
     )
 }
 
-export default StudentsCard
+export default TeacherStudentCard

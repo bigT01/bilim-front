@@ -9,14 +9,14 @@ const StudentsChart = ({data}:StudentsChartProps) => {
         <ResponsiveBar
             data={data}
             keys={[
-                'average grade',
+                'average_grade',
             ]}
-            indexBy="class"
+            indexBy="attend"
             margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
             padding={0.3}
             valueScale={{ type: 'linear' }}
             indexScale={{ type: 'band', round: true }}
-            colors={['#000000', '#0f0fff']}
+            colors={['#6c6e6c', '#0f0fff']}
 
             defs={[
                 {
@@ -44,7 +44,7 @@ const StudentsChart = ({data}:StudentsChartProps) => {
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: 'classes',
+                legend: 'attend',
                 legendPosition: 'middle',
                 legendOffset: 32
             }}
@@ -62,7 +62,7 @@ const StudentsChart = ({data}:StudentsChartProps) => {
                 from: 'color',
                 modifiers: [
                     [
-                        'darker',
+                        'brighter',
                         1.6
                     ]
                 ]
