@@ -117,7 +117,7 @@ const SubjectAddUser = () => {
                         <input type="text" className={"search_input"} onChange={SearchHandler}/>
                     </div>
                     <Checkbox checked={allChecked} onChange={() => handleAllCheck()}>
-                        Check all
+                        выбрать всех
                     </Checkbox>
                     <button className={`btn_add ${checkedStudent[0] ? 'able': 'disable'}`} onClick={() => SubmitHandler(checkedStudent)}>Добавить</button>
                 </div>
@@ -130,10 +130,10 @@ const SubjectAddUser = () => {
                             id
                         </th>
                         <th className='table_header__cail name'>
-                            name
+                            имя
                         </th>
                         <th className='table_header__cail'>
-                            grade
+                            класс
                         </th>
                     </tr>
 

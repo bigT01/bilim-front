@@ -40,7 +40,7 @@ const CourseItem = ({id, name, num_lessons, num_students}:CourseItemProps) => {
             </div>
             <div className="name">
                 <Link to={`/admin/subjects/${id}`} className="course_name">{name}</Link>
-                <p className="course_lessons">{num_lessons} lessons</p>
+                <p className="course_lessons">количество уроков: {num_lessons}</p>
             </div>
             <div className="student_number">
                 <p>{num_students}</p>

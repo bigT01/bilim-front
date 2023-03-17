@@ -7,32 +7,6 @@ import axios from "../../axios";
 const DashboardStudent =() =>{
     const {userId} = UseAuthContext()
     const [gradeData, setGradeData] = useState([])
-    const fakeData = [
-        {
-            subjectName: 'Math',
-            teacherName: 'Raushan Sagdatovna',
-            grade: 30,
-            message: 'hard work'
-        },
-        {
-            subjectName: 'History',
-            teacherName: 'Adam Adamson',
-            grade: 80,
-            message: 'good'
-        },
-        {
-            subjectName: 'Chemistry',
-            teacherName: 'Michel Gates',
-            grade: 100,
-            message: "excellent"
-        },
-        {
-            subjectName: 'Biology',
-            teacherName: 'Ivan Alexandr',
-            grade: 50,
-            message: 'satisfy'
-        },
-    ]
 
     useEffect(() => {
         axios.get(`http://localhost:4444/api/user/${userId}/grade/lessons`)

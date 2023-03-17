@@ -17,32 +17,32 @@ const AdminIndex = ({children}: AdminIndex) =>{
         {
             to: '/admin/dashboard',
             icon: <Dashboard/>,
-            name: 'Dashboard'
+            name: 'Главная'
         },
         {
             to: '/admin/teachers',
             icon: <Teacher color={'black'}/>,
-            name: 'Teachers'
+            name: 'Учители'
         },
         {
             to: '/admin/students',
             icon: <Student/>,
-            name: 'Students'
+            name: 'Ученики'
         },
         {
             to: '/admin/subjects',
             icon: <Subjects/>,
-            name: 'Subjects'
+            name: 'Курсы'
         },
         {
             to: '/admin/message',
             icon:  <FiMail />,
-            name: "сообщения"
+            name: "Сообщения"
         },
         {
             to: '/admin/standards',
             icon:  <BiDockLeft />,
-            name: "стандарты"
+            name: "Стандарты"
         },
     ]
 

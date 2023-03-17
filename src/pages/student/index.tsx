@@ -15,17 +15,17 @@ const StudentIndex = ({children}:StudentIndexProps) =>{
         {
             to: '/student/dashboard',
             icon: <Dashboard/>,
-            name: 'Dashboard'
+            name: 'Главная'
         },
         {
             to: '/student/subject',
             icon:  <Subjects/>,
-            name: "Subjects"
+            name: "Курсы"
         },
             {
                 to: '/student/message',
                 icon:  <FiMail />,
-                name: "сообщения"
+                name: "Сообщения"
             },
     ]
 

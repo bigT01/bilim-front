@@ -34,7 +34,7 @@ const Teachers = () =>{
     return(
         <AdminIndex>
             <div className="mb-10 flex justify-between items-center">
-                <h3 className='font-bold text-2xl'>Преподавтели</h3>
+                <h3 className='font-bold text-2xl'>Учители</h3>
                 <Link to={'/admin/addTeachers'} className='rounded-xl px-4 py-2 bg-green-600 text-white'>+</Link>
             </div>
             {data[0] && (

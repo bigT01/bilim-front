@@ -69,7 +69,7 @@ const Login = () =>{
                 </div>
                 <div className="login_container_login">
                     <div className="header">
-                        <h1>Sign in</h1>
+                        <h1>Войти</h1>
                     </div>
                     <form className={'form_signUp'} onSubmit={handleSubmit(onSubmit)}>
                         <div className="input_wrapper">
@@ -77,12 +77,11 @@ const Login = () =>{
                             <input type="text" {...register('login')} className={'signUp_input'}/>
                         </div>
                         <div className="input_wrapper">
-                            <label className={'signUp_label'}>password</label>
+                            <label className={'signUp_label'}>Пароль</label>
                             <input type="password" {...register("password")} className={'signUp_input'}/>
                         </div>
-                        <div className="submit_wrapper">
-                            <a href="#">forgot your email?</a>
-                            <button type={'submit'} className={'submit'}>Submit</button>
+                        <div className="submit_wrapper" style={{justifyContent: 'flex-end'}}>
+                            <button type={'submit'} className={'submit'}>Войти</button>
                         </div>
 
                     </form>
