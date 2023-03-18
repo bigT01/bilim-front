@@ -11,7 +11,7 @@ import {UseAuthContext} from "../../context/AuthContext";
 const LessonStudent = () => {
     const {userId} = UseAuthContext()
     const {id} = useParams()
-    const [data, setData] = useState<any>()
+    const [data, setData] = useState<any>([])
     const [grades, setGrades] = useState([])
 
     useEffect(() => {

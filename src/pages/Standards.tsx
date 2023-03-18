@@ -55,7 +55,7 @@ const Standards = () => {
             </div>
             {data[0] && (
                 data.map((item:any) => (
-                    <div className="flex flex-col w-full gap-5" key={item.id}>
+                    <div className="flex flex-col w-full mb-5" key={item.id}>
                         <div className="bg-blue-200 flex items-center justify-between rounded-2xl shadow-2xl w-full px-8 py-4">
                             <div className='flex gap-5 items-center'>
                                 <div className='rounded-xl px-4 py-2 bg-blue-900 text-white'><BiDockRight/></div>
