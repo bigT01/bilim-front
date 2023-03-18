@@ -22,7 +22,7 @@ const SubjectsItem = () => {
         <AdminIndex>
             <div className="subject_item_wrapper">
                 <div className="header">
-                    <h2>Course Name</h2>
+                    <h2>называния курса</h2>
                     <Link to={`/admin/subject/${id}/addLesson`} className={'btn_add'}>добавить урок</Link>
                 </div>
 

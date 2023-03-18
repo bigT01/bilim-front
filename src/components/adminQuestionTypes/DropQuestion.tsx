@@ -119,9 +119,9 @@ const DropQuestion = ({id, typeQuestion}:LessonQAProps) => {
     return(
         <>
             <Input placeholder={'Напишите вопрос ...'} onChange={e =>setQuestionSender(e.target.value)} value={questionSender} style={{width: '70%', height: 45, marginBottom: 20}}/>
-            {photo ? <div style={{display: 'flex', alignItems: 'center', justifyContent:'space-between'}}><img src={`http://localhost:4444${photo}`} alt='img:preview' width={250} height={200} style={{objectFit:'cover', marginRight: '2rem'}}/> <Button type={'primary'} onClick={() => setPhoto('')} danger>удалить</Button></div> : <>
+            {photo ? <div style={{display: 'flex', alignItems: 'center', justifyContent:'space-between'}}><img src={`https://bilimplace.kz${photo}`} alt='img:preview' width={250} height={200} style={{objectFit:'cover', marginRight: '2rem'}}/> <Button type={'primary'} onClick={() => setPhoto('')} danger>удалить</Button></div> : <>
                 <Upload
-                    action="http://localhost:4444/upload"
+                    action="https://bilimplace.kz/upload"
                     listType="picture-card"
                     fileList={fileList}
                     onPreview={handlePreview}

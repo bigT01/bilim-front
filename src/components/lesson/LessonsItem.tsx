@@ -21,7 +21,7 @@ const LessonsItem = ({name, id, added}: LessonsItemProps) => {
         <div className="lesson_item">
             <Link to={`/admin/subjects/updateLesson/${id}`} className="btn_edit"><Edit color={'#ffffff'}/></Link>
             <div className="lesson_picture_wrapper">
-                <img src={`http://localhost:4444${added}`} alt="pictureLesson"/>
+                <img src={`https://bilimplace.kz${added}`} alt="pictureLesson"/>
             </div>
             <div className="lesson_body">
                 <div className="body_information">

@@ -19,7 +19,7 @@ const TeacherStadards = () =>{
     }, [])
 
     const onDownloadHandler = (url:string, name:string) => {
-        fetch(`http://localhost:4444${url}`).then(response => {
+        fetch(`https://bilimplace.kz${url}`).then(response => {
             response.blob().then(blob => {
                 // Creating new object of PDF file
                 const fileURL = window.URL.createObjectURL(blob);
@@ -47,7 +47,7 @@ const TeacherStadards = () =>{
 
                             <div className='flex gap-5'>
                                 <button className='rounded-xl px-4 py-2 bg-orange-500 text-white' onClick={() => onDownloadHandler(item.material, item.name)}><BiDownload/></button>
-                                <a href={`http://localhost:4444${item.material}`} target={'_blank'} className='rounded-xl px-4 py-2 bg-green-800 text-white'><AiFillEye/></a>
+                                <a href={`https://bilimplace.kz${item.material}`} target={'_blank'} className='rounded-xl px-4 py-2 bg-green-800 text-white'><AiFillEye/></a>
                             </div>
 
                         </div>

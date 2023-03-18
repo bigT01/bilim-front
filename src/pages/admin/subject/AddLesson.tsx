@@ -90,7 +90,7 @@ const AddLesson = () => {
     const props: UploadProps = {
         name: 'file',
         multiple: true,
-        action: 'http://localhost:4444/upload',
+        action: 'https://bilimplace.kz/upload',
         onChange(info) {
             const { status } = info.file;
             if (status !== 'uploading') {
@@ -200,7 +200,7 @@ const AddLesson = () => {
                     <div className="input_wrapper">
                         <label className='preview_text'>превию фото</label>
                         <Upload
-                            action="http://localhost:4444/upload"
+                            action="https://bilimplace.kz/upload"
                             listType="picture-card"
                             fileList={fileList}
                             onPreview={handlePreview}

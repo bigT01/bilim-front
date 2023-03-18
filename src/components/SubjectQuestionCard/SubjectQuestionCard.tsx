@@ -41,7 +41,7 @@ const SubjectQuestionCard = ({id, quizId, FinishHandler}:SubjectQuestionCardProp
     return (
         <div className='w-full'>
             {data?.type !== 'drop' && <h3 className="text-[16px] font-bold mb-10">{data?.question}</h3>}
-            {data?.photo && <img src={`http://localhost:4444${data?.photo}`} alt="img-question" className={'mb-10'}/>}
+            {data?.photo && <img src={`https://bilimplace.kz${data?.photo}`} alt="img-question" className={'mb-10'}/>}
             <div className="mb-16">
                 {data?.type === 'checkbox' && <RadioComponent variants={data?.options} id={id} />}
                 {data?.type === 'multiple' && <Multiple variants={data?.options} id={id} />}

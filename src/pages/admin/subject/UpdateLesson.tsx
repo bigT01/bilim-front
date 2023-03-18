@@ -128,7 +128,7 @@ const UpdateLesson = () => {
     const props: UploadProps = {
         name: 'file',
         multiple: true,
-        action: 'http://localhost:4444/upload',
+        action: 'https://bilimplace.kz/upload',
         onChange(info) {
             const { status } = info.file;
             if (status !== 'uploading') {
@@ -261,9 +261,9 @@ const UpdateLesson = () => {
                     </div>
                     <div className="input_wrapper">
                         <label className='preview_text'>превию фото</label>
-                        {previewURL ? <div style={{display: 'flex', alignItems: 'center', justifyContent:'space-between'}}><img src={`http://localhost:4444${previewURL}`} alt='img:preview' width={250} height={200} style={{objectFit:'cover', marginRight: '2rem'}}/> <Button type={'primary'} onClick={() => setPreviewURL('')} danger>удалить</Button></div> : <>
+                        {previewURL ? <div style={{display: 'flex', alignItems: 'center', justifyContent:'space-between'}}><img src={`https://bilimplace.kz${previewURL}`} alt='img:preview' width={250} height={200} style={{objectFit:'cover', marginRight: '2rem'}}/> <Button type={'primary'} onClick={() => setPreviewURL('')} danger>удалить</Button></div> : <>
                             <Upload
-                                action="http://localhost:4444/upload"
+                                action="https://bilimplace.kz/upload"
                                 listType="picture-card"
                                 fileList={fileList}
                                 onPreview={handlePreview}

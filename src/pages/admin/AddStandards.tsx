@@ -34,7 +34,7 @@ const AddStandards = () => {
     const props: UploadProps = {
         name: 'file',
         multiple: false,
-        action: 'http://localhost:4444/upload',
+        action: 'https://bilimplace.kz/upload',
         onChange(info) {
             const { status } = info.file;
             if (status !== 'uploading') {

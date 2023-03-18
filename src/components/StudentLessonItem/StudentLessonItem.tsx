@@ -33,7 +33,7 @@ const StudentLessonItem = ({lesson_id, start_time, end_time, title, preview_imag
         <div className='relative'>
             <div className={`lesson_item ${isGraded? 'opacity-40' : 'opacity-100'} `}>
                 <div className="lesson_picture_wrapper">
-                    <img src={`http://localhost:4444${preview_image}`} alt="pictureLesson"/>
+                    <img src={`https://bilimplace.kz${preview_image}`} alt="pictureLesson"/>
                 </div>
                 <div className="lesson_body">
                     <div className="body_information">

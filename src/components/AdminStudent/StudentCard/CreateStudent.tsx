@@ -40,7 +40,7 @@ const CreateStudent = () => {
         <AdminIndex>
             <div className={s.wrapper}>
                 <div className={s.header}>
-                    <h2>Create Student</h2>
+                    <h2>Создать нового пользователья</h2>
                     <Link to={'/admin/students'} className={s.close} ><CloseButton color={'#f61e1e'}/></Link>
                 </div>
                 <div className={s.body}>
