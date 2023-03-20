@@ -9,11 +9,12 @@ const DashboardStudent =() =>{
     const [gradeData, setGradeData] = useState([])
 
     useEffect(() => {
-        axios.get(`http://localhost:4444/api/user/${userId}/grade/lessons`)
+        axios.get(`/user/${userId}/grade/lessons`)
             .then(res => {
                 setGradeData(res.data)
             })
     }, [])
+
 
     return(
         <StudentIndex>

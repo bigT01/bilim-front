@@ -44,7 +44,7 @@ const StudentLessonItem = ({lesson_id, start_time, end_time, title, preview_imag
             </div>
             {isGraded && (
                 <div className='absolute left-0 top-0 w-full h-full z-10 flex justify-center items-center'>
-                    <p className='text-xl text-green-800 font-bold rotate-[-15deg]'>вы уже сдали эгзамен</p>
+                    <p className='text-xl text-green-800 font-bold rotate-[-15deg]'>вы уже сдали экзамен</p>
                 </div>
             )}
         </div>

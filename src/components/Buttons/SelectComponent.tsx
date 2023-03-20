@@ -43,7 +43,7 @@ const SelectComponent = ({variants, id, selectVar}:any) => {
                     <p>{element?.question}</p>
                     <Select
                         defaultValue="выберите"
-                        style={{ width: 120 }}
+                        style={{ width: 'fit-content' }}
                         onChange={(e) => handleChange(e, element?.value)}
                         options={selectVar.map((item:any) => ({ value: item }))}
                     />
